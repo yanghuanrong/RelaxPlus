@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "examples": "vue-cli-service build",
+    "build": "rollup --config config/rollup.config.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "rollup-plugin-vue": "^6.0.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0"
   },

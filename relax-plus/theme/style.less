@@ -1,0 +1,111 @@
+body{
+  margin: 0;
+  overflow-x: hidden;
+  font-size: 12px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+}
+
+textarea,input{
+  font-family: "Roboto", sans-serif;
+}
+
+* {
+    outline: none !important;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+html {
+    box-sizing: border-box;
+    -ms-overflow-style: scrollbar;
+}
+
+html{
+  font-family: Lato,sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@import "base";
+@import "icon";
+@import "button";
+@import "menu";
+@import "grid";
+@import "input";
+@import "checkbox";
+@import "calendar";
+@import "select";
+@import "message";
+@import "notice";
+@import "switch";
+@import "datepicker";
+@import "form";
+@import "badge";
+@import "drag";
+@import "transition";
+
+.info{
+  color: @primary;
+}
+
+.error{
+  color: @danger;
+}
+
+.success{
+  color: @success;
+}
+
+.warning{
+  color: @warning;
+}
+
+
+i.x-arrow{
+  position: absolute;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  @color:#ccc;
+
+  &::after,&::before {
+    content: "";
+    position: absolute;
+    width:1px;
+    height: 7px;
+    background-color: @color;
+    left: 4px;
+    top: 7px;
+    transform-origin: top center;
+    transition: all .2s ease
+  }
+
+  &::after{
+    transform: rotate(135deg);
+  }
+  &::before{
+    transform: rotate(-135deg);
+  }
+
+  &.is-active{
+    &::after{
+      top: 2px;
+      transform: rotate(45deg);
+    }
+    &::before{
+      top: 2px;
+      transform: rotate(-45deg);
+    }
+  }
+}
