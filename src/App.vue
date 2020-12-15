@@ -1,24 +1,26 @@
 <template>
-  <div id="nav">
-    <x-button @click="test" type="success">success</x-button>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="wrapper">
+    <div class="sidebar-menu" style="width: 225px">
+      <div style="padding: 20px">
+        <router-link to="/">
+          <div class="logo-img">
+            <span>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
+          </div>
+        </router-link>
+      </div>
+      <router-link to="/button">Button</router-link>
+    </div>
+    <div class="content-page">
+      <router-view />
+    </div>
   </div>
-  <router-view/>
 </template>
 
 <script>
-
-export default {
-  setup(){
-
-    const test = () => {
-      console.log(111)
-    }
-
-    return {
-      test
-    }
-  }
-}
+export default {};
 </script>

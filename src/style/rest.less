@@ -1,0 +1,83 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: normal;
+  vertical-align: baseline;
+}
+
+a {
+  color: #8A8A8A;
+  text-decoration: none;
+  -webkit-backface-visibility: hidden;
+}
+
+*{box-sizing: border-box;}
+
+li {
+  list-style: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  opacity: 0;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  height: 5px;
+  background-color: #000;
+
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  width: 5px;
+  background-color: #000;
+}
+
+input:focus,button:focus,textarea:focus{ outline: none;}
+body,input,textarea{ font-family: "THEX",'微软雅黑',Arial;}
+
+// a:focus,
+// input:focus,
+// p:focus,
+// button:focus,
+// div:focus{
+// -webkit-tap-highlight-color:rgba(0,0,0,0);
+// -webkit-user-modify:read-write-plaintext-only; 
+// }
+
+body{ -webkit-tap-highlight-color:rgba(0,0,0,0); }
+
+
+@font-face {
+  font-family: 'calibre bold';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("font/calibre-semibold.woff2") format("woff2"),
+}
+
+@font-face {
+  font-family: 'calibre';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("font/calibre-regular.woff2") format("woff2"),
+}

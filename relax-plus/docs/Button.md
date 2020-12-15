@@ -4,10 +4,10 @@ tag: vue
 date: 2020.11.20
 ---
 
-# Button
+# Button 按钮
 > 帅气的Button
 
-:::demo 哈哈哈
+:::demo 基础按钮 我擦的的都是是是
 ```html
 <template>
   <x-button type="warning" @click="test">warning</x-button>
@@ -26,6 +26,7 @@ export default {
   }
 }
 </script>
+
 ```
 :::
 
@@ -34,7 +35,15 @@ export default {
 :::demo eee
 ```html
 <template>
+  <div class="color">222</div>
   <div>warning</div>
 </template>
+
+
+<style>
+  .color{
+    color: #F00
+  }
+<style>
 ```
 :::

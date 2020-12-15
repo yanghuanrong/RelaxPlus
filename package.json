@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "node relax-plus/config/create-route.js && vue-cli-service serve",
     "examples": "vue-cli-service build",
     "build": "rollup --config config/rollup.config.js"
   },

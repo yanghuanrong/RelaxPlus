@@ -1,8 +1,9 @@
 const { stripScript, stripTemplate, genInlineComponentText } = require('./util')
 const md = require('./config')
+const matter = require('gray-matter');
 
 module.exports = function (source) {
-  const content = md.render(source)
+  const content = md.render(matter(source).content)
 
   const startTag = '<!--element-demo:'
   const startTagLen = startTag.length
@@ -61,7 +62,7 @@ module.exports = function (source) {
   output.push(content.slice(start))
   return `
     <template>
-      <section class="content element-doc">
+      <section class="relax-doc">
         ${output.join('')}
       </section>
     </template>
