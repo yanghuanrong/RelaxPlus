@@ -16,8 +16,8 @@ module.exports = {
                     compiler: require('@vue/compiler-sfc')
                 })
             .end()
-            .use(path.resolve('relax-plus/config/md-loader.js'))
-            .loader(path.resolve('relax-plus/config/md-loader.js'))
+            .use(path.resolve('relax-plus/config/md-loader/index.js'))
+            .loader(path.resolve('relax-plus/config/md-loader/index.js'))
             
     }
 } 
