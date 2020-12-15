@@ -1,6 +1,6 @@
 // const fs = require('fs')
 // const path = require('path')
-// var source = fs.readFileSync(path.resolve(__dirname, '../md/test1.md'), 'utf8')
+// var source = fs.readFileSync(path.resolve(__dirname, '../../src/docs/Button.md'), 'utf8')
 // setTimeout(mdLoader, 0, source)
 
 
@@ -8,6 +8,9 @@
 const loaderUtils = require('loader-utils')
 const mdContainer = require('markdown-it-container')
 const matter = require('gray-matter');
+// const sfc = require('@vue/compiler-sfc');
+// const compiler = require('@vue/component-compiler-utils')
+
 // const topbar = '<div class="hljs-topbar"><div class="dot"><i class="red"></i><i class="yellow"></i><i class="green"></i></div></div>'
 const topbar = ''
 const md = require('markdown-it')({
@@ -65,12 +68,12 @@ function mdLoader(source) {
   <template>
     <div class="content blog-doc">
       ${html}
-    </div> 
+    </div>
   </template>`
 
   const script = `
   <script>
-  import DemoBlock from '@blog/config/demoBlock.vue'
+  import DemoBlock from '@RelaxPlus/config/demoBlock.vue'
   ${demoRequest}
   export default {
     components: {
@@ -81,10 +84,18 @@ function mdLoader(source) {
   </script>
   `
 
+  // const a = compiler.parse(template)
+  // console.log(a)
+
   const page = `
   ${template}
   ${script}
   `
+
+
+  // const a = sfc.parse(test)
+  // const b = compiler.ParseOptions(a)
+  // console.log(compiler)
   return page
 }
 

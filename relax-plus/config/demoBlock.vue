@@ -41,10 +41,8 @@
   </div>
 </template>
 
-<script type="text/babel">
+<script>
 import "./demoBlock.less";
-import FileSaver from "file-saver";
-import {data} from '../data/data.json'
 
 export default {
   data(){
@@ -57,20 +55,9 @@ export default {
       fileList: []
     }
   },
-  created(){
-    const id = this.$route.params.id
-    if(id){
-      data.forEach(item => {
-        if(item.blogName === id) {
-          this.fileList = item.blogList
-        }
-      })
-    }
-  },
   methods: {
     download(data){
-      const blob = new Blob([data.core], {type: "text/plain;charset=utf-8"});
-      FileSaver.saveAs(blob, `${data.name}.${data.ext}`)
+      
     }
   }
 };

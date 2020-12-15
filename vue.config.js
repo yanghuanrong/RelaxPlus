@@ -10,10 +10,14 @@ module.exports = {
 
         config.module.rule('md')
             .test(/\.md/)
-            .use('vue-loader')
-            .loader('vue-loader')
+            .use('vue-loader-v16')
+                .loader('vue-loader-v16')
+                .options({
+                    compiler: require('@vue/compiler-sfc')
+                })
             .end()
             .use(path.resolve('relax-plus/config/md-loader.js'))
             .loader(path.resolve('relax-plus/config/md-loader.js'))
+            
     }
-}
+} 
