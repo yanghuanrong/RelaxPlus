@@ -7,43 +7,30 @@ date: 2020.11.20
 # Button 按钮
 > 帅气的Button
 
-:::demo 基础按钮 我擦的的都是是是
+## 基础按钮
+> 按钮可以根据 `type` 来设置不同的颜色，提供了6种类型的按钮 `primary` `success` `info` `danger` `warning`
+:::demo
 ```html
 <template>
-  <x-button type="warning" @click="test">warning</x-button>
+  <x-button type="warning"> warning </x-button>
+  <x-button type="primary"> primary </x-button>
+  <x-button type="success"> success </x-button>
+  <x-button type="info"> info </x-button>
+  <x-button type="danger"> danger </x-button>
 </template>
-
-<script>
-export default {
-  setup(){
-    const test = () => {
-      console.log(11)
-    }
-
-    return {
-      test
-    }
-  }
-}
-</script>
-
 ```
 :::
 
-### sdfadsf
------------------
-:::demo eee
+## 镂空按钮
+> 设置 `plain` 属性可以设置镂空按钮
+:::demo
 ```html
 <template>
-  <div class="color">222</div>
-  <div>warning</div>
+  <x-button type="warning" plain> warning </x-button>
+  <x-button type="primary" plain> primary </x-button>
+  <x-button type="success" plain> success </x-button>
+  <x-button type="info" plain> info </x-button>
+  <x-button type="danger" plain> danger </x-button>
 </template>
-
-
-<style>
-  .color{
-    color: #F00
-  }
-<style>
 ```
 :::
