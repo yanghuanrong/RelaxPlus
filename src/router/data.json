@@ -1,10 +1,21 @@
 {"data":[
   {
-    "title": "打造现象级WEB按钮",
-    "tag": "vue",
-    "date": "2020.11.20",
+    "title": "Button 按钮",
+    "tag": "General",
     "componentName": "Button",
     "fileName": "Button.md",
     "routePath": "/button"
+  },
+  {
+    "title": "安装",
+    "componentName": "Installation",
+    "fileName": "Installation.md",
+    "routePath": "/installation"
+  },
+  {
+    "title": "快速上手",
+    "componentName": "Quickstart",
+    "fileName": "Quickstart.md",
+    "routePath": "/quickstart"
   }
 ]}

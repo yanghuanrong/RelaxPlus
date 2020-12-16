@@ -39,13 +39,36 @@ body,
   overflow: hidden;
   display: flex;
   background-color: #f3f6f8;
+
+  .sidebar-menu {
+    height: 100%;
+    overflow: auto;
+    background: #FFF;
+
+    .menu{
+      padding: 0 8px;
+      a{
+        font-size: 14px;
+        display: block;
+        color: #333;
+        padding: 8px 20px;
+        margin: 4px 0;
+      }
+      a:hover{
+        background-color: #eee;
+      }
+      dl{
+        dt{
+          color: #999;
+          padding: 8px 20px;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #eee;
+        }
+      }
+    }
+  }
 }
 
-.sidebar-menu {
-  height: 100%;
-  overflow: auto;
-  background: #FFF;
-}
 
 .content-page {
   min-height: 100%;

@@ -43,7 +43,6 @@ export default {
       isShow.value = !isShow.value
     }
 
-
     return {
       isShow,
       handleCode,
