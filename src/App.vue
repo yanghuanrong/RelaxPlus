@@ -32,7 +32,6 @@ export default {
   setup() {
     const nav = useNav();
 
-    console.log(nav);
     return {
       nav,
     };
@@ -53,7 +52,7 @@ const useNav = () => {
       });
 
       if (index !== null) {
-        submenu[i].child.push(item);
+        submenu[index].child.push(item);
       } else {
         submenu.push({
           title: item.tag,

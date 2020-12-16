@@ -1,7 +1,9 @@
 import Button from './button/index.js'
+import Icon from './icon/index.js'
 
 const components = [
-  Button
+  Button,
+  Icon
 ]
 
 const install = function (app, opts = {}) {
@@ -17,5 +19,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
-  Button
+  Button,
+  Icon
 }

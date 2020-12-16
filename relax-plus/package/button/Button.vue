@@ -1,10 +1,15 @@
 <template>
   <button class="x-btn" :class="className">
-    <slot></slot>
+    <i v-if="loading" class='x-icon-loader' />
+    <i v-else-if="icon !== ''" :class="icon" />
+    <span v-if="$slots.default">
+      <slot></slot>
+    </span>
   </button>
 </template>
 
 <script>
+import {toRefs, computed} from 'vue'
 export default {
   name: 'Button',
   props: {
@@ -36,25 +41,34 @@ export default {
     loading: Boolean
   },
   setup(props){
-    const className = useClass(props)
+    const {loading, icon} = toRefs(props)
+    const className = useClass({
+      props,
+      loading,
+      icon,
+    })
 
     return {
-      className
+      className,
+      icon
     }    
   }
 };
 
-const useClass = props => ([
-  props.type && 'x-btn-' + props.type,
-  props.size !== '' || props.size ? 'x-btn-' + props.size : '',
-  {
-    'is-plain': props.plain,
-    'is-round': props.round,
-    'is-circle': props.circle,
-    'is-block': props.block,
-    'disabled': props.disabled
-  },
-  props.loading && 'x-btn-loading'
-])
-
+const useClass = ({props, loading, icon}) => {
+  return computed(() => {
+    return [
+      props.type && `x-btn-${props.type}`,
+      props.size !== '' || props.size ? `x-btn-${props.size}` : '',
+      {
+        'is-plain': props.plain,
+        'is-round': props.round,
+        'is-circle': props.circle,
+        'is-block': props.block,
+        'disabled': props.disabled
+      },
+      loading.value && 'x-btn-loading'
+    ]
+  })
+}
 </script>

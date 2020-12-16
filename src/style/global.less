@@ -33,6 +33,29 @@ body,
   }
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.col(@index, @type, @num) when (@index > 0) {
+  .col(@index - 1, @type, @num);
+
+  .col-@{type}-@{index} {
+      grid-column: span @index;
+  }
+}
+
+
+@media (min-width: 576px) {
+  .col(12, xs, 12);
+}
+
+@media (min-width: 768px) {
+  .col(12, md, 12);
+}
+
+
 .wrapper {
   width: 100%;
   height: 100%;
@@ -77,19 +100,15 @@ body,
   padding: 35px;
 }
 
-.card-box {
-  padding: 20px;
-  border-radius: 3px;
-  margin-bottom: 30px;
-  background-color: #ffffff;
-}
-
-.m-t-sm {
-  margin-top: 10px;
-}
-
-
 .relax-doc{
+  p{
+    code{
+      background-color: #fff;
+      border-radius: 3px;
+      padding: 1px 3px;
+      font-family: "arial";
+    }
+  }
   h1{
     font-size: 22px;
     font-weight: bold;
@@ -135,17 +154,17 @@ body,
     }
   }
   
-}
 
-
+  
 .icon-list {
-  display: flex;
-  flex-wrap: wrap;
+  padding: 20px;
+  border-radius: 3px;
+  margin-bottom: 30px;
+  background-color: #fff;
 
   &>div {
     text-align: center;
     list-style: none;
-    cursor: pointer;
     height: 100px;
     color: #555;
     -webkit-transition: color .3s ease-in-out, background-color .3s ease-in-out;
@@ -153,7 +172,6 @@ body,
     position: relative;
     margin: 3px 0;
     border-radius: 4px;
-    background-color: #fff;
     overflow: hidden;
     padding: 10px 0 0;
 
@@ -168,7 +186,7 @@ body,
       will-change: transform;
     }
 
-    .icon-class {
+    .icon-name {
       color: #888;
       display: block;
       text-align: center;
@@ -178,14 +196,11 @@ body,
       font-family: Lucida Console, Consolas;
       white-space: nowrap;
     }
-
-    .icon-copy {
-      opacity: 0;
-      position: relative;
-      z-index: -1;
-    }
   }
 }
+}
+
+
 
 
 .components-badge-demo .x-badge{
