@@ -65,7 +65,7 @@ function copy(value) {
     document.body.appendChild(oInput)
     oInput.style.width = '0'
     oInput.style.height = '0'
-    oInput.style.position = 'absolute'
+    oInput.style.position = 'fixed'
     oInput.style.opacity = '0'
     oInput.value = value
 

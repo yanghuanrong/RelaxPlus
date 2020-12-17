@@ -1,5 +1,11 @@
 {"data":[
   {
+    "title": "关于",
+    "componentName": "About",
+    "fileName": "About.md",
+    "routePath": "/about"
+  },
+  {
     "title": "Button 按钮",
     "tag": "General",
     "componentName": "Button",
@@ -12,12 +18,6 @@
     "componentName": "Icon",
     "fileName": "Icon.md",
     "routePath": "/icon"
-  },
-  {
-    "title": "安装",
-    "componentName": "Installation",
-    "fileName": "Installation.md",
-    "routePath": "/installation"
   },
   {
     "title": "Message 消息",
