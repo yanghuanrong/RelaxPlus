@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import {data} from './data.json'
 import Home from '../views/Home.vue'
 
@@ -19,7 +19,7 @@ data.map((item) => {
 })
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   scrollBehavior () {
     return { top: 0 }
   },
