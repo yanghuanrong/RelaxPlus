@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "yarn data && vue-cli-service serve",
     "examples": "vue-cli-service build",
-    "build": "rollup --config config/rollup.config.js",
+    "build": "rollup --config relax-plus/config/rollup.config.js",
     "data": "node relax-plus/config/create-route.js"
   },
   "dependencies": {
