@@ -20,7 +20,6 @@ export default {
   },
   setup(props){
     const {content , duration} = props
-    console.log(duration)
     const instance = getCurrentInstance()
 
     const isShow = ref(true)
