@@ -9,7 +9,7 @@ export default {
     type: String
   },
   setup(props){
-    const type = props
+    const {type} = props
     return {
       type
     }

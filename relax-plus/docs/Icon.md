@@ -4,9 +4,22 @@ tag: General
 ---
 
 # Icon 图标
+> 语义化的矢量图形
+
+## 使用方法
+> 直接通过设置类名为 x-icon-iconName 来使用即可。例如：
+:::demo
+```html
+<template>
+  <x-icon type="x-icon-star-on"></x-icon>
+  <x-icon type="x-icon-link"></x-icon>
+</template>
+```
+:::
+
+
+## 图标集合
 > 内置了许多的图标
-
-
 <div class="icon-list grid">
   <div class="col-xs-3 col-md-2">
     <i class="x-icon-heart-on"></i>
