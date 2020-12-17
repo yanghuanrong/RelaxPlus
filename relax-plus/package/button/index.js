@@ -1,7 +1,7 @@
-import Button from './Button.vue'
+import element from './Button.vue'
 
-Button.install = function (app) {
-  app.component(Button.name, Button)
+element.install = function (app) {
+  app.component(element.name, element)
 }
 
-export default Button
+export default element

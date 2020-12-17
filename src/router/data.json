@@ -20,6 +20,13 @@
     "routePath": "/installation"
   },
   {
+    "title": "Message 消息",
+    "tag": "Feedback",
+    "componentName": "Message",
+    "fileName": "Message.md",
+    "routePath": "/message"
+  },
+  {
     "title": "快速上手",
     "componentName": "Quickstart",
     "fileName": "Quickstart.md",

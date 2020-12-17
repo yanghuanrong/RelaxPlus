@@ -34,10 +34,10 @@ export default {
     CollapseTransition
   },
   setup(){
-    const internalInstance = getCurrentInstance()
+    const instance = getCurrentInstance()
     const isShow = ref(false)
 
-    const handleCopy = useCopy.bind(this, internalInstance.ctx)
+    const handleCopy = useCopy.bind(this, instance.ctx)
 
     const handleCode = () => {
       isShow.value = !isShow.value

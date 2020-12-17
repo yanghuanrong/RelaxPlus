@@ -2,11 +2,11 @@
   <div class="wrapper">
     <div class="sidebar-menu" style="width: 225px">
       <div style="padding: 20px">
-        <router-link to="/">
+        <!-- <router-link to="/"> -->
           <div class="logo-img">
             <span></span>
           </div>
-        </router-link>
+        <!-- </router-link> -->
       </div>
       <div v-for="menu in nav" class="menu">
         <dl v-if="menu.child">
