@@ -1,12 +1,12 @@
 @import "rest";
 @import "highlight";
-@import "demoBlock";
+@import "docs";
 
 html,
 body,
 #app {
   height: 100%;
-  background-color: #f3f6f8;
+  background-color: #f6f9fb;
 }
 
 .logo-img {
@@ -102,127 +102,6 @@ body,
   overflow: auto;
   padding: 35px;
 }
-
-.relax-doc{
-  p{
-    code{
-      background-color: #fff;
-      border-radius: 3px;
-      padding: 1px 3px;
-      font-family: "arial";
-      border: 1px solid #eaf0f5;
-    }
-  }
-  h1{
-    font-size: 22px;
-    font-weight: bold;
-    line-height: 1.5;
-
-    &+blockquote{
-      margin-bottom: 30px;
-    }
-  }
- 
-  h2 {
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1.4;
-    &+blockquote{
-      margin-bottom: 10px;
-    
-    }
-  }
-
-  h3 {
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  h4 {
-    font-size: 14px;
-  }
-
-  h5 {
-    font-size: 12px;
-  }
-
-  p{
-    font-size: 12px;
-    color: #98a6ad;
-  }
-
-  .demo-source{
-    .x-btn {
-      margin-right: 8px;
-      margin-bottom: 12px;
-    }
-    &>[class*=x-icon] {
-      font-size: 22px;
-      margin-left: 30px;
-    }
-  }
-  
-  &>ol,&>ul{
-    margin-top: 10px;
-    margin-bottom: 30px;
-    li{
-      font-size: 14px;
-      line-height: 1.6;
-    }
-  }
-
-  &>ol {
-    li{
-      padding-left: 20px;
-      list-style-type: disc;
-    }
-  }
-  
-  
-.icon-list {
-  padding: 20px;
-  border-radius: 3px;
-  margin-bottom: 30px;
-  background-color: #fff;
-
-  &>div {
-    text-align: center;
-    list-style: none;
-    height: 100px;
-    color: #555;
-    -webkit-transition: color .3s ease-in-out, background-color .3s ease-in-out;
-    transition: color .3s ease-in-out, background-color .3s ease-in-out;
-    position: relative;
-    margin: 3px 0;
-    border-radius: 4px;
-    overflow: hidden;
-    padding: 10px 0 0;
-
-    i[class^=x-icon-] {
-      border-radius: 100%;
-      font-size: 24px;
-      margin: 12px 0 16px;
-      -webkit-transition: -webkit-transform .3s ease-in-out;
-      transition: -webkit-transform .3s ease-in-out;
-      transition: transform .3s ease-in-out;
-      transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out;
-      will-change: transform;
-    }
-
-    .icon-name {
-      color: #888;
-      display: block;
-      text-align: center;
-      -webkit-transform: scale(.83);
-      -ms-transform: scale(.83);
-      transform: scale(.83);
-      font-family: Lucida Console, Consolas;
-      white-space: nowrap;
-    }
-  }
-}
-}
-
 
 
 
