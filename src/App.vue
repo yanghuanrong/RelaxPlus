@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="sidebar-menu" style="width: 225px">
+    <div class="sidebar-menu">
       <div style="padding: 20px">
         <!-- <router-link to="/"> -->
           <div class="logo-img">

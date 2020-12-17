@@ -20,6 +20,9 @@ data.map((item) => {
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+  scrollBehavior () {
+    return { top: 0 }
+  },
   routes
 })
 

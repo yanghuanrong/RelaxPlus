@@ -1,5 +1,6 @@
 <template>
-  <div class="demo-block" :class="{show: isShow}">
+  <div class="demo-block" >
+    <div class="demo-wrap" :class="{show: isShow}">
     <div class="demo-source">
         <slot name="source"></slot>
     </div>
@@ -20,10 +21,12 @@
         </div>
       </CollapseTransition>
     </div>
+    <div class="tag-detail">
+      <slot></slot>
+    </div>
+    </div>
   </div>
-  <div class="tag-detail">
-    <slot></slot>
-  </div>
+
 </template>
 
 <script>
@@ -53,6 +56,7 @@ export default {
 
 const useCopy = (ctx) => {
   const html = ctx.$slots.highlight()[0]['children'][0]['children']
+  ctx.$message.success('拷贝成功')
   copy(html)
 }
 

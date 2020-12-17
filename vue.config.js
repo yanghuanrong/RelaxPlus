@@ -7,6 +7,7 @@ module.exports = {
         
         config.resolve.alias
             .set('@RelaxPlus', path.resolve('relax-plus'))
+            .set('RelaxPlus', path.resolve('relax-plus/package/index.js'))
 
         config.module.rule('md')
             .test(/\.md/)

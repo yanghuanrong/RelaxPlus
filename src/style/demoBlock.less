@@ -1,69 +1,73 @@
 @border: #f3f6f8;
+
 .demo-block{
-  background-color: #FFF;
-  border-radius: 3px;
   margin-bottom: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  transition: box-shadow 1s;
-  padding:30px 20px 10px;
 
-  &.show{
-    box-shadow: 0 0 20px fade(#000, 8%)
-  }
+  .demo-wrap{
+    background-color: #FFF;
+    border-radius: 3px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    transition: box-shadow 1s;
+    padding:30px 20px 10px;
   
-  .demo-source{
-    padding-bottom: 30px;
-    border-bottom: 2px dotted @border;
-  }
-
-  .demo-highlight{
-    flex:1;
-    position: relative;
-    transition: height ease .2s;
-    padding-top: 10px;
-
-    .demo-icon{
-      position: absolute;
-      right: 0;
-      top: -35px;
-      display: flex;
-
-      .demo-icon__item{
-        width: 30px;
-        height: 30px;
-        border-radius: 100%;
-        text-align: center;
-        line-height: 30px;
-        font-size: 14px;
-        cursor: pointer;
-        margin-left: 10px;
-        transition: all ease .4s;
-        
-        &:hover{
-          background: #f3f6f8;
-        };
-      }
+    &.show{
+      box-shadow: 0 0 20px fade(#000, 8%)
     }
-
-    .tag-handle{
-      right: 10px;
-      top: 10px;
-
-      i.x-icon-copy{
-        color: #98a6ad;
-        cursor: pointer;
-        transition: color ease .4s;
-
-        &:hover{
-          color: #333;
+    
+    .demo-source{
+      padding-bottom: 30px;
+      border-bottom: 2px dotted @border;
+    }
+  
+    .demo-highlight{
+      flex:1;
+      position: relative;
+      transition: height ease .2s;
+      padding-top: 10px;
+  
+      .demo-icon{
+        position: absolute;
+        right: 0;
+        top: -35px;
+        display: flex;
+  
+        .demo-icon__item{
+          width: 30px;
+          height: 30px;
+          border-radius: 100%;
+          text-align: center;
+          line-height: 30px;
+          font-size: 14px;
+          cursor: pointer;
+          margin-left: 10px;
+          transition: all ease .4s;
+          
+          &:hover{
+            background: #f3f6f8;
+          };
         }
       }
-      i.x-icon-check{
-        color: #0acf97;
+  
+      .tag-handle{
+        right: 10px;
+        top: 10px;
+  
+        i.x-icon-copy{
+          color: #98a6ad;
+          cursor: pointer;
+          transition: color ease .4s;
+  
+          &:hover{
+            color: #333;
+          }
+        }
+        i.x-icon-check{
+          color: #0acf97;
+        }
       }
     }
   }
-
+  
 }

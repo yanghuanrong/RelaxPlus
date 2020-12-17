@@ -6,6 +6,7 @@ html,
 body,
 #app {
   height: 100%;
+  background-color: #f3f6f8;
 }
 
 .logo-img {
@@ -58,14 +59,17 @@ body,
 
 .wrapper {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   overflow: hidden;
-  display: flex;
-  background-color: #f3f6f8;
+  padding-left: 225px;
 
   .sidebar-menu {
-    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
     overflow: auto;
+    width: 225px;
     background: #FFF;
 
     .menu{
@@ -91,7 +95,6 @@ body,
     }
   }
 }
-
 
 .content-page {
   min-height: 100%;

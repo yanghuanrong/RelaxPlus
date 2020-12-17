@@ -1,5 +1,5 @@
 <template>
-  <transition name="slideY-fade" @after-leave="close" appear>
+  <transition name="slideY-fade" @after-leave="afterLeave" appear>
     <div class="x-message" v-show="isShow">
       <span><i :class="icon[type]"/>{{content}}</span>
     </div>
@@ -19,15 +19,21 @@ export default {
     }
   },
   setup(props){
-    const isShow = ref(true)
+    const {content , duration} = props
+    console.log(duration)
     const instance = getCurrentInstance()
-    const {content} = props
 
-    setTimeout(() => {
+    const isShow = ref(true)
+
+    if(duration > 0) {
+      setTimeout(close, duration * 1000)
+    }
+
+    function close() {
       isShow.value = false
-    }, 1500)
-
-    const close = () => {
+    }
+ 
+    const afterLeave = () => {
       instance.vnode.el.parentElement?.removeChild(instance.vnode.el)
     }
 
@@ -43,7 +49,8 @@ export default {
       icon,
       isShow,
       content,
-      close
+      close,
+      afterLeave
     }
   }
 };
