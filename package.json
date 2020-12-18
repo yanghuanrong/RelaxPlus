@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "yarn data && vue-cli-service serve",
-    "examples": "vue-cli-service build",
-    "build": "rollup --config relax-plus/config/rollup.config.js",
+    "build": "vue-cli-service build",
+    "build:ui": "rollup --config relax-plus/config/rollup.config.js",
     "data": "node relax-plus/config/create-route.js"
   },
   "dependencies": {

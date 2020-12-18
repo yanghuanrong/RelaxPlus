@@ -4,11 +4,6 @@ import {createComponent} from '../../utils/component'
 
 function messageCreate(content, type, duration) {
 
-  // if(Object.prototype.toString.call(duration) !== '[object Number]'){
-  //   console.error('message duration is number')
-  //   return
-  // }
-
   const props = {
     content,
     type,
@@ -17,8 +12,7 @@ function messageCreate(content, type, duration) {
   
   const component = createComponent(element, props)
   document.body.appendChild(component.vnode.el)
-
-  return component.ctx.close.bind(this)
+  return component.setupState.close.bind(this)
 }
 
 let oneKey = null

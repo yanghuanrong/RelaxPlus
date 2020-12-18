@@ -8,7 +8,7 @@ tag: Feedback
 
 ## 普通提示
 > 最基本的提示，默认在 `1.5` 秒后消失。
-:::demo `message` 会被挂载在 `vue` 实例下面, 当然也可以引入 `RelaxPlus` 直接使用
+:::demo `message` 会被挂载在 `vue` 全局属性中, 当然也可以引入 `RelaxPlus` 直接使用
 ```html
 <template>
    <x-button type='primary' @click="handerClick">显示普通提示</x-button>
@@ -18,9 +18,10 @@ tag: Feedback
   import {getCurrentInstance} from 'vue'
   export default {
     setup(){
-      const {ctx} = getCurrentInstance()
+      const instance = getCurrentInstance()
+      const {$message} = instance.appContext.config.globalProperties
       const handerClick = () => {
-        ctx.$message('你好呀')
+        $message('你好呀')
       }
       return {
         handerClick
@@ -47,18 +48,19 @@ tag: Feedback
   import {getCurrentInstance} from 'vue'
   export default {
     setup(){
-      const {ctx} = getCurrentInstance()
+      const instance = getCurrentInstance()
+      const {$message} = instance.appContext.config.globalProperties
       const handerClickInfo = () => {
-        ctx.$message.info('显示信息提示')
+        $message.info('显示信息提示')
       }
       const handerClickError = () => {
-        ctx.$message.error('显示错误提示')
+        $message.error('显示错误提示')
       }
       const handerClickSuccess = () => {
-        ctx.$message.success('显示成功提示')
+        $message.success('显示成功提示')
       }
       const handerClickWarning = () => {
-        ctx.$message.warning('显示警告提示')
+        $message.warning('显示警告提示')
       }
       return {
         handerClickInfo,
@@ -85,15 +87,16 @@ tag: Feedback
 import {getCurrentInstance} from 'vue'
 export default {
   setup(){
-    const {ctx} = getCurrentInstance()
+    const instance = getCurrentInstance()
+    const {$message} = instance.appContext.config.globalProperties
 
     const loading = () => {
-      const message = ctx.$message.loading('message 消息', 0)
+      const message = $message.loading('message 消息', 0)
       setTimeout(message, 3000)
     }
 
     const info = () => {
-      ctx.$message('message 消息', 3)
+      $message('message 消息', 3)
     }
     return {
       loading,

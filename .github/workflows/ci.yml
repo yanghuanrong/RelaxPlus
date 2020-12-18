@@ -16,7 +16,7 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
         FOLDER: dist
-        BUILD_SCRIPT: npm install && npm run examples
+        BUILD_SCRIPT: npm install && npm run build
 
     - name: SyncToGitee
       uses: wearerequired/git-mirror-action@master

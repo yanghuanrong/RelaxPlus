@@ -23,7 +23,7 @@ export default {
     const instance = getCurrentInstance()
 
     const isShow = ref(true)
-
+    
     if(duration > 0) {
       setTimeout(close, duration * 1000)
     }

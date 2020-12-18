@@ -38,12 +38,16 @@ export default {
   components: {
     CollapseTransition
   },
-  setup(){
+  setup(props, {slots}){
     const instance = getCurrentInstance()
+    const globalProperties = instance.appContext.config.globalProperties
+
+    const handleCopy = useCopy.bind(this, {
+      slots,
+      globalProperties
+    })
+
     const isShow = ref(false)
-
-    const handleCopy = useCopy.bind(this, instance.ctx)
-
     const handleCode = () => {
       isShow.value = !isShow.value
     }
@@ -56,9 +60,9 @@ export default {
   }
 }
 
-const useCopy = (ctx) => {
-  const html = ctx.$slots.highlight()[0]['children'][0]['children']
-  ctx.$message.success('拷贝成功')
+const useCopy = ({slots,globalProperties}) => {
+  const html = slots.highlight()[0]['children'][0]['children']
+  globalProperties.$message.success('拷贝成功')
   copy(html)
 }
 
