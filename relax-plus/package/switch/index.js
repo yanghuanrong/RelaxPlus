@@ -1,4 +1,4 @@
-import element from './button.vue'
+import element from './switch.vue'
 
 element.install = function (app) {
   app.component(element.name, element)

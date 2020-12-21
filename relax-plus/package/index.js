@@ -5,9 +5,14 @@ import Icon from './icon/index'
 // Feedback
 import Message from './message/index'
 
+// Data Entry 
+import Switch from './switch/index'
+
+
 const components = [
   Button,
-  Icon
+  Icon,
+  Switch
 ]
 
 const install = function (app) {
@@ -31,5 +36,6 @@ export default {
   install,
   Button,
   Icon,
-  Message
+  Message,
+  Switch
 }

@@ -91,7 +91,7 @@ export default {
     const {$message} = instance.appContext.config.globalProperties
 
     const loading = () => {
-      const message = $message.loading('message 消息', 0)
+      const message = $message.loading('3秒后自动关闭', 0)
       setTimeout(message, 3000)
     }
 

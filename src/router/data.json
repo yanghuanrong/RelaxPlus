@@ -31,5 +31,12 @@
     "componentName": "Quickstart",
     "fileName": "Quickstart.md",
     "routePath": "/quickstart"
+  },
+  {
+    "title": "Switch 开关",
+    "tag": "Data Entry",
+    "componentName": "Switch",
+    "fileName": "Switch.md",
+    "routePath": "/switch"
   }
 ]}
