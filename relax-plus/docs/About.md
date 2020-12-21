@@ -22,7 +22,7 @@ title: 关于
 - ✖ Input 输入框
 - ✖ Checkbox 多选框
 - ✖ Select 选择器
-- ✖ Switch 开关
+- ✔ Switch 开关
 - ✖ DatePicker 日期选择器
 - ✖ Calendar 日历
 - ✖ Form 表单
