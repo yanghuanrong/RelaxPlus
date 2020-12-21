@@ -23,6 +23,7 @@
     <div class="content-page">
       <router-view />
     </div>
+    
   </div>
 </template>
 
@@ -30,13 +31,13 @@
 import routes from "@/router/data";
 export default {
   setup() {
-    const nav = useNav();
+    const nav = useNav()
 
     return {
-      nav,
+      nav
     };
   },
-};
+}
 
 const useNav = () => {
   const menu = [];

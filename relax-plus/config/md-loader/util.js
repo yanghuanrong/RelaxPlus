@@ -32,24 +32,8 @@ function stripTemplate(content) {
 // }
 
 function genInlineComponentText(template, script) {
-  // const finalOptions = {
-  //   source: `<div>${template}</div>`,
-  //   filename: 'inline-component', // TODO：这里有待调整
-  //   compiler
-  // };
 
-  // const compiled = compiler.compile(template, { mode: "module"})
   const compiled = compiler.compile(template, { prefixIdentifiers: true })
-  // const compiled = compileTemplate(finalOptions);
-
-  // errors
-  // if (compiled.errors && compiled.errors.length) {
-  //   console.error(
-  //     `\n  Error compiling template:\n${pad(compiled.source)}\n` +
-  //       compiled.errors.map(e => `  - ${e}`).join('\n') +
-  //       '\n'
-  //   );
-  // }
 
   const code = compiled.code.replace(/return\s+?function\s+?render/, () => {
     return 'function render '
@@ -85,7 +69,7 @@ function genInlineComponentText(template, script) {
       mounted(){
         this.$nextTick(()=>{
           const blocks = document.querySelectorAll('pre code:not(.hljs)')
-          Array.prototype.forEach.call(blocks, hljs.highlightBlock)     
+          Array.prototype.forEach.call(blocks, hljs.highlightBlock)
         })
       },
       render,

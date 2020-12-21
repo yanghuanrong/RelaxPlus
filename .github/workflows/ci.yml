@@ -32,3 +32,5 @@ jobs:
           gitee-username: bsie
           gitee-password: ${{ secrets.GITEE_PASSWORD }}
           gitee-repo: bsie/RelaxPlus
+          branch: gh-pages
+
