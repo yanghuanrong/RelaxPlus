@@ -6,6 +6,10 @@ import Icon from './icon/index'
 import Message from './message/index'
 import Notice from './notice/index'
 
+// Layout
+import Row from './row/index'
+import Col from './col/index'
+
 // Data Entry 
 import Switch from './switch/index'
 
@@ -13,7 +17,9 @@ import Switch from './switch/index'
 const components = [
   Button,
   Icon,
-  Switch
+  Switch,
+  Row,
+  Col
 ]
 
 const install = function (app) {
@@ -40,5 +46,7 @@ export default {
   Icon,
   Message,
   Switch,
-  Notice
+  Notice,
+  Row,
+  Col
 }

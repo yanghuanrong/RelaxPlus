@@ -13,6 +13,13 @@
     "routePath": "/button"
   },
   {
+    "title": "Grid 栅格",
+    "tag": "Layout",
+    "componentName": "Grid",
+    "fileName": "Grid.md",
+    "routePath": "/grid"
+  },
+  {
     "title": "Icon 图标",
     "tag": "General",
     "componentName": "Icon",

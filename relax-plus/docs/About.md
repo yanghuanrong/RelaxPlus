@@ -27,7 +27,7 @@ title: 关于
 - ✖ Calendar 日历
 - ✖ Form 表单
 - ✔ Message 消息
-- ✖ Notice 通知
+- ✔ Notice 通知
 
 # 提升空间
 > 创建新的 docs文档的时候，并不会触发路由数据更新 <br>
