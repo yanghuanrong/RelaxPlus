@@ -18,7 +18,7 @@ title: 关于
 - ✔ Button 按钮
 - ✔ Icon 图标
 - ✖ Badge 标记
-- ✖ Grid 栅格
+- ✔ Grid 栅格
 - ✖ Input 输入框
 - ✖ Checkbox 多选框
 - ✖ Select 选择器

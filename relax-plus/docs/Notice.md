@@ -91,37 +91,6 @@ tag: Feedback
 ```
 :::
 
-## 手动关闭
-> 自定义时长，为 `0` 则不自动关闭
-:::demo
-```html
-<template>
-   <x-button @click="handerClick">手动关闭</x-button>
-</template>
-
-<script>
-  import {getCurrentInstance} from 'vue'
-  export default {
-    setup(){
-      const instance = getCurrentInstance()
-      const {$notice} = instance.appContext.config.globalProperties
-      const handerClick = () => {
-        $notice.success({
-          title: 'Notice 通知',
-          content: '全新的 Notice 通知组件，对比老版本动画更加流畅，细腻，柔和，加入进度条倒计时指示，根本停不下来，太酷了',
-          duration: 0
-        })
-      }
-      return {
-        handerClick
-      }
-    }
-  }
-</script>
-```
-:::
-
-
 ## 仅显示标题
 > `title` 为必填项
 :::demo
@@ -157,7 +126,49 @@ tag: Feedback
 :::demo
 ```html
 <template>
-   <x-button @click="handerClick">显示自定义图标</x-button>
+   <x-button @click="handerClick1">显示自定义图标</x-button>
+   <x-button @click="handerClick2">显示自定义图标</x-button>
+</template>
+
+<script>
+  import {getCurrentInstance} from 'vue'
+  export default {
+    setup(){
+      const instance = getCurrentInstance()
+      const {$notice} = instance.appContext.config.globalProperties
+
+      const handerClick1 = () => {
+        $notice.error({
+          icon: 'x-icon-heart-on',
+          title: '落叶的一生，只是为了归根吗？',
+          duration: 20
+        })
+      }
+
+      const handerClick2 = () => {
+        $notice.info({
+          icon: 'x-icon-cloud-rain',
+          title: '面对疾风吧！',
+          duration: 20
+        })
+      }
+
+      return {
+        handerClick1,
+        handerClick2,
+      }
+    }
+  }
+</script>
+```
+:::
+
+## 手动关闭
+> 自定义时长，为 `0` 则不自动关闭
+:::demo
+```html
+<template>
+   <x-button @click="handerClick">手动关闭</x-button>
 </template>
 
 <script>
@@ -167,10 +178,10 @@ tag: Feedback
       const instance = getCurrentInstance()
       const {$notice} = instance.appContext.config.globalProperties
       const handerClick = () => {
-        $notice.error({
-          icon: 'x-icon-heart-on',
-          title: '落叶的一生，只是为了归根吗？',
-          duration: 20
+        $notice.success({
+          title: 'Notice 通知',
+          content: '全新的 Notice 通知组件，对比老版本动画更加流畅，细腻，柔和，加入进度条倒计时指示，根本停不下来，太酷了',
+          duration: 0
         })
       }
       return {
