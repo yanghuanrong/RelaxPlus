@@ -81,7 +81,7 @@ export default {
     const afterLeave = (el) => {
       el.style.height = el.offsetHeight + 'px'
       el.style.overflow = ''
-      // instance.vnode.el.parentElement?.removeChild(instance.vnode.el)
+      instance.vnode.el.parentElement?.removeChild(instance.vnode.el)
     }
 
     const iconType = {
