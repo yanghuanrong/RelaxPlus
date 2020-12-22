@@ -6,24 +6,65 @@
   bottom: auto;
 
   .x-notice-content-rect{
-    padding: 10px 24px;
-    border-radius: 4px;
-    box-shadow: 0 4px 10px fade(#000, 10%);
-    background: #fff;
     line-height: 1.5;
-    margin-bottom: 16px;
-    overflow: hidden;
+    padding: 8px;
     width: 360px;
-    position: relative;
+    overflow: hidden;
+
+    .x-notice-bar{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #e8e8e8;
+
+      i{
+        background-color: #b7b7b7;
+        display: block;
+        height: inherit;
+        width: 0;
+        transition: width .3s ease;
+      }
+
+      &.info{
+        background-color: fade(@info, 20%);
+        i{
+          background-color: @info;
+        }
+      }
+      &.success{
+        background-color: fade(@success, 20%);
+        i{
+          background-color: @success;
+        }
+      }
+      &.error{
+        background-color: fade(@danger, 20%);
+        i{
+          background-color: @danger;
+        }
+      }
+      &.warning{
+        background-color: fade(@warning, 20%);
+        i{
+          background-color: @warning;
+        }
+      }
+    }
 
     .x-notice-content{
+      background: #fff;
+      box-shadow: 0 4px 10px fade(#000, 10%);
+      border-radius: 4px;
+      padding: 10px 24px;
       position: relative;
     }
 
     .x-notice-icon{
       position: absolute;
-      left: 0;
-      top: -2px;
+      left: 20px;
+      top: 7px;
       font-size: 18px;
 
       &+.x-notice-title{
@@ -49,8 +90,8 @@
 
     .x-notice-close{
       position: absolute;
-      right: 0;
-      top: 0;
+      right: 10px;
+      top: 8px;
       color: #999;
       cursor: pointer;
       transition: color .2s;
@@ -63,23 +104,3 @@
     }
   }
 }
-
-.notice-move-enter-active,.notice-move-leave-active{
-  transition: all .2s ease;
-  transform-origin: center top;
-}
-
-.notice-move-enter{
-  opacity: 0;
-  transform: translateX(20%);
-}
-
-.notice-move-enter-to{
-  transform: translateX(0);
-}
-
-.notice-move-leave-to{
-  opacity: 0;
-  height: 0;
-}
-

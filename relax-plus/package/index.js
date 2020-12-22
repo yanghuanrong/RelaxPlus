@@ -4,6 +4,7 @@ import Icon from './icon/index'
 
 // Feedback
 import Message from './message/index'
+import Notice from './notice/index'
 
 // Data Entry 
 import Switch from './switch/index'
@@ -25,6 +26,7 @@ const install = function (app) {
 
 function applyOptions(app){
   app.config.globalProperties.$message = Message
+  app.config.globalProperties.$notice = Notice
 }
 
 /* istanbul ignore if */
@@ -37,5 +39,6 @@ export default {
   Button,
   Icon,
   Message,
-  Switch
+  Switch,
+  Notice
 }

@@ -27,6 +27,13 @@
     "routePath": "/message"
   },
   {
+    "title": "Notice 通知",
+    "tag": "Feedback",
+    "componentName": "Notice",
+    "fileName": "Notice.md",
+    "routePath": "/notice"
+  },
+  {
     "title": "快速上手",
     "componentName": "Quickstart",
     "fileName": "Quickstart.md",
