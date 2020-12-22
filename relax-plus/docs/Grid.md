@@ -109,7 +109,7 @@ tag: Layout
 :::
 
 ## flex对齐
-> 通过给row设置参数 `align` 为不同的值，来定义子元素在垂直方向上的排布方式。在 `flex` 模式下有效。
+> 通过给 `row` 设置参数 `align` 为不同的值，来定义子元素在垂直方向上的排布方式。在 `flex` 模式下有效。
 :::demo
 ```html
 <template>
