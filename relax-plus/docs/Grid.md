@@ -114,22 +114,22 @@ tag: Layout
 ```html
 <template>
   <x-row type="flex" justify="center" align="top">
-    <x-col :span="4"><div style="height: 80px">col-4</div></x-col>
-    <x-col :span="4"><div style="height: 30px">col-4</div></x-col>
-    <x-col :span="4"><div style="height: 100px">col-4</div></x-col>
-    <x-col :span="4"><div style="height: 60px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 80px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 30px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 100px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 60px">col-4</div></x-col>
   </x-row>
   <x-row type="flex" justify="center" align="center">
-    <x-col :span="4"><div style="height: 80px">col-4</div></x-col>
-    <x-col :span="4"><div style="height: 30px">col-4</div></x-col>
-    <x-col :span="4"><div style="height: 100px">col-4</div></x-col>
-    <x-col :span="4"><div style="height: 60px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 80px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 30px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 100px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 60px">col-4</div></x-col>
   </x-row>
   <x-row type="flex" justify="center" align="bottom">
-    <x-col :span="4"><div style="height: 80px">col-4</div></x-col>
-    <x-col :span="4"><div style="height: 30px">col-4</div></x-col>
-    <x-col :span="4"><div style="height: 100px">col-4</div></x-col>
-    <x-col :span="4"><div style="height: 60px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 80px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 30px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 100px">col-4</div></x-col>
+    <x-col :span="6"><div style="height: 60px">col-4</div></x-col>
   </x-row>
 </template>
 ```
@@ -178,9 +178,12 @@ tag: Layout
 ```html
 <template>
   <x-row>
-    <x-col :xs="2" :sm="4" :md="6" :lg="8"><div>col</div></x-col>
-    <x-col :xs="20" :sm="16" :md="12" :lg="8"><div>col</div></x-col>
-    <x-col :xs="2" :sm="4" :md="6" :lg="8"><div>col</div></x-col>
+    <x-col :xs="24" :sm="12" :md="8" :lg="4"><div>col</div></x-col>
+    <x-col :xs="24" :sm="12" :md="8" :lg="4"><div>col</div></x-col>
+    <x-col :xs="24" :sm="12" :md="8" :lg="4"><div>col</div></x-col>
+    <x-col :xs="24" :sm="12" :md="8" :lg="4"><div>col</div></x-col>
+    <x-col :xs="24" :sm="12" :md="8" :lg="4"><div>col</div></x-col>
+    <x-col :xs="24" :sm="12" :md="8" :lg="4"><div>col</div></x-col>
   </x-row>
 </template>
 ```
