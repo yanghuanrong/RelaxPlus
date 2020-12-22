@@ -12,7 +12,10 @@
           <i :style="{width: bar + '%'}"></i>
         </div>
         <span class="x-notice-icon" v-if="type">
-          <i :class="iconType[type]"/>
+          <i :class="[
+            icon || iconType[type],
+            type
+          ]"/>
         </span>
         <div class="x-notice-title">{{title}}</div>
         <div class="x-notice-description" v-if="content">{{content}}</div>
@@ -29,6 +32,7 @@ import {ref, getCurrentInstance} from 'vue'
 export default {
   name: "Notice",
   props: {
+    icon: String,
     title: String,
     content: String,
     type: String,
@@ -38,7 +42,7 @@ export default {
     }
   },
   setup(props){
-    const {title, content, type , duration} = props
+    const {title, content, type , duration, icon} = props
     const instance = getCurrentInstance()
     const isShow = ref(true)
     const bar = ref(0)
@@ -81,10 +85,10 @@ export default {
     }
 
     const iconType = {
-      info: "x-icon-info info",
-      error: "x-icon-x-circle error",
-      success: "x-icon-check-circle success",
-      warning: "x-icon-alert-triangle warning",
+      info: "x-icon-info",
+      error: "x-icon-x-circle",
+      success: "x-icon-check-circle",
+      warning: "x-icon-alert-triangle",
     }
     
     return {
@@ -96,6 +100,7 @@ export default {
       close,
       bar,
       duration,
+      icon,
 
       beforeLeave,
       leave,

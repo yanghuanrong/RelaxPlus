@@ -123,7 +123,7 @@ tag: Feedback
 
 
 ## 仅显示标题
-> title 为必填项
+> `title` 为必填项
 :::demo
 ```html
 <template>
@@ -140,6 +140,37 @@ tag: Feedback
         $notice.warning({
           title: '10秒后自动关闭',
           duration: 10
+        })
+      }
+      return {
+        handerClick
+      }
+    }
+  }
+</script>
+```
+:::
+
+
+## 自定义图标
+> 填写 `icon` 属性，可以使用自己喜欢的图标
+:::demo
+```html
+<template>
+   <x-button @click="handerClick">显示自定义图标</x-button>
+</template>
+
+<script>
+  import {getCurrentInstance} from 'vue'
+  export default {
+    setup(){
+      const instance = getCurrentInstance()
+      const {$notice} = instance.appContext.config.globalProperties
+      const handerClick = () => {
+        $notice.error({
+          icon: 'x-icon-heart-on',
+          title: '落叶的一生，只是为了归根吗？',
+          duration: 20
         })
       }
       return {
