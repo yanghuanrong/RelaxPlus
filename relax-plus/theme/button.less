@@ -65,6 +65,10 @@
   &.x-btn-sm {
     padding: 3px 10px;
     font-size: 12px;
+    .x-load{
+      width: 1.5em;
+      height: 1.5em;
+    }
   }
 
   &.x-btn-text {
@@ -351,6 +355,21 @@
 
   &.x-btn-loading,
   &.disabled,
+  &:disabled{
+    cursor: inherit;
+    box-shadow: none;
+    opacity: 0.5;
+
+    &:hover,
+    &:focus,
+    &:active {
+      transform: none;
+      box-shadow: none;
+      opacity: 0.5;
+    }
+  }
+  
+  &.disabled,
   &:disabled {
     box-shadow: none;
     opacity: 0.5;
@@ -365,22 +384,52 @@
     }
   }
 
-
-  &.x-btn-loading {
-    cursor: auto;
-
-    &>i.x-icon-loader {
+  .x-load {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    color: inherit;
+    vertical-align: middle;
+    pointer-events: none;
+    border: 0 solid transparent;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    &:before,
+    &:after {
+      content: '';
+      border: .2em solid currentcolor;
+      border-radius: 50%;
+      width: inherit;
+      height: inherit;
       position: absolute;
-      animation: rotating linear 1.5s infinite;
-
-      &+span {
-        margin-left: 15px;
-        transition: margin-left .2s linear;
-      }
+      top: 0;
+      left: 0;
+      animation: x-load 1s linear infinite;
+      opacity: 0;
+    }
+    
+    &:after {
+        animation-delay: .5s;
     }
   }
-
-
+  
+  @keyframes x-load {
+      0% {
+          transform: scale(0);
+          opacity: 0;
+      }
+      50% {
+          opacity: 1;
+      }
+      100% {
+          transform: scale(1);
+          opacity: 0;
+      }
+  }
 
   &.is-round {
     border-radius: 2em
@@ -398,15 +447,5 @@
 
   & [class*=x-icon-]+span {
     margin-left: 5px;
-  }
-}
-
-@keyframes rotating {
-  0% {
-    transform: rotate(0);
-  }
-
-  100% {
-    transform: rotate(360deg);
   }
 }

@@ -71,10 +71,9 @@ tag: General
       const handerClick = () => {
         loading.value = true
 
-
         setTimeout(() => {
           loading.value = false
-        }, 2000)
+        }, 3000)
       }
 
       return {

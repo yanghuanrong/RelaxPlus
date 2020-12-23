@@ -1,10 +1,13 @@
 <template>
-  <button class="x-btn" :class="className">
-    <i v-if="loading" class='x-icon-loader' />
-    <i v-else-if="icon !== ''" :class="icon" />
-    <span v-if="$slots.default">
-      <slot></slot>
+  <button class="x-btn" :class="className" :disabled="isDisabled">
+    <span v-if="loading" class='x-load'></span>
+    <span :style="{opacity: loading ? 0 : ''}">
+      <i if="icon !== ''" :class="icon" />
+      <span v-if="$slots.default">
+        <slot></slot>
+      </span>
     </span>
+    
   </button>
 </template>
 
@@ -41,16 +44,18 @@ export default {
     loading: Boolean
   },
   setup(props){
+    const isDisabled = computed(() => (props.loading || props.disabled))
     const {loading, icon} = toRefs(props)
     const className = useClass({
       props,
       loading,
       icon,
     })
-
+    
     return {
       className,
-      icon
+      icon,
+      isDisabled
     }    
   }
 };
