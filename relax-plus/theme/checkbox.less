@@ -1,15 +1,13 @@
 .x-checkbox {
   cursor: pointer;
   margin-right: 10px;
+  user-select: none;
+  line-height: 1.3;
 
   &:hover {
     span::before {
       border-color: @primary;
     }
-  }
-
-  &.x-checkbox-disabled {
-    cursor: not-allowed;
   }
 
   span {
@@ -51,10 +49,6 @@
     opacity: 0;
     z-index: 1;
     outline: none !important;
-
-    &:disabled+span {
-      opacity: 0.65;
-    }
   }
 
   input[type="checkbox"]:focus+span {
@@ -89,21 +83,27 @@
 
     &.x-checkbox-disabled {
       input[type="checkbox"]+span {
-        &::before {
-          background-color: @primary;
-          border-color: @primary;
-          cursor: not-allowed;
+        
+        &::after {
+          border: 1px solid fade(@text, 40%);
+          border-top-width: 0;
+          border-left-width: 0;
+          transform: rotate(45deg);
+          border-color: fade(@text, 40%);
         }
       }
     }
   }
 
   &.x-checkbox-disabled {
+    cursor: not-allowed;
+
     input[type="checkbox"]+span {
+      opacity: 0.65;
+
       &::before {
         background-color: fade(@border, 30%);
         border-color: @border;
-        cursor: not-allowed;
       }
     }
   }

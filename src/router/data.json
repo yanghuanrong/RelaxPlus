@@ -13,6 +13,13 @@
     "routePath": "/button"
   },
   {
+    "title": "Checkbox 多选框",
+    "tag": "Data Entry",
+    "componentName": "Checkbox",
+    "fileName": "Checkbox.md",
+    "routePath": "/checkbox"
+  },
+  {
     "title": "Grid 栅格",
     "tag": "Layout",
     "componentName": "Grid",

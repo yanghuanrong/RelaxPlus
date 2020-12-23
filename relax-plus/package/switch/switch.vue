@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {toRefs, computed} from 'vue';
+import {toRefs} from 'vue';
 export default {
   name: 'Switch',
   props:{
