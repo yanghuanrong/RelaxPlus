@@ -59,26 +59,37 @@ tag: General
   <x-button type='warning' size="sm" round :loading="true">loading</x-button>
   <x-button type='danger' round :loading="true">loading</x-button>
   <x-button type='info' round plain :loading="true">loading</x-button>
-  <x-button type='success' plain :loading="true">loading</x-button>
-  <x-button type='primary' :loading="loading" @click="handerClick">Click loading</x-button>
+  <x-button type='success' plain :loading="loading1" @click="handerClick1" icon="x-icon-heart-on">loading</x-button>
+  <x-button type='primary' :loading="loading2" @click="handerClick2">Click loading</x-button>
 </template>
 <script>
   import {ref} from 'vue'
   export default {
     setup(){
-      const loading = ref(false)
+      const loading1 = ref(false)
+      const loading2 = ref(false)
 
-      const handerClick = () => {
-        loading.value = true
+      const handerClick1 = () => {
+        loading1.value = true
 
         setTimeout(() => {
-          loading.value = false
+          loading1.value = false
+        }, 3000)
+      }
+
+      const handerClick2 = () => {
+        loading2.value = true
+
+        setTimeout(() => {
+          loading2.value = false
         }, 3000)
       }
 
       return {
-        loading,
-        handerClick
+        loading1,
+        loading2,
+        handerClick1,
+        handerClick2,
       }
     }
   }

@@ -32,7 +32,7 @@
   max-width: 100%;
   margin: 0;
   padding: 7px 15px;
-  transition: all 0.25s ease-in-out;
+  transition: background 0.25s ease-in-out;
   border: 1px solid transparent;
   border-radius: 2px;
   color: #fff;
@@ -51,6 +51,13 @@
   -ms-user-select: none;
   user-select: none;
   text-decoration: none;
+
+  &>.content{
+    display: inline-block;
+    transition: all .35s ease;
+    transform: scale(1);
+    opacity: 1;
+  }
 
   &:focus {
     background-image: none;
@@ -353,22 +360,6 @@
     }
   }
 
-  &.x-btn-loading,
-  &.disabled,
-  &:disabled{
-    cursor: inherit;
-    box-shadow: none;
-    opacity: 0.5;
-
-    &:hover,
-    &:focus,
-    &:active {
-      transform: none;
-      box-shadow: none;
-      opacity: 0.5;
-    }
-  }
-  
   &.disabled,
   &:disabled {
     box-shadow: none;
@@ -384,6 +375,23 @@
     }
   }
 
+  &.x-btn-loading{
+    &:disabled{
+      cursor: inherit;
+      box-shadow: none;
+      opacity: 0.5;
+  
+      &:hover,
+      &:focus,
+      &:active {
+        transform: none;
+        box-shadow: none;
+        opacity: 0.5;
+      }
+    }
+  }
+  
+  
   .x-load {
     display: inline-block;
     width: 2em;

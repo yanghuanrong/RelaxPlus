@@ -1,8 +1,8 @@
 <template>
   <button class="x-btn" :class="className" :disabled="isDisabled">
     <span v-if="loading" class='x-load'></span>
-    <span :style="{opacity: loading ? 0 : ''}">
-      <i if="icon !== ''" :class="icon" />
+    <span class="content" :style="style">
+      <i v-if="icon !== ''" :class="icon" />
       <span v-if="$slots.default">
         <slot></slot>
       </span>
@@ -52,9 +52,22 @@ export default {
       icon,
     })
     
+    const style = computed(() => {
+      let ret = {}
+      if(props.loading){
+        ret = {
+          opacity: '0',
+          transform: 'scale(2.2)'
+        }
+      }
+      return ret
+    })
+    
+
     return {
       className,
       icon,
+      style,
       isDisabled
     }    
   }
