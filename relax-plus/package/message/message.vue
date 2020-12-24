@@ -19,7 +19,7 @@ export default {
     }
   },
   setup(props){
-    const {content , duration} = props
+    const {duration} = props
     const instance = getCurrentInstance()
 
     const isShow = ref(true)
@@ -47,7 +47,6 @@ export default {
     return {
       icon,
       isShow,
-      content,
       close,
       afterLeave
     }

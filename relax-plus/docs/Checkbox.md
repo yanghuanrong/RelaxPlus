@@ -18,7 +18,7 @@ tag: Data Entry
   import {ref} from 'vue'
   export default {
     setup(){
-      const checked = ref(false)
+      const checked = ref(true)
 
       return {
         checked
@@ -34,9 +34,36 @@ tag: Data Entry
 :::demo
 ```html
 <template>
-  <x-checkbox label="banana" disabled />
-  <x-checkbox label="apple" disabled checked />
-  <x-checkbox label="orange" disabled checked> 橘子 </x-checkbox>
+  <x-checkbox label="one" />
+  <x-checkbox label="two" disabled />
+  <x-checkbox label="three" disabled checked />
+  <x-checkbox label="four" disabled checked> 橘子 </x-checkbox>
 </template>
 ```
+::: 
+
+## 多选组
+>使用 `CheckboxGroup` 配合数组来生成组合。在组合使用时，`Checkbox` 使用 `label` 来自动判断选中状态。每个 `Checkbox` 的内容可以自定义，如不填写则默认使用 `label` 的值
+:::demo
+```html
+<template>
+  <x-checkbox-group v-model="options">
+    <x-checkbox label="one" />
+  </x-checkbox-group>
+</template>
+
+<script>
+  import {reactive} from 'vue'
+  export default {
+    setup(){
+      const options = reactive([])
+
+      return {
+        options
+      }
+    }
+  }
+</script>
+```
 :::
+

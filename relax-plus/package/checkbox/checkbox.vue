@@ -2,11 +2,11 @@
   <label 
     class="x-checkbox"
     :class="{
-      'x-checkbox-checked': modelValue || checked ,
+      'x-checkbox-checked': isChecked,
       'x-checkbox-disabled': disabled
     }"
   >
-    <input type="checkbox" :label="label" :disabled="disabled" :checked="modelValue" @change="handerClick" />
+    <input type="checkbox" :label="label" :disabled="disabled" :checked="isChecked" @change="handerClick" />
     <span>
       <template v-if="$slots.default">
         <slot></slot>
@@ -19,7 +19,9 @@
 </template>
 
 <script>
-import {computed, toRefs} from 'vue'
+import {ref} from 'vue'
+import useEmit from '../../utils/emiter'
+    
 export default {
   name: 'Checkbox',
   props: {
@@ -29,17 +31,17 @@ export default {
     disabled: Boolean
   },
   setup(props, {emit}){
-    const field = toRefs(props) 
+    const isChecked = ref(props.checked || props.modelValue)
 
     const handerClick = () => {
-      if(!field.disabled.value) {
-        emit('update:modelValue', !field.modelValue.value)
-      }
+      isChecked.value = !isChecked.value
+      emit('update:modelValue', isChecked)
+      emit('change', isChecked)
     }
     
     return {
       handerClick,
-      ...field
+      isChecked
     }
   }
 }

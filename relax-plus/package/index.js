@@ -13,6 +13,7 @@ import Col from './col/index'
 // Data Entry 
 import Switch from './switch/index'
 import Checkbox from './checkbox/index'
+import CheckboxGroup from './checkbox-group/index'
 
 const components = [
   Button,
@@ -20,7 +21,8 @@ const components = [
   Switch,
   Row,
   Col,
-  Checkbox
+  Checkbox,
+  CheckboxGroup
 ]
 
 const install = function (app) {
@@ -50,5 +52,6 @@ export default {
   Notice,
   Row,
   Col,
-  Checkbox
+  Checkbox,
+  CheckboxGroup
 }

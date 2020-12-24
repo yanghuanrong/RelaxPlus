@@ -23,7 +23,7 @@ import router from './router';
 
 // 引入RelaxPlus
 import RelaxPlus from 'RelaxPlus'
-import '@RelaxPlus/theme/style.less'
+import 'RelaxPlus/theme/style.less'
 
 createApp(App)
 .use(router)
