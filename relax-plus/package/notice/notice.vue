@@ -42,7 +42,7 @@ export default {
     }
   },
   setup(props){
-    const {title, content, type , duration, icon} = props
+    const {duration} = props
     const instance = getCurrentInstance()
     const isShow = ref(true)
     const bar = ref(0)
@@ -106,14 +106,10 @@ export default {
     
     return {
       iconType,
-      type,
-      title,
-      content,
       isShow,
       close,
       bar,
       duration,
-      icon,
       starTime,
       endTime,
 

@@ -47,9 +47,6 @@ export default {
     }
 
     return {
-      type: props.type,
-      disabled,
-      modelValue,
       handerClick
     }
   }

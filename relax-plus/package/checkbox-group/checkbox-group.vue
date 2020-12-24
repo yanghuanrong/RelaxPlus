@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { toRefs } from 'vue'
+import { reactive,toRefs } from 'vue'
 import useEmit from '../../utils/emiter'
 
 export default {
@@ -13,14 +13,19 @@ export default {
   props: {
     modelValue: Array
   },
-  setup(props){
+  setup(props, {emit}){
     const {on, broadcast} = useEmit()
-    // const {modelValue} = toRefs(props)
-
-    // broadcast('checkboxGroup:modelValue', modelValue)
-    // on('checkbox:modelValue', (array) => {
-    //   emit('update:modelValue', array)
-    // })
+    const {modelValue} = toRefs(props)
+    
+    on('modelValue', (isCheked, label) => {
+      if(isCheked){
+        modelValue.value.push(label)
+      } else {
+        modelValue.value.splice(modelValue.value.indexOf(label), 1)
+      }
+      emit('update:modelValue', modelValue)
+    })
+    
   }
 }
 </script>

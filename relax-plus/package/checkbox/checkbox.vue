@@ -6,7 +6,7 @@
       'x-checkbox-disabled': disabled
     }"
   >
-    <input type="checkbox" :label="label" :disabled="disabled" :checked="isChecked" @change="handerClick" />
+    <input type="checkbox" :label="label" :disabled="disabled" :checked="isChecked" @change.stop="handerClick" />
     <span>
       <template v-if="$slots.default">
         <slot></slot>
@@ -33,11 +33,22 @@ export default {
   setup(props, {emit}){
     const isChecked = ref(props.checked || props.modelValue)
 
+    const {dispatch} = useEmit()
+
     const handerClick = () => {
       isChecked.value = !isChecked.value
       emit('update:modelValue', isChecked)
-      emit('change', isChecked)
+      emit('change', isChecked.value)
+      emitGroup()
     }
+
+    const emitGroup = () => {
+      if(!props.disabled) {
+        dispatch('modelValue', isChecked.value, props.label)
+      }
+    }
+
+    emitGroup()
     
     return {
       handerClick,

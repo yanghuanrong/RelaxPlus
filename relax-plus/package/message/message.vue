@@ -11,7 +11,7 @@ import {ref, getCurrentInstance} from 'vue'
 export default {
   name: "Message",
   props: {
-    content: String,
+    content: [String, Number, Boolean],
     type: String,
     duration: {
       type: Number,
