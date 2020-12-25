@@ -4,6 +4,7 @@
       <input
         class="x-input"
         v-bind="$attrs"
+        :type="type"
         @input="handerInput"
         :value="value"
       />

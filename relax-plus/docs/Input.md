@@ -42,18 +42,5 @@ export default {
 <template>
   <x-input placeholder="请输入" type="textarea" rows="7" cols="20" v-model="value" />
 </template>
-
-<script>
-import {ref} from 'vue'
-export default {
-  setup(){
-    const value = ref('')
-
-    return {
-      value
-    }
-  }
-}
-</script>
 ```
 :::
