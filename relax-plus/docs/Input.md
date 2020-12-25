@@ -35,12 +35,25 @@ export default {
 :::
 
 
-## 文本域
-> 设置 `type` 属性为 `textarea`
+## 前缀和后缀图标
+> 通过设置 `icon-before` 和 `icon-after` 设置前缀及后缀图标
 :::demo
 ```html
 <template>
-  <x-input placeholder="请输入" type="textarea" rows="7" cols="20" v-model="value" />
+  <x-input placeholder="请输入" icon-before="x-icon-search" />
+  <x-input placeholder="请输入" icon-after="x-icon-calendar" style="margin-left:5px" />
 </template>
+```
+:::
+
+
+## 文本域
+> 设置 `type` 属性为 `textarea`
+:::demo `maxlength` 可以限制 `textarea` 的输入长度
+```html
+<template>
+  <x-input placeholder="请输入" type="textarea" rows="7" cols="20" :maxlength="40" />
+</template>
+
 ```
 :::
