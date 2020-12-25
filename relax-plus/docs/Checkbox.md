@@ -92,25 +92,28 @@ tag: Data Entry
 ```
 :::
 
+
 ## 控制 checkbox
-> 数据联动
-:::demo `checked` 并不是响应式的
-```html 
+> 其他组件控制进行数据联动
+:::demo
+```html
 <template>
-  <x-checkbox label="checkbox" :disabled="disabled" v-model="checked" />
+   <x-checkbox label="checkbox" :disabled="disabled" v-model="checked" />
   
   <div style="margin-top: 10px">
     <x-button type="success" size='sm' @click="checked = !checked">{{checked ? 'Checked' : 'Unchecked'}}</x-button>
     <x-button type="danger" size='sm' @click="disabled = !disabled">{{disabled ? 'Disabled' : 'Enabled'}}</x-button>
   </div>
+
 </template>
 
 <script>
   import {ref} from 'vue'
   export default {
     setup(){
-      const checked = ref(true)
       const disabled = ref(true)
+      const checked = ref(true)
+
       return {
         checked,
         disabled
@@ -121,9 +124,8 @@ tag: Data Entry
 ```
 :::
 
-
 ## 布局
-> Checkbox 与 Grid 组件一起使用，可以实现灵活的布局。
+> `Checkbox` 与 `Grid` 组件一起使用，可以实现灵活的布局。
 :::demo
 ```html
 <template>
@@ -132,10 +134,6 @@ tag: Data Entry
       <x-checkbox v-model="item.checked" v-bind="item" >options {{item.label}}</x-checkbox>
     </x-col>
   </x-row>
-
-  <div style="margin-top: 10px">
-  选中的值：<pre>{{options}}</pre>
-  </div>
 </template>
   
 <script>
