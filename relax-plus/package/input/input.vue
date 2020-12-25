@@ -18,7 +18,7 @@
       <i class="x-after" :class="iconAfter"></i>
     </template>
     <template v-else>
-      <textarea 
+      <textarea
         class="x-textarea"
         v-bind="$attrs"
         @input="handerInput"
