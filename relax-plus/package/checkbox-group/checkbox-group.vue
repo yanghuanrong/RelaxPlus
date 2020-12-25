@@ -5,8 +5,7 @@
 </template>
 
 <script>
-import { reactive,toRefs } from 'vue'
-import useEmit from '../../utils/emiter'
+import { getCurrentInstance, provide } from 'vue'
 
 export default {
   name: 'CheckboxGroup',
@@ -14,18 +13,7 @@ export default {
     modelValue: Array
   },
   setup(props, {emit}){
-    const {on, broadcast} = useEmit()
-    const {modelValue} = toRefs(props)
-    
-    on('modelValue', (isCheked, label) => {
-      if(isCheked){
-        modelValue.value.push(label)
-      } else {
-        modelValue.value.splice(modelValue.value.indexOf(label), 1)
-      }
-      emit('update:modelValue', modelValue)
-    })
-    
+    provide('checkboxGroup', getCurrentInstance())
   }
 }
 </script>

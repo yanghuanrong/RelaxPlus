@@ -25,7 +25,7 @@ export default {
     lg: [Number, Object]
   },
   setup(props){
-    const Row = inject('Row').props
+    const Row = inject('Row', {props: {}})
     let classes = ['x-col']
     
     let isSpan = true

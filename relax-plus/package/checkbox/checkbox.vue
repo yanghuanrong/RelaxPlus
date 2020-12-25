@@ -2,11 +2,11 @@
   <label 
     class="x-checkbox"
     :class="{
-      'x-checkbox-checked': isChecked,
+      'x-checkbox-checked': isCheked,
       'x-checkbox-disabled': disabled
     }"
   >
-    <input type="checkbox" :label="label" :disabled="disabled" :checked="isChecked" @change.stop="handerClick" />
+    <input type="checkbox" :label="label" :disabled="disabled" :checked="isCheked" @change.stop="handerClick" />
     <span>
       <template v-if="$slots.default">
         <slot></slot>
@@ -19,8 +19,7 @@
 </template>
 
 <script>
-import {ref} from 'vue'
-import useEmit from '../../utils/emiter'
+import {inject, reactive, watchEffect, computed, onMounted} from 'vue'
     
 export default {
   name: 'Checkbox',
@@ -31,28 +30,58 @@ export default {
     disabled: Boolean
   },
   setup(props, {emit}){
-    const isChecked = ref(props.checked || props.modelValue)
 
-    const {dispatch} = useEmit()
+    const checkboxGroup = inject('checkboxGroup', { props: {} })
 
-    const handerClick = () => {
-      isChecked.value = !isChecked.value
-      emit('update:modelValue', isChecked)
-      emit('change', isChecked.value)
-      emitGroup()
-    }
+    const state = reactive({
+      modelValue: null
+    })
 
-    const emitGroup = () => {
-      if(!props.disabled) {
-        dispatch('modelValue', isChecked.value, props.label)
+    watchEffect(() => {
+      state.modelValue = checkboxGroup.props.modelValue || props.modelValue || props.checked
+    })
+
+    const model = computed({
+      get(){
+        return state.modelValue
+      },
+      set({checked, label}){
+        if(Object.prototype.toString.call(model.value) === '[object Array]'){
+          const modelValue = model.value
+          const labelIndex = modelValue.indexOf(label)
+
+          labelIndex === -1 && checked === true && modelValue.push(label)
+          labelIndex !== -1 && checked === false && modelValue.splice(labelIndex, 1)
+
+          state.modelValue = modelValue
+          emit('update:modelValue', modelValue)
+
+        } else {
+          state.modelValue = checked
+          emit('update:modelValue', checked)
+        }
       }
+    })
+
+    const isCheked = computed(() => {
+      if(Object.prototype.toString.call(model.value) === '[object Array]'){
+        return model.value.indexOf(props.label) !== -1
+      } else {
+        return model.value
+      }
+    })
+
+    const handerClick = (e) => {
+      model.value = {
+        checked: e.target.checked,
+        label: props.label
+      }
+      emit('change', model.value)
     }
 
-    emitGroup()
-    
     return {
       handerClick,
-      isChecked
+      isCheked
     }
   }
 }

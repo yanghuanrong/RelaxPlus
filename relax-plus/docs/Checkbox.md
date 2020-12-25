@@ -31,13 +31,13 @@ tag: Data Entry
 
 ## 禁用
 > 添加 `disabled` 属性 禁用 `checkbox`
-:::demo
+:::demo 当状态改变时，会触发 `change` 事件
 ```html
 <template>
   <x-checkbox label="one" @change="change" />
   <x-checkbox label="two" disabled />
   <x-checkbox label="three" disabled checked />
-  <x-checkbox label="four" disabled checked> 橘子 </x-checkbox>
+  <x-checkbox label="four" disabled checked> four </x-checkbox>
 </template>
 <script>
   import {getCurrentInstance} from 'vue'
@@ -67,9 +67,8 @@ tag: Data Entry
   <x-checkbox-group v-model="options">
     <x-checkbox label="one" />
     <x-checkbox label="two" />
-    <x-checkbox label="three" />
-    <x-checkbox label="four" />
   </x-checkbox-group>
+  
   <div style="margin-top: 10px">
   选中的值：{{options}}
   </div>
@@ -79,10 +78,10 @@ tag: Data Entry
   import {reactive} from 'vue'
   export default {
     setup(){
-      const options = reactive([])
-
+      const options = reactive(['one'])
+      
       return {
-        options
+        options,
       }
     }
   }
@@ -90,3 +89,48 @@ tag: Data Entry
 ```
 :::
 
+## 控制 checkbox
+> 数据联动
+:::demo
+```html
+<template>
+  <x-checkbox label="checkbox" :disabled="disabled" :checked="checked" />
+  
+  <div style="margin-top: 10px">
+    <x-button type="success" size='sm' @click="checked = !checked">{{checked ? 'Checked' : 'Unchecked'}}</x-button>
+    <x-button type="danger" size='sm' @click="disabled = !disabled">{{disabled ? 'Disabled' : 'Enabled'}}</x-button>
+  </div>
+</template>
+
+<script>
+  import {ref} from 'vue'
+  export default {
+    setup(){
+      const checked = ref(true)
+      const disabled = ref(true)
+      return {
+        checked,
+        disabled
+      }
+    }
+  }
+</script>
+```
+:::
+
+
+## 布局
+> Checkbox 与 Grid 组件一起使用，可以实现灵活的布局。
+:::demo
+```html
+<template>
+  <x-checkbox-group>
+      <x-col><x-checkbox label="one" /></x-col>
+      <x-col><x-checkbox label="two" /></x-col>
+      <x-col><x-checkbox label="three" /></x-col>
+      <x-col><x-checkbox label="four" /></x-col>
+  </x-checkbox-group>
+  
+</template>
+```
+:::
