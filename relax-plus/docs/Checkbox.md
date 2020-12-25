@@ -94,10 +94,10 @@ tag: Data Entry
 
 ## 控制 checkbox
 > 数据联动
-:::demo
-```html
+:::demo `checked` 并不是响应式的
+```html 
 <template>
-  <x-checkbox label="checkbox" :disabled="disabled" :checked="checked" />
+  <x-checkbox label="checkbox" :disabled="disabled" v-model="checked" />
   
   <div style="margin-top: 10px">
     <x-button type="success" size='sm' @click="checked = !checked">{{checked ? 'Checked' : 'Unchecked'}}</x-button>
@@ -128,7 +128,7 @@ tag: Data Entry
 ```html
 <template>
   <x-row>
-    <x-col v-for="item in options" >
+    <x-col v-for="item in options" style="margin-bottom: 10px">
       <x-checkbox v-model="item.checked" v-bind="item" >options {{item.label}}</x-checkbox>
     </x-col>
   </x-row>
