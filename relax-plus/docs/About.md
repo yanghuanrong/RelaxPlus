@@ -20,7 +20,7 @@ title: 关于
 - ✖ Badge 标记
 - ✔ Grid 栅格
 - ✖ Input 输入框
-- ✖ Checkbox 多选框
+- ✔ Checkbox 多选框
 - ✖ Select 选择器
 - ✔ Switch 开关
 - ✖ DatePicker 日期选择器

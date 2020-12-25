@@ -106,8 +106,8 @@ tag: General
   <x-button type='primary' plain round disabled>primary</x-button>
   <x-button type='success' plain round disabled>success</x-button>
   <x-button type='info' plain round disabled>info</x-button>
-  <x-button type='danger' plain round disabled>danger</x-button>
-  <x-button type='warning' plain round disabled>warning</x-button>
+  <x-button type='danger'  round disabled>danger</x-button>
+  <x-button type='warning' disabled>warning</x-button>
 </template>
 ```
 :::

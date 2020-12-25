@@ -34,6 +34,13 @@
     "routePath": "/icon"
   },
   {
+    "title": "Input 输入框",
+    "tag": "Data Entry",
+    "componentName": "Input",
+    "fileName": "Input.md",
+    "routePath": "/input"
+  },
+  {
     "title": "Message 消息",
     "tag": "Feedback",
     "componentName": "Message",
