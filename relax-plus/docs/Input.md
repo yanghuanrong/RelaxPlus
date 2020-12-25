@@ -12,7 +12,48 @@ tag: Data Entry
 :::demo
 ```html
 <template>
-  <x-input />
+  <x-input placeholder="请输入" type="text" v-model="value" />
+  <x-input placeholder="请输入" type="password" v-model="value" style="margin-left:5px" />
+  <div style="margin-top: 10px">
+    输入框值：{{value}}
+  </div>
 </template>
+
+<script>
+import {ref} from 'vue'
+export default {
+  setup(){
+    const value = ref('')
+
+    return {
+      value
+    }
+  }
+}
+</script>
+```
+:::
+
+
+## 文本域
+> 设置 `type` 属性为 `textarea`
+:::demo
+```html
+<template>
+  <x-input placeholder="请输入" type="textarea" rows="7" cols="20" v-model="value" />
+</template>
+
+<script>
+import {ref} from 'vue'
+export default {
+  setup(){
+    const value = ref('')
+
+    return {
+      value
+    }
+  }
+}
+</script>
 ```
 :::

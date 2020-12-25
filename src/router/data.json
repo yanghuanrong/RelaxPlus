@@ -1,11 +1,5 @@
 {"data":[
   {
-    "title": "关于",
-    "componentName": "About",
-    "fileName": "About.md",
-    "routePath": "/about"
-  },
-  {
     "title": "Button 按钮",
     "tag": "General",
     "componentName": "Button",
