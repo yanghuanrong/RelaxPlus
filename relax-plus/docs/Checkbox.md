@@ -65,8 +65,11 @@ tag: Data Entry
 ```html
 <template>
   <x-checkbox-group v-model="options">
-    <x-checkbox label="one" />
+    <x-checkbox label="one" disabled />
     <x-checkbox label="two" />
+    <x-checkbox label="three"  />
+    <x-checkbox label="four"  />
+    <x-checkbox label="five" disabled />
   </x-checkbox-group>
   
   <div style="margin-top: 10px">
@@ -78,7 +81,7 @@ tag: Data Entry
   import {reactive} from 'vue'
   export default {
     setup(){
-      const options = reactive(['one'])
+      const options = reactive(['one', 'two'])
       
       return {
         options,
@@ -124,13 +127,50 @@ tag: Data Entry
 :::demo
 ```html
 <template>
-  <x-checkbox-group>
-      <x-col><x-checkbox label="one" /></x-col>
-      <x-col><x-checkbox label="two" /></x-col>
-      <x-col><x-checkbox label="three" /></x-col>
-      <x-col><x-checkbox label="four" /></x-col>
-  </x-checkbox-group>
-  
+  <x-row>
+    <x-col v-for="item in options" >
+      <x-checkbox v-model="item.checked" v-bind="item" >options {{item.label}}</x-checkbox>
+    </x-col>
+  </x-row>
+
+  <div style="margin-top: 10px">
+  选中的值：<pre>{{options}}</pre>
+  </div>
 </template>
+  
+<script>
+  import {reactive} from 'vue'
+  export default {
+    setup(){
+      const options = reactive([{
+        label: 'one',
+        checked: true,
+        disabled: true,
+      },
+      {
+        label: 'two',
+        checked: true,
+        disabled: false,
+      },
+      {
+        label: 'one',
+        checked: false,
+        disabled: false,
+      },{
+        label: 'three',
+        checked: false,
+        disabled: false,
+      },{
+        label: 'four',
+        checked: false,
+        disabled: true,
+      }])
+      
+      return {
+        options,
+      }
+    }
+  }
+</script>
 ```
 :::
