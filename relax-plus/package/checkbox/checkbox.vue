@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {inject, reactive, watchEffect, computed, onMounted} from 'vue'
+import {inject, reactive, watchEffect, computed} from 'vue'
     
 export default {
   name: 'Checkbox',
