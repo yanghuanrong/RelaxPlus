@@ -151,17 +151,19 @@ tag: Data Entry
         disabled: false,
       },
       {
-        label: 'one',
-        checked: false,
-        disabled: false,
-      },{
         label: 'three',
         checked: false,
         disabled: false,
-      },{
+      },
+      {
         label: 'four',
         checked: false,
         disabled: true,
+      },
+      {
+        label: 'five',
+        checked: false,
+        disabled: false,
       }])
       
       return {

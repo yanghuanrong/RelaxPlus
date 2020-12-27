@@ -52,7 +52,7 @@ export default {
 :::demo `maxlength` 可以限制 `textarea` 的输入长度
 ```html
 <template>
-  <x-input placeholder="请输入" type="textarea" rows="7" cols="20" :maxlength="40" />
+  <x-input placeholder="请输入" style="width: 350px" type="textarea" rows="7" cols="20" :maxlength="40" />
 </template>
 
 ```

@@ -2,54 +2,12 @@
     position: relative;
     display: inline-block;
 
-    .x-input,
-    .x-textarea {
-      padding: 7px 10px;
-      border: 1px solid @border;
-      border-radius: 4px;
-      font-size: 12px;
-      transition-property: border-color, box-shadow;
-      transition-duration: 0.25s;
-      transition-timing-function: ease-in-out;
-      color: @text;
-
-      &:disabled {
-        cursor: no-drop;
-        background: #efefef;
-        color: fade(#333, 30%);
-
-        &:hover {
-          border-color: @border;
-        }
-      }
-
-      &:hover {
-        border-color: @primary;
-      }
-
-      &:focus,
-      &.is-focus {
-        border-color: @primary;
-        box-shadow: 0 0 0 2px fade(@primary, 30%);
-
-        &::placeholder {
-          color: fade(@border, 40%);
-        }
-      }
-
-      &::placeholder {
-        color: @border;
-      }
-    }
-
-
-
-
-    &.x-input-icon-before{
-      .x-input{
+    &.x-input-icon-before {
+      .x-input {
         padding-left: 25px;
       }
-      .x-before{
+
+      .x-before {
         left: 8px;
         top: 50%;
         transform: translateY(-50%);
@@ -58,11 +16,12 @@
       }
     }
 
-    &.x-input-icon-after{
-      .x-input{
+    &.x-input-icon-after {
+      .x-input {
         padding-right: 25px;
       }
-      .x-after{
+
+      .x-after {
         right: 8px;
         top: 50%;
         transform: translateY(-50%);
@@ -70,11 +29,12 @@
         position: absolute;
       }
     }
-    
-    .x-textarea{
+
+    .x-textarea {
       padding-bottom: 2.3em;
     }
-    .x-textarea-maxlength{
+
+    .x-textarea-maxlength {
       position: absolute;
       left: 10px;
       bottom: 10px;
@@ -82,4 +42,44 @@
       color: @border;
     }
 
+  }
+
+  .x-input,
+  .x-textarea {
+    padding: 7px 10px;
+    border: 1px solid @border;
+    border-radius: 4px;
+    font-size: 12px;
+    transition-property: border-color, box-shadow;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+    color: @text;
+
+    &:disabled {
+      cursor: no-drop;
+      background: #efefef;
+      color: fade(#333, 30%);
+
+      &:hover {
+        border-color: @border;
+      }
+    }
+
+    &:hover {
+      border-color: @primary;
+    }
+
+    &:focus,
+    &.is-focus {
+      border-color: @primary;
+      box-shadow: 0 0 0 2px fade(@primary, 30%);
+
+      &::placeholder {
+        color: fade(@border, 40%);
+      }
+    }
+
+    &::placeholder {
+      color: @border;
+    }
   }

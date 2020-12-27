@@ -15,6 +15,8 @@ import Switch from './switch/index'
 import Checkbox from './checkbox/index'
 import CheckboxGroup from './checkbox-group/index'
 import Input from './input/index'
+import Select from './select/index';
+import SelectOption from './select-option/index';
 
 const components = [
   Button,
@@ -24,7 +26,9 @@ const components = [
   Col,
   Checkbox,
   CheckboxGroup,
-  Input
+  Input,
+  Select,
+  SelectOption
 ]
 
 const install = function (app) {
@@ -56,5 +60,7 @@ export default {
   Col,
   Checkbox,
   CheckboxGroup,
-  Input
+  Input,
+  Select,
+  SelectOption
 }

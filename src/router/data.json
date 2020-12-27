@@ -55,6 +55,13 @@
     "routePath": "/quickstart"
   },
   {
+    "title": "Select 选择",
+    "tag": "Data Entry",
+    "componentName": "Select",
+    "fileName": "Select.md",
+    "routePath": "/select"
+  },
+  {
     "title": "Switch 开关",
     "tag": "Data Entry",
     "componentName": "Switch",
