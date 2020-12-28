@@ -109,8 +109,10 @@
   }
 }
 
+
+
   // 单选模式
-  .x-select-option{
+.x-select-option{
     z-index: 2;
     position: absolute;
     background-color: #FFF;
@@ -124,8 +126,11 @@
       white-space: nowrap;
       cursor: pointer;
       padding-left: 25px;
-      padding: 6px 12px;
-      transition: background .4s ease;
+      background-color: #fff;
+      padding: 0 12px;
+      height: 30px;
+      line-height: 30px;
+      overflow: hidden;
 
       &:hover{
         background-color: fade(@primary, 10%)
@@ -145,6 +150,30 @@
           background-color: initial;
         }
       }
+    }
+    
+    .x-select-item{
+      max-height: 220px;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
+        height: 1px;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 6px;
+        // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        background: rgba(144, 147, 153, 0.5);
+      }
+      &::-webkit-scrollbar-track {
+        // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        background: transparent;
+      }
+    }
+
+    .x-select-search{
+      padding: 10px;
     }
   }
 

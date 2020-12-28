@@ -20,7 +20,16 @@
         <div v-if="!multiple && state.length ">{{state}}</div>
       </div>
 
-      <input readonly :placeholder="state.length ? '' : placeholder" class="x-input" @focus="focus"/>
+      <input 
+        readonly 
+        :placeholder="state.length ? '' : placeholder"
+        class="x-input" 
+        :class="{
+          'is-focus': isShow,
+          'is-blur': !isShow,
+        }"
+        @focus="focus"
+      />
     
       <i class="x-arrow" v-show="!isClear" :class="{'is-active': isShow}"></i>
       <div class="x-clearable" v-show="isClear" @click.stop="handelClear">
@@ -31,8 +40,20 @@
 
     <teleport to="body">
       <transition name="option" ref="option">
-        <div class="x-select-option" :style="rect" v-show="isShow">
-          <slot></slot>
+        <div class="x-select-option" @click.stop :style="rect" v-show="isShow">
+          <div class="x-select-search" v-if="search">
+            <div class="x-from-input x-input-icon-before" >
+              <i class="x-before x-icon-search"></i>
+              <input
+                class="x-input x-input-sm"
+                @input="searchValue"
+                @click.stop
+              />
+            </div>
+          </div>
+          <div class="x-select-item">
+            <slot></slot>
+          </div>
         </div>
       </transition>
     </teleport>
@@ -46,7 +67,8 @@ export default {
   name: 'Select',
   props: {
     modelValue: [Array, String],
-    placeholder: String
+    placeholder: String,
+    search: [String, Boolean]
   },
   setup(props, {emit}){
     
@@ -58,7 +80,7 @@ export default {
     const multiple = computed(() => (Object.prototype.toString.call(props.modelValue) === '[object Array]'))
     const state = multiple.value ? reactive([]) : ref('')
 
-    const {on} = emitter()
+    const {on, broadcast} = emitter()
     on('selectOption', ({label, value, checked}) => {
       emit('update:modelValue', value)
 
@@ -96,12 +118,24 @@ export default {
       }
     }
 
+    let TimeId = null
+    const searchValue = (e) => {
+
+      clearTimeout(TimeId);
+      TimeId = setTimeout(() => {
+        broadcast('search', e.target.value)
+      }, 100);
+    }
+    
+
+
     return {
       focus,
       rect,
       multiple,
       state,
       option,
+      searchValue,
 
       toggle,
       isShow,
@@ -155,6 +189,7 @@ function useRect(isShow){
     rect.top = top + 'px'
     rect.left = el.left + 'px'
     rect.minWidth = el.width + 'px'
+    rect.minHeight = elHeight + 'px'
   }
 
   onMounted(() => {

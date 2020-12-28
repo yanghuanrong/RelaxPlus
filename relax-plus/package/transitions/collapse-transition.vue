@@ -28,7 +28,6 @@ export default {
       el.style.overflow = 'hidden'
     }
 
-
     const beforeLeave = (el) => {
       el.style.height = el.scrollHeight + 'px'
     }

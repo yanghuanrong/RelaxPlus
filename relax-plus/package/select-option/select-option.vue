@@ -1,18 +1,22 @@
 <template>
-  <div 
-    class="x-option"
-    :class="{
-      'is-checked': isChecked,
-      'is-disabled': disabled
-    }"
-    @click.stop="handerClick"
-  >
-    {{label || value}}
-  </div>
+  <CollapseTransition>
+    <div 
+      class="x-option"
+      :class="{
+        'is-checked': isChecked,
+        'is-disabled': disabled
+      }"
+      @click.stop="handerClick"
+      v-show="isShow"
+    >
+      {{label || value}}
+    </div>
+  </CollapseTransition>
 </template>
 
 <script>
-import { inject, toRefs, computed, watchEffect, reactive, ref } from 'vue';
+import { inject, computed, watchEffect, reactive, ref, getCurrentInstance } from 'vue';
+import CollapseTransition from '../transitions/collapse-transition'
 import emitter from '../../utils/emiter'
 export default {
   name: 'Option',
@@ -21,9 +25,13 @@ export default {
     label: String,
     disabled: Boolean,
   },
+  components: {
+    CollapseTransition
+  },
   setup(props){
     const {value, label, disabled} = props
-    const {dispatch} = emitter()
+    const {dispatch, on} = emitter()
+    const uid = getCurrentInstance().uid
 
     const Select = inject('Select', {props: {}})
 
@@ -86,9 +94,16 @@ export default {
       checked: isChecked.value
     })
 
+    const isShow = ref(true)
+    on('search', (searchValue) => {
+      isShow.value = props.value.search(searchValue) > -1
+    })
+
     return {
       handerClick,
-      isChecked
+      isShow,
+      isChecked,
+      uid
     }
   }
 }

@@ -91,3 +91,32 @@ tag: Data Entry
 </script>
 ```
 :::
+
+
+
+## 搜索维度
+> 添加 `search` 属性将开启搜索，
+:::demo
+```html
+<template>
+  <x-select v-model="value" :search="true">
+    <x-option value="one" label="One" />
+    <x-option value="two" label="Two" />
+    <x-option value="three" label="Three"  disabled />
+    <x-option value="four" label="Four"  />
+  </x-select>
+</template>
+<script>
+  import {ref} from 'vue'
+  export default {
+    setup(){
+      const value = ref(['one'])
+
+      return {
+        value
+      }
+    }
+  }
+</script>
+```
+:::
