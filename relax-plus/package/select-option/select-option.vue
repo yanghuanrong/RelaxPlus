@@ -25,7 +25,6 @@ export default {
     const {value, label, disabled} = props
     const {dispatch} = emitter()
 
-
     const Select = inject('Select', {props: {}})
 
     const state = reactive({
@@ -82,10 +81,10 @@ export default {
     }
   
     dispatch('selectDefault', {
-        value,
-        label,
-        checked: isChecked.value
-      })
+      value,
+      label,
+      checked: isChecked.value
+    })
 
     return {
       handerClick,

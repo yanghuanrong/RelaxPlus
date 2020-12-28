@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { onMounted, ref, getCurrentInstance, reactive, provide, toRefs, computed, nextTick } from 'vue';
+import { onMounted, ref, getCurrentInstance, reactive, provide, computed, onUnmounted } from 'vue';
 import emitter from '../../utils/emiter'
 export default {
   name: 'Select',
@@ -58,6 +58,7 @@ export default {
 
     const multiple = computed(() => (Object.prototype.toString.call(props.modelValue) === '[object Array]'))
     const state = multiple.value ? reactive([]) : ref('')
+
     const {on} = emitter()
     on('selectOption', ({label, value, checked}) => {
       emit('update:modelValue', value)
@@ -96,7 +97,6 @@ export default {
       }
     }
 
-
     return {
       focus,
       rect,
@@ -111,6 +111,7 @@ export default {
   }
 }
 
+
 function useClear(state, multiple) {
   const isClear = ref(false)
   const mouseover = () => {
@@ -123,7 +124,7 @@ function useClear(state, multiple) {
       isClear.value = false
     }
   }
-
+  
   return {
     isClear,
     mouseover,
@@ -133,6 +134,7 @@ function useClear(state, multiple) {
 
 function useRect(){
   const rect = reactive({})
+
   const focus = (e) => {
     const el = e.target.getBoundingClientRect()
     const h = document.documentElement.scrollTop
@@ -162,14 +164,19 @@ function useToggle(){
       show();
     }
   }
+
+  const currentInstance = getCurrentInstance()
+  const isHide = (e) => {
+    const el = currentInstance.vnode.el
+    if (!el.contains(e.target)) {
+      hide()
+    }
+  }
   onMounted(() => {
-    const currentInstance = getCurrentInstance()
-    document.addEventListener("click", e => {
-      const el = currentInstance.vnode.el
-      if (!el.contains(e.target)) {
-        hide()
-      }
-    })
+    document.addEventListener("click", isHide)
+  })
+  onUnmounted(() => {
+    document.removeEventListener("click", isHide)
   })
 
   return {

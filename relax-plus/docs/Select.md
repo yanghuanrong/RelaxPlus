@@ -47,7 +47,6 @@ tag: Data Entry
     <x-option value="three" label="options three" disabled />
     <x-option value="four" label="options four" disabled/>
   </x-select>
-  {{value}}
 </template>
 <script>
   import {ref} from 'vue'
@@ -77,7 +76,6 @@ tag: Data Entry
     <x-option value="three" label="Three" disabled />
     <x-option value="four" label="Four" />
   </x-select>
-  {{value}}
 </template>
 <script>
   import {ref} from 'vue'
