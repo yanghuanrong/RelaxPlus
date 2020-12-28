@@ -74,7 +74,7 @@ tag: Data Entry
   <x-select v-model="value">
     <x-option value="one" label="One" />
     <x-option value="two" label="Two" />
-    <x-option value="three" label="Three"  />
+    <x-option value="three" label="Three" disabled />
     <x-option value="four" label="Four" />
   </x-select>
   {{value}}

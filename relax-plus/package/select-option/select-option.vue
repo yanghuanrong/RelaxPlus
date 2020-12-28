@@ -31,7 +31,7 @@ export default {
     const state = reactive({
       modelValue: null
     })
-
+  
     watchEffect(() => {
       state.modelValue = Select.props.modelValue
     })
@@ -72,22 +72,20 @@ export default {
         return model.value === value
       }
     })
-    const onChecked = ref(isChecked.value)
 
     const handerClick = () => {
       if(disabled) return
-      onChecked.value = !onChecked.value
       model.value = {
-        checked: onChecked.value,
+        checked: !isChecked.value,
         value
       }
     }
-
+  
     dispatch('selectDefault', {
-      value,
-      label,
-      checked: onChecked.value
-    })
+        value,
+        label,
+        checked: isChecked.value
+      })
 
     return {
       handerClick,

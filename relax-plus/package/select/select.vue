@@ -11,7 +11,7 @@
         <template v-if="multiple">
         <div class="x-select-array-content" v-if="state.length">
           <span class="x-con-array">{{state[0]}}</span>
-          <span class="x-clearable-array">
+          <span class="x-clearable-array" @click.stop="handelClear">
             <i class="x-icon-x"></i>
           </span>
         </div>
@@ -22,10 +22,10 @@
 
       <input readonly :placeholder="state.length ? '' : placeholder" class="x-input" @focus="focus"/>
     
-      <i class="x-arrow"  :class="{'is-active': isShow}"></i>
-      <!-- <div class="x-clearable" v-show="isClear" key="1" @click.stop="clearable">
+      <i class="x-arrow" v-show="!isClear" :class="{'is-active': isShow}"></i>
+      <div class="x-clearable" v-show="isClear" @click.stop="handelClear">
         <i class="x-icon-x"></i>
-      </div> -->
+      </div>
 
     </div>
 
@@ -71,6 +71,7 @@ export default {
         hide()
       }
     })
+
     on('selectDefault', ({label, value, checked}) => {
       if(checked){
         if(multiple.value) {
@@ -81,11 +82,18 @@ export default {
       }
     })
 
-    // const clearFn = useClear()
+    const clear = useClear(state, multiple.value)
 
-    const clearable = () => {
-      // state.value = ''
-      emit('update:modelValue', '')
+    const handelClear = () => {
+      if(multiple.value){
+        const modelValue = props.modelValue
+        modelValue.pop()
+        state.shift() // state 用的unshift插入 所以需要从第一个开始删
+        emit('update:modelValue', modelValue)
+      } else {
+        state.value = ''
+        emit('update:modelValue', '')
+      }
     }
 
 
@@ -97,21 +105,23 @@ export default {
 
       toggle,
       isShow,
-      clearable,
-      // ...clearFn
+      handelClear,
+      ...clear
     }
   }
 }
 
-function useClear(state) {
+function useClear(state, multiple) {
   const isClear = ref(false)
   const mouseover = () => {
-    // if (state.value.length) {
-    //   isClear.value = true
-    // }
+    if (!multiple && state.value.length) {
+      isClear.value = true
+    }
   }
   const mouseout = () => {
-      // isClear.value = false
+    if(!multiple){
+      isClear.value = false
+    }
   }
 
   return {
