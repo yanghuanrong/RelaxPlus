@@ -52,8 +52,8 @@ export default {
     
     provide('Select', getCurrentInstance())
 
-    const {focus, rect, option} = useRect()
     const {toggle, isShow, hide} = useToggle()
+    const {focus, rect, option} = useRect(isShow)
 
     const multiple = computed(() => (Object.prototype.toString.call(props.modelValue) === '[object Array]'))
     const state = multiple.value ? reactive([]) : ref('')
@@ -132,21 +132,25 @@ function useClear(state, multiple) {
   }
 }
 
-function useRect(){
+function useRect(isShow){
   const rect = reactive({})
   const option = ref(null)
   let elHeight = 0
   const clientHeight = document.documentElement.clientHeight
-  
+  let parent = null
+
+  let top1 = 0
+  let top2 = 0
+
   const focus = (e) => {
     const el = e.target.getBoundingClientRect()
+    parent = e.target
     const scrollTop = document.documentElement.scrollTop
     const parentHeight = el.top + el.height
-    let top = parentHeight + scrollTop
 
-    if(parentHeight + elHeight > clientHeight){
-      top = top - elHeight - el.height - 5
-    }
+    top1 = parentHeight + scrollTop
+    top2 = top1 - elHeight - el.height - 5
+    const top = parentHeight + elHeight > clientHeight ? top2 : top1
 
     rect.top = top + 'px'
     rect.left = el.left + 'px'
@@ -160,6 +164,20 @@ function useRect(){
     elHeight = el.offsetHeight
     el.style.top = ""
     el.style.display = "none"
+    
+    window.addEventListener('scroll', () => {
+      if(isShow.value) {
+        const Rect = parent.getBoundingClientRect()
+        const scrollTop = document.documentElement.scrollTop
+
+        if(Rect.top + Rect.height + elHeight > clientHeight){
+          rect.top = top2 + 'px'
+        } else {
+          rect.top = top1 + 'px'
+        }
+      }
+    })
+
   })
 
   return {
