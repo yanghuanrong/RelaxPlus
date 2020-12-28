@@ -30,7 +30,7 @@
     </div>
 
     <teleport to="body">
-      <transition name="option">
+      <transition name="option" ref="option">
         <div class="x-select-option" :style="rect" v-show="isShow">
           <slot></slot>
         </div>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { onMounted, ref, getCurrentInstance, reactive, provide, computed, onUnmounted } from 'vue';
+import { onMounted, ref, getCurrentInstance, reactive, provide, computed, onUnmounted, watchEffect } from 'vue';
 import emitter from '../../utils/emiter'
 export default {
   name: 'Select',
@@ -52,9 +52,8 @@ export default {
     
     provide('Select', getCurrentInstance())
 
-    const {focus, rect} = useRect()
+    const {focus, rect, option} = useRect()
     const {toggle, isShow, hide} = useToggle()
-
 
     const multiple = computed(() => (Object.prototype.toString.call(props.modelValue) === '[object Array]'))
     const state = multiple.value ? reactive([]) : ref('')
@@ -102,6 +101,7 @@ export default {
       rect,
       multiple,
       state,
+      option,
 
       toggle,
       isShow,
@@ -134,17 +134,37 @@ function useClear(state, multiple) {
 
 function useRect(){
   const rect = reactive({})
-
+  const option = ref(null)
+  let elHeight = 0
+  const clientHeight = document.documentElement.clientHeight
+  
   const focus = (e) => {
     const el = e.target.getBoundingClientRect()
-    const h = document.documentElement.scrollTop
-    rect.top = el.top + el.height + h + 'px'
+    const scrollTop = document.documentElement.scrollTop
+    const parentHeight = el.top + el.height
+    let top = parentHeight + scrollTop
+
+    if(parentHeight + elHeight > clientHeight){
+      top = top - elHeight - el.height - 5
+    }
+
+    rect.top = top + 'px'
     rect.left = el.left + 'px'
     rect.minWidth = el.width + 'px'
   }
 
+  onMounted(() => {
+    const el = option.value
+    el.style.top = "-100%"
+    el.style.display = "block"
+    elHeight = el.offsetHeight
+    el.style.top = ""
+    el.style.display = "none"
+  })
+
   return {
     rect,
+    option,
     focus
   }
 }
