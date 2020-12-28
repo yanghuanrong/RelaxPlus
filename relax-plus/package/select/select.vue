@@ -2,16 +2,30 @@
   <div class="x-select">
     <div 
       class="x-select-input"
-      @click="toggle"
+      @click.prevent="toggle"
       @mouseover="mouseover"
       @mouseout="mouseout"
     >
-      <input readonly :value="state" :placeholder="placeholder" class="x-input" @focus="focus"/>
-    
-      <i class="x-arrow" v-show="!isClear" :class="{'is-active': isShow}"></i>
-      <div class="x-clearable" v-show="isClear" key="1" @click.stop="clearable">
-        <i class="x-icon-x"></i>
+
+      <div class="x-select-array">
+        <template v-if="multiple">
+        <div class="x-select-array-content" v-if="state.length">
+          <span class="x-con-array">{{state[0]}}</span>
+          <span class="x-clearable-array">
+            <i class="x-icon-x"></i>
+          </span>
+        </div>
+        <span v-if="state.length > 1">+ {{state.length - 1}}</span>
+        </template>
+        <div v-if="!multiple && state.length ">{{state}}</div>
       </div>
+
+      <input readonly :placeholder="state.length ? '' : placeholder" class="x-input" @focus="focus"/>
+    
+      <i class="x-arrow"  :class="{'is-active': isShow}"></i>
+      <!-- <div class="x-clearable" v-show="isClear" key="1" @click.stop="clearable">
+        <i class="x-icon-x"></i>
+      </div> -->
 
     </div>
 
@@ -26,7 +40,7 @@
 </template>
 
 <script>
-import { onMounted, ref, getCurrentInstance, reactive, provide, toRefs } from 'vue';
+import { onMounted, ref, getCurrentInstance, reactive, provide, toRefs, computed, nextTick } from 'vue';
 import emitter from '../../utils/emiter'
 export default {
   name: 'Select',
@@ -35,81 +49,56 @@ export default {
     placeholder: String
   },
   setup(props, {emit}){
-    const currentInstance = getCurrentInstance()
+    
+    provide('Select', getCurrentInstance())
+
+    const {focus, rect} = useRect()
+    const {toggle, isShow, hide} = useToggle()
+
+
+    const multiple = computed(() => (Object.prototype.toString.call(props.modelValue) === '[object Array]'))
+    const state = multiple.value ? reactive([]) : ref('')
     const {on} = emitter()
-    const isFocus = ref(false)
-    const isShow = ref(false)
-    const state = ref('')
-    const rect = reactive({
-      top: ''
-    })
-    const {modelValue} = toRefs(props)
-    
-    provide('Select', currentInstance)
-
-    on('selectOption', ({label, value}) => {
+    on('selectOption', ({label, value, checked}) => {
       emit('update:modelValue', value)
-      state.value = label || value
-      hide()
-    })
 
-    on('selectDefault', ({label, value}) => {
-      if(modelValue.value === value){
-        state.value = label || value
-      }
-    })
-
-    const focus = (e) => {
-      const el = e.target.getBoundingClientRect()
-      const h = document.documentElement.scrollTop
-      rect.top = el.top + el.height + h + 'px'
-      rect.left = el.left + 'px'
-      rect.minWidth = el.width + 'px'
-
-      isFocus.value = true
-    }
-
-    const show = () => {
-      isShow.value = true
-      isFocus.value = true
-    }
-    const hide = () => {
-      isShow.value = false
-      isFocus.value = false
-    }
-    const toggle = () => {
-      if (isFocus.value && isShow.value) {
-        hide();
+      if(multiple.value){
+        const labelIndex = state.indexOf(label)
+        labelIndex === -1 && checked === true && state.unshift(label)
+        labelIndex !== -1 && checked === false && state.splice(labelIndex, 1)
       } else {
-        show();
+        state.value = label
+        hide()
       }
-    }
-    
-    
-    onMounted(() => {
-      document.addEventListener("click", e => {
-        const el = currentInstance.vnode.el
-        if (!el.contains(e.target)) {
-          hide()
+    })
+    on('selectDefault', ({label, value, checked}) => {
+      if(checked){
+        if(multiple.value) {
+          state.unshift(label)
+        } else {
+          state.value = label
         }
-      })
+      }
     })
 
-    const clearFn = useClear(state)
+    // const clearFn = useClear()
 
     const clearable = () => {
-      state.value = ''
+      // state.value = ''
       emit('update:modelValue', '')
     }
 
+
     return {
       focus,
-      toggle,
-      state,
       rect,
+      multiple,
+      state,
+
+      toggle,
       isShow,
       clearable,
-      ...clearFn
+      // ...clearFn
     }
   }
 }
@@ -117,18 +106,66 @@ export default {
 function useClear(state) {
   const isClear = ref(false)
   const mouseover = () => {
-    if (state.value.length) {
-      isClear.value = true
-    }
+    // if (state.value.length) {
+    //   isClear.value = true
+    // }
   }
   const mouseout = () => {
-      isClear.value = false
+      // isClear.value = false
   }
 
   return {
     isClear,
     mouseover,
     mouseout
+  }
+}
+
+function useRect(){
+  const rect = reactive({})
+  const focus = (e) => {
+    const el = e.target.getBoundingClientRect()
+    const h = document.documentElement.scrollTop
+    rect.top = el.top + el.height + h + 'px'
+    rect.left = el.left + 'px'
+    rect.minWidth = el.width + 'px'
+  }
+
+  return {
+    rect,
+    focus
+  }
+}
+
+function useToggle(){
+   const isShow = ref(false)
+  const show = () => {
+    isShow.value = true
+  }
+  const hide = () => {
+    isShow.value = false
+  }
+  const toggle = () => {
+    if (isShow.value) {
+      hide();
+    } else {
+      show();
+    }
+  }
+  onMounted(() => {
+    const currentInstance = getCurrentInstance()
+    document.addEventListener("click", e => {
+      const el = currentInstance.vnode.el
+      if (!el.contains(e.target)) {
+        hide()
+      }
+    })
+  })
+
+  return {
+    toggle,
+    isShow,
+    hide,
   }
 }
 

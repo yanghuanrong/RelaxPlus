@@ -4,6 +4,7 @@
 
   .x-select-input{
     position: relative;
+    cursor: pointer;
 
     &.x-select-input-disabled{
       cursor: not-allowed;
@@ -68,7 +69,8 @@
       flex-wrap: wrap;
       display: flex;
       align-items: center;
-
+      pointer-events: none;
+      
       &>span{
         padding: 2px 8px;
         background-color: @border;
@@ -101,6 +103,8 @@
         }
       }
     }
+
+
   }
 }
 

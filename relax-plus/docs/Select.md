@@ -47,12 +47,43 @@ tag: Data Entry
     <x-option value="three" label="options three" disabled />
     <x-option value="four" label="options four" disabled/>
   </x-select>
+  {{value}}
 </template>
 <script>
   import {ref} from 'vue'
   export default {
     setup(){
       const value = ref('one')
+
+      return {
+        value
+      }
+    }
+  }
+</script>
+```
+:::
+
+
+
+## 多选
+> 给 `option` 组件添加 `disabled` 可以禁止选项
+:::demo
+```html
+<template>
+  <x-select v-model="value">
+    <x-option value="one" label="One" />
+    <x-option value="two" label="Two" />
+    <x-option value="three" label="Three"  />
+    <x-option value="four" label="Four" />
+  </x-select>
+  {{value}}
+</template>
+<script>
+  import {ref} from 'vue'
+  export default {
+    setup(){
+      const value = ref(['one'])
 
       return {
         value
