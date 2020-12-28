@@ -135,16 +135,16 @@ function useClear(state, multiple) {
 function useRect(isShow){
   const rect = reactive({})
   const option = ref(null)
-  let elHeight = 0
   const clientHeight = document.documentElement.clientHeight
-  let parent = null
 
+  let elHeight = 0
   let top1 = 0
   let top2 = 0
+  let parent = null
 
   const focus = (e) => {
+    parent = e .target
     const el = e.target.getBoundingClientRect()
-    parent = e.target
     const scrollTop = document.documentElement.scrollTop
     const parentHeight = el.top + el.height
 
@@ -166,7 +166,7 @@ function useRect(isShow){
     el.style.display = "none"
     
     window.addEventListener('scroll', () => {
-      if(isShow.value) {
+      if(isShow.value && parent) {
         const Rect = parent.getBoundingClientRect()
         const scrollTop = document.documentElement.scrollTop
 
