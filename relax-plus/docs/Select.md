@@ -41,7 +41,7 @@ tag: Data Entry
 :::demo
 ```html
 <template>
-  <x-select v-model="value">
+  <x-select v-model="value" placeholder="请选择">
     <x-option value="one" label="options one" />
     <x-option value="two" label="options two" />
     <x-option value="three" label="options three" disabled />
@@ -70,7 +70,7 @@ tag: Data Entry
 :::demo
 ```html
 <template>
-  <x-select v-model="value">
+  <x-select v-model="value" placeholder="请选择">
     <x-option value="one" label="One" />
     <x-option value="two" label="Two" />
     <x-option value="three" label="Three" disabled />
@@ -99,7 +99,7 @@ tag: Data Entry
 :::demo
 ```html
 <template>
-  <x-select v-model="value" :search="true">
+  <x-select v-model="value" placeholder="请选择" :search="true">
     <x-option value="one" label="One" />
     <x-option value="two" label="Two" />
     <x-option value="three" label="Three"  disabled />
@@ -110,7 +110,7 @@ tag: Data Entry
   import {ref} from 'vue'
   export default {
     setup(){
-      const value = ref(['one'])
+      const value = ref([])
 
       return {
         value
