@@ -46,7 +46,7 @@
               <i class="x-before x-icon-search"></i>
               <input
                 class="x-input x-input-sm"
-                @input="searchValue"
+                v-model="searchValue"
                 @click.stop
               />
             </div>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { onMounted, ref, getCurrentInstance, reactive, provide, computed, onUnmounted, watchEffect } from 'vue';
+import { onMounted, ref, getCurrentInstance, reactive, provide, computed, onUnmounted, watch } from 'vue';
 import emitter from '../../utils/emiter'
 export default {
   name: 'Select',
@@ -74,7 +74,7 @@ export default {
     
     provide('Select', getCurrentInstance())
 
-    const {toggle, isShow, hide} = useToggle()
+    const {toggle, isShow, hide, searchValue} = useToggle()
     const {focus, rect, option} = useRect(isShow)
 
     const multiple = computed(() => (Object.prototype.toString.call(props.modelValue) === '[object Array]'))
@@ -118,16 +118,15 @@ export default {
       }
     }
 
-    let TimeId = null
-    const searchValue = (e) => {
-
-      clearTimeout(TimeId);
-      TimeId = setTimeout(() => {
-        broadcast('search', e.target.value)
-      }, 100);
+    if(props.search){
+      let time
+      watch(searchValue, (value) => {
+        clearTimeout(time)
+        time = setTimeout(() => {
+          broadcast('search', value)
+        }, 100)
+      })
     }
-    
-
 
     return {
       focus,
@@ -148,6 +147,7 @@ export default {
 
 function useClear(state, multiple) {
   const isClear = ref(false)
+
   const mouseover = () => {
     if (!multiple && state.value.length) {
       isClear.value = true
@@ -224,7 +224,10 @@ function useRect(isShow){
 
 function useToggle(){
    const isShow = ref(false)
+  const searchValue = ref('')
+
   const show = () => {
+    searchValue.value = ''
     isShow.value = true
   }
   const hide = () => {
@@ -256,6 +259,7 @@ function useToggle(){
     toggle,
     isShow,
     hide,
+    searchValue
   }
 }
 
