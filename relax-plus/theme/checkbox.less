@@ -1,4 +1,5 @@
 .x-checkbox {
+  --color: var(--primary);
   cursor: pointer;
   margin-right: 10px;
   user-select: none;
@@ -6,11 +7,11 @@
 
   &:hover {
     span::before {
-      border-color: @primary;
+      border-color: rgb(var(--color));
     }
   }
 
-  span {
+  input[type="checkbox"]+span {
     display: inline-block;
     padding-left: 6px;
     position: relative;
@@ -18,9 +19,9 @@
 
     &::before {
       content: "";
-      background-color: @white;
+      background-color: rgb(--white);
       border-radius: 2px;
-      border: 1px solid darken(@border, 10%);
+      border: 1px solid rgb(var(--color), .5);
       display: inline-block;
       left: 0;
       margin-left: -14px;
@@ -32,15 +33,23 @@
     }
 
     &::after {
-      color: @border;
-      display: inline-block;
-      font-size: 11px;
-      height: 16px;
-      left: 0;
-      margin-left: -16px;
+      content: "";
       position: absolute;
-      top: 0;
-      width: 16px;
+      top: 3px;
+      left: -8px;
+      display: table;
+      width: 4px;
+      height: 8px;
+      border: 1px solid rgb(var(--white));
+      border-top-width: 0;
+      border-left-width: 0;
+      transform: rotate(45deg) scale(0);
+      opacity: 0;
+      transition: all .4s ease;
+    }
+
+    &:active::before {
+      box-shadow: 0 0 0 2px rgb(var(--color), .5);
     }
   }
 
@@ -51,45 +60,27 @@
     outline: none !important;
   }
 
-  input[type="checkbox"]:focus+span {
-    &::before {
-      outline-offset: -2px;
-      outline: none;
-    }
-  }
-
   &.x-checkbox-checked {
     input[type="checkbox"]+span {
       &::after {
-        content: "";
-        position: absolute;
-        top: 3px;
-        left: 8px;
-        display: table;
-        width: 4px;
-        height: 8px;
-        border: 1px solid @border;
-        border-top-width: 0;
-        border-left-width: 0;
-        transform: rotate(45deg);
-        border-color: @white;
+        opacity: 1;
+        transform: rotate(45deg) scale(1);
       }
 
       &::before {
-        background-color: @primary;
-        border-color: @primary;
+        background-color: rgb(var(--color));
+        border-color: rgb(var(--color));
       }
     }
 
     &.x-checkbox-disabled {
       input[type="checkbox"]+span {
-        
         &::after {
-          border: 1px solid fade(@text, 40%);
+          border: 1px solid rgb(var(--text), .4);
           border-top-width: 0;
           border-left-width: 0;
           transform: rotate(45deg);
-          border-color: fade(@text, 40%);
+          border-color: rgb(var(--text), .4);
         }
       }
     }
@@ -102,9 +93,15 @@
       opacity: 0.65;
 
       &::before {
-        background-color: fade(@border, 30%);
-        border-color: @border;
+        background-color: rgb(var(--text), .1);
+        border-color: rgb(var(--text), .1);
+      }
+
+      &:active::before {
+        box-shadow: none;
       }
     }
+
+    
   }
 }

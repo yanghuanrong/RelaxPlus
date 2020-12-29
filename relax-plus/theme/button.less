@@ -1,41 +1,14 @@
-.x-btn-group {
-  position: relative;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  vertical-align: middle;
-
-  &>.x-btn {
-    position: relative;
-    margin-left: -1px;
-    margin-right: 0 !important;
-    &:hover {
-      z-index: 1;
-    }
-  }
-
-  &>&:not(:last-child)>.x-btn,
-  &>.x-btn:not(:last-child):not(.dropdown-toggle) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  &>&:not(:first-child)>.x-btn,
-  &>.x-btn:not(:first-child) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-}
-
 .x-btn {
+  --color: var(--default);
+
   display: inline-block;
   position: relative;
   max-width: 100%;
   margin: 0;
   padding: 7px 15px;
-  transition: background 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
   border: 1px solid transparent;
   border-radius: 2px;
-  color: #fff;
   font-size: 12px;
   font-weight: 400;
   text-align: center;
@@ -43,18 +16,65 @@
   white-space: nowrap;
   cursor: pointer;
   vertical-align: middle;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   text-decoration: none;
+  color: rgb(var(--white));
+  border-color: rgb(var(--color), 0.8);
+  background-color: rgb(var(--color), 0.9);
+
+  &:hover {
+    background-color: rgb(var(--color), 1);
+  }
+
+  &:active {
+    border-color: rgb(var(--color), 1);
+    background-color: rgb(var(--color), .5);
+    box-shadow: 0 0 0 2px rgb(var(--color), .5);
+  }
 
   &:focus {
     background-image: none;
     outline: 0;
+  }
+
+  &.x-btn-default {
+    --color: var(--default);
+    color: rgb(var(--text));
+
+    &.is-plain{
+      color: currentColor;
+    }
+  }
+  &.x-btn-success {
+    --color: var(--success);
+  }
+  &.x-btn-primary {
+    --color: var(--primary);
+  }
+  &.x-btn-danger {
+    --color: var(--danger);
+  }
+  &.x-btn-info {
+    --color: var(--info);
+  }
+  &.x-btn-warning {
+    --color: var(--warning);
+  }
+
+  &.is-plain {
+    border-width: 1px;
+    border-style: solid;
+    background-color: transparent;
+    box-shadow: none;
+    color: rgb(var(--color));
+
+    &:hover{
+      background-color: rgb(var(--color), .1);
+    }
+    &:active {
+      box-shadow: 0 0 0 2px rgb(var(--color), .3);
+    }
   }
 
   &.x-btn-lg {
@@ -70,296 +90,21 @@
       height: 1.5em;
     }
   }
-
-  &.x-btn-content{
-    display: inline-block;
-    transition: all .35s ease;
-    transform: scale(1);
-    opacity: 1;
+  
+  &.is-round {
+    border-radius: 2em
   }
 
-  &.x-btn-text {
-    background-color: transparent;
-    color: @primary;
-    padding-left: 0;
-    padding-right: 0;
-
-
-    &.disabled {
-      color: #999 !important;
-      background-color: inherit !important;
-
-      &:hover {
-        color: #999;
-      }
-    }
+  &.is-circle {
+    border-radius: 50%;
+    padding: 8px 9px;
   }
 
-  &.x-btn-default {
-    @color: #444;
-    color: @color;
-    border-color: @default;
-    background-color: fade(@default, 40%);
-
-    &.is-plain {
-      color: @color;
-    }
-
-    &:hover {
-      background-color: darken(@default, 5%);
-    }
-
-    &:active {
-      border-color: darken(@default, 10%);
-      background-color: fade(@default, 75%);
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 2px fade(@default, 50%);
-    }
-
-    &.disabled,&.x-btn-loading {
-      &.is-plain {
-
-        &:hover,
-        &:focus,
-        &:active {
-          color: @color;
-          background-color: inherit !important;
-        }
-      }
-
-      &:hover,
-      &:focus,
-      &:active {
-        border-color: @default;
-        background-color: @color  !important;
-        box-shadow: none !important;
-      }
-    }
+  &.is-block {
+    display: block;
+    width: 100%;
   }
-
-  &.x-btn-info {
-    border-color: @info;
-    background-color: @info;
-
-    &.is-plain {
-      color: @info;
-    }
-
-    &:hover {
-      background-color: darken(@info, 5%);
-    }
-
-    &:active {
-      border-color: darken(@info, 10%);
-      background-color: fade(@info, 75%);
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 2px fade(@info, 50%);
-    }
-
-    &.disabled,&.x-btn-loading {
-      &.is-plain {
-
-        &:hover,
-        &:focus,
-        &:active {
-          color: @info;
-          background-color: inherit !important;
-        }
-      }
-
-      &:hover,
-      &:focus,
-      &:active {
-        border-color: @info;
-        background-color: @info  !important;
-        box-shadow: none !important;
-      }
-    }
-  }
-
-  &.x-btn-success {
-    border-color: @success;
-    background-color: @success;
-
-    &.is-plain {
-      color: @success;
-    }
-
-    &:hover {
-      background-color: darken(@success, 5%);
-    }
-
-    &:active {
-      border-color: darken(@success, 10%);
-      background-color: fade(@success, 75%);
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 2px fade(@success, 50%);
-    }
-
-    &.disabled,&.x-btn-loading {
-      &.is-plain {
-
-        &:hover,
-        &:focus,
-        &:active {
-          color: @success;
-          background-color: inherit !important;
-        }
-      }
-
-      &:hover,
-      &:focus,
-      &:active {
-        border-color: @success;
-        background-color: @success;
-        box-shadow: none !important;
-      }
-    }
-  }
-
-  &.x-btn-primary {
-    border-color: @primary;
-    background-color: @primary;
-
-    &.is-plain {
-      color: @primary;
-    }
-
-    &:hover {
-      background-color: darken(@primary, 5%);
-    }
-
-    &:active {
-      border-color: darken(@primary, 10%);
-      background-color: fade(@primary, 75%);
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 2px fade(@primary, 50%);
-    }
-
-    &.disabled,&.x-btn-loading {
-      &.is-plain {
-
-        &:hover,
-        &:focus,
-        &:active {
-          color: @primary;
-          background-color: inherit !important;
-        }
-      }
-
-      &:hover,
-      &:focus,
-      &:active {
-        border-color: @primary;
-        background-color: @primary  !important;
-        box-shadow: none !important;
-      }
-    }
-  }
-
-  &.x-btn-warning {
-    border-color: @warning;
-    background-color: @warning;
-
-    &.is-plain {
-      color: @warning;
-    }
-
-    &:hover {
-      background-color: darken(@warning, 5%);
-    }
-
-    &:active {
-      border-color: darken(@warning, 10%);
-      background-color: fade(@warning, 75%);
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 2px fade(@warning, 50%);
-    }
-
-    &.disabled,&.x-btn-loading {
-      &.is-plain {
-
-        &:hover,
-        &:focus,
-        &:active {
-          color: @warning;
-          background-color: inherit !important;
-        }
-      }
-
-      &:hover,
-      &:focus,
-      &:active {
-        border-color: @warning;
-        background-color: @warning  !important;
-        box-shadow: none !important;
-      }
-    }
-  }
-
-  &.x-btn-danger {
-    border-color: @danger;
-    background-color: @danger;
-
-    &.is-plain {
-      color: @danger;
-    }
-
-    &:hover {
-      background-color: darken(@danger, 5%);
-    }
-
-    &:active {
-      border-color: darken(@danger, 10%);
-      background-color: fade(@danger, 75%);
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 2px fade(@danger, 50%);
-    }
-
-    &.disabled,&.x-btn-loading {
-      &.is-plain {
-
-        &:hover,
-        &:focus,
-        &:active {
-          color: @danger;
-          background-color: inherit !important;
-        }
-      }
-
-      &:hover,
-      &:focus,
-      &:active {
-        border-color: @danger;
-        background-color: @danger !important;
-        box-shadow: none !important;
-      }
-    }
-  }
-
-  &.is-plain {
-    border-width: 1px;
-    border-style: solid;
-    background-color: transparent;
-    box-shadow: none;
-
-    &:hover {
-      color: @white
-    }
-  }
-
+  
   &.disabled,
   &:disabled {
     box-shadow: none;
@@ -391,6 +136,12 @@
     }
   }
   
+  &>.x-btn-content{
+    display: inline-block;
+    transition: all .35s ease;
+    transform: scale(1);
+    opacity: 1;
+  }
   
   .x-load {
     display: inline-block;
@@ -439,19 +190,6 @@
       }
   }
 
-  &.is-round {
-    border-radius: 2em
-  }
-
-  &.is-circle {
-    border-radius: 50%;
-    padding: 8px 9px;
-  }
-
-  &.is-block {
-    display: block;
-    width: 100%;
-  }
 
   & [class*=x-icon-]+span {
     margin-left: 5px;

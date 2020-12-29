@@ -8,7 +8,7 @@
   cursor: pointer;
   outline: none;
   text-align: right;
-  transition: background-color .3s;
+  transition: all .3s ease;
   color: #ffffff;
   font-size: 12px;
   padding-left: 25px;
@@ -31,42 +31,27 @@
 
   &.x-switch-checked{
     text-align: left;
-    
     padding-right: 25px;
-  padding-left: 10px;
+    padding-left: 10px;
 
     &.x-switch-primary{
-      background-color: @primary;
+      background-color: rgb(var(--primary));
     }
     &.x-switch-info{
-      background-color: @info;
+      background-color: rgb(var(--info));
     }
     &.x-switch-danger{
-      background-color: @danger;
+      background-color: rgb(var(--danger));
     }
     &.x-switch-success{
-      background-color: @success;
+      background-color: rgb(var(--success));
     }
     &.x-switch-warning{
-      background-color: @warning;
+      background-color: rgb(var(--warning));
     }
 
     &.x-switch-disabled{
-      &.x-switch-primary{
-        background-color: fade(@primary, 20%);
-      }
-      &.x-switch-info{
-        background-color: fade(@info, 20%);
-      }
-      &.x-switch-danger{
-        background-color: fade(@danger, 20%);
-      }
-      &.x-switch-success{
-        background-color: fade(@success, 20%);
-      }
-      &.x-switch-warning{
-        background-color: fade(@warning, 20%);
-      }
+      opacity: 0.2;
 
       &::before{
         border-color: #fff;
@@ -92,7 +77,6 @@
     background-color: #efefef;
 
     &::before{
-      // background-color: #ccc;
       border-color: #ccc;
     }
   }

@@ -11,7 +11,7 @@
         left: 8px;
         top: 50%;
         transform: translateY(-50%);
-        color: @border;
+        color: rgb(var(--line-color));
         position: absolute;
       }
     }
@@ -25,7 +25,7 @@
         right: 8px;
         top: 50%;
         transform: translateY(-50%);
-        color: @border;
+        color: rgb(var(--line-color));
         position: absolute;
       }
     }
@@ -39,7 +39,7 @@
       left: 10px;
       bottom: 10px;
       font-size: 12px;
-      color: @border;
+      color: rgb(var(--line-color));
     }
 
   }
@@ -47,44 +47,44 @@
   .x-input,
   .x-textarea {
     padding: 7px 10px;
-    border: 1px solid @border;
+    border: 1px solid rgb(var(--line-color));
     border-radius: 4px;
     font-size: 12px;
     transition-property: border-color, box-shadow;
     transition-duration: 0.25s;
     transition-timing-function: ease-in-out;
-    color: @text;
+    color: var(--text);
 
     &:disabled {
       cursor: no-drop;
       background: #efefef;
-      color: fade(#333, 30%);
+      color: rgb(var(--text), .3);
 
       &:hover {
-        border-color: @border;
+        border-color: rgb(var(--line-color));
       }
     }
 
     &:hover {
-      border-color: @primary;
+      border-color: rgb(var(--primary));
     }
 
     &:focus,
     &.is-focus {
-      border-color: @primary;
-      box-shadow: 0 0 0 2px fade(@primary, 30%);
+      border-color: rgb(var(--primary));
+      box-shadow: 0 0 0 2px rgb(var(--primary), .3);
 
       &::placeholder {
-        color: fade(@border, 40%);
+        color: rgb(var(--line-color), .4);
       }
     }
 
     &.is-blur {
-      border-color: @border;
+      border-color: rgb(var(--line-color));
       box-shadow: none;
 
       &::placeholder {
-        color: @border;
+        color: rgb(var(--line-color));
       }
     }
 
@@ -99,6 +99,6 @@
     }
 
     &::placeholder {
-      color: @border;
+      color: rgb(var(--line-color));
     }
   }

@@ -34,17 +34,12 @@
 
       i{
         transition: all 0.25s ease-in-out;
-        color: darken(@border, 20%);
+        color: rgb(var(--text));
       }
 
       right: 0;
       cursor: pointer;
 
-      &:hover{
-        i{
-          color: darken(@border, 60%);
-        }
-      }
     }
 
     .x-select-icon{
@@ -73,14 +68,14 @@
 
       &>span{
         padding: 2px 8px;
-        background-color: @border;
+        background-color: rgb(var(--line-color));
         border-radius: 4px;
       }
 
       .x-select-array-content{
         max-width: 70%;
         padding: 2px 8px;
-        background-color: @border;
+        background-color: rgb(var(--line-color));
         border-radius: 4px;
         margin-right: 5px;
         display: flex;
@@ -133,19 +128,19 @@
       overflow: hidden;
 
       &:hover{
-        background-color: fade(@primary, 10%)
+        background-color: rgb(var(--primary), .2)
       }
 
       &.is-checked{
-        color: @primary;
-        background-color: fade(@border, 10%);
+        color: rgb(var(--primary));
+        background-color: rgb(var(--line-color), .1);
         font-weight: bold;
       }
 
       // 禁用状态
       &.is-disabled{
         cursor: no-drop;
-        color: fade(@text, 40%);
+        color: rgb(var(--text), .4);
         &:hover{
           background-color: initial;
         }
