@@ -1,0 +1,296 @@
+.index {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #FFF;
+  user-select: none;
+  display: flex;
+  align-items: center;
+
+  .year{
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    padding-left: 0.1em;
+    font-size: 55em;
+    font-family: fantasy;
+    color: #fafafa;
+  }
+
+  .content {
+    position: relative;
+    padding-left: 10%;
+    z-index: 10;
+
+    .title{
+      margin-bottom: 10px;
+      font-size: 4em;
+      font-weight: bold;
+      font-family: "calibre bold", sans-serif;
+    }
+    .description {
+      width: 800px;
+      font-size: 3em;
+      font-weight: bold;
+      font-family: "calibre bold", sans-serif;
+      margin-bottom: 80px;
+    }
+
+    .github {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+
+      .git.x-btn{
+        margin: 0 10px;
+
+        &:hover{
+          background: fade(#2d7bf4, 5%);
+          color: #2d7bf4;
+        }
+      }
+      
+    }
+  }
+
+  .element {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+
+    div {
+      position: absolute;
+    }
+
+    // 三角
+    .triangle {
+      background-color: #ed4c65;
+      text-align: left;
+      filter: blur(0.5px);
+      position: absolute;
+      top:1em;
+      left: 1.3em;
+    }
+
+    .triangle:before,
+    .triangle:after {
+      content: '';
+      position: absolute;
+      background-color: inherit;
+    }
+
+    .triangle,
+    .triangle:before,
+    .triangle:after {
+      width: 3.4em;
+      height: 3.4em;
+      border-top-right-radius: 30%;
+    }
+
+    .triangle {
+      transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+    }
+
+    .triangle:before {
+      transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+    }
+
+    .triangle:after {
+      transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+    }
+
+    .triangle-rotate {
+      width: 6em;
+      height: 6em;
+      animation: trianglerotate ease-in-out 10s infinite;
+    }
+    .triangle-move {
+      bottom: 20%;
+      left: 13%;
+      width: 6em;
+      height: 6em;
+      animation: trianglemove ease-in-out 10s infinite;
+    }
+
+    @keyframes trianglemove {
+      0% {
+        transform: translateY(0);
+      }
+      10%{
+        transform: translateY(0);
+      }
+      45%{
+        transform: translateY(3em);
+      }
+      55%{
+        transform: translateY(3em);
+      }
+      90%{
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes trianglerotate {
+      0% {
+        transform: rotate(30deg);
+      }
+      10%{
+        transform: rotate(30deg);
+      }
+      45%{
+        transform: rotate(-30deg);
+      }
+      55%{
+        transform: rotate(-30deg);
+      }
+      90%{
+        transform: rotate(30deg);
+      }
+      100% {
+        transform: rotate(30deg);
+      }
+    }
+
+    .ellipse {
+      background-color: #f1f3f4;
+      width: 13em;
+      height: 7.5em;
+      border-radius: 7em;
+      filter: blur(0.6px);
+      left: -5em;
+      top: 50%;
+      transform-origin: left center;
+      animation: ellipse linear 28s infinite;
+    }
+
+    @keyframes ellipse {
+      0% {
+        transform: rotate(40deg)
+      }
+
+      5% {
+        transform: rotate(40deg)
+      }
+
+      48% {
+        transform: rotate(-40deg)
+      }
+
+      52% {
+        transform: rotate(-40deg)
+      }
+
+      95% {
+        transform: rotate(40deg)
+      }
+
+      100% {
+        transform: rotate(40deg)
+      }
+    }
+
+    .square {
+      background-color: fade(#0e9635, 85%);
+      width: 24em;
+      height: 24em;
+      border-radius: 2em;
+      filter: blur(0.6px);
+      right: -20em;
+      bottom: 12%;
+      animation: square linear 35s infinite;
+    }
+
+    @keyframes square {
+      from {
+        transform: rotate(0)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .round {
+      background-color: #f1f3f4;
+      width: 8em;
+      height: 8em;
+      border-radius: 100em;
+      filter: blur(0.6px);
+      right: 3em;
+      bottom: 11%;
+    }
+
+    .combination{
+      width: 7em;
+      height: 6em;
+      top: 19%;
+      left: 13%;
+      filter: blur(0.6px);
+      background: orange;
+      background-size: 1em 1em, 1em 1em;
+      background-image: linear-gradient(#FFF 0.75em, transparent 0px), linear-gradient(90deg, #FFF 0.75em, transparent 0px);
+    }
+
+    .combination::after{
+      content: "";
+      border-radius: 100%;
+      width: 3em;
+      height: 3em;
+      background: fade(#49b0e6, 90%);
+      position: absolute;
+      animation: combination ease-in 10s infinite;
+    }
+
+    @keyframes combination {
+      0% {
+        transform: translate(-2em, -1.5em)
+      }
+      50%{
+        transform: translate(0em, 0em)
+      }
+      100% {
+        transform: translate(-2em, -1.5em)
+      }
+    }
+
+    .semicirce{
+      width:15em;
+      height:15em;
+      filter: blur(0.6px);
+      right: 20%;
+      top: -15%;
+      animation: semicirce ease-in 10s infinite;
+    }
+
+    .semicirce::after{
+      content: "";
+      height: inherit;
+      width: inherit;
+      border-radius: 100%;
+      background-color:#f9bc0b;
+      display: block;
+    }
+
+    @keyframes semicirce {
+      0% {
+        transform: translateY(20%)
+      }
+      50%{
+        transform: translateY(0)
+      }
+      100% {
+        transform: translateY(20%)
+      }
+    }
+
+  }
+}

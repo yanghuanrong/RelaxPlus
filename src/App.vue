@@ -1,13 +1,13 @@
 <template>
   <div class="wrapper">
     <div class="sidebar-menu">
-      <div style="padding: 20px">
-        <!-- <router-link to="/"> -->
-          <div class="logo-img">
-            <span></span>
-          </div>
-        <!-- </router-link> -->
-      </div>
+      <teleport to="body">
+      <router-link to="/" title="RelaxPlus">
+        <div class="logo-img">
+          <span></span>
+        </div>
+      </router-link>
+      </teleport>
       <div v-for="menu in nav" class="menu">
         <dl v-if="menu.child">
           <dt># {{ menu.title }}</dt>

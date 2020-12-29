@@ -1,17 +1,24 @@
 @import "rest";
 @import "highlight";
 @import "docs";
+@import "index";
 
 html,
 body,
 #app {
   height: 100%;
-  background-color: #f6f9fb;
+  background-color: #fafafa;
 }
 
 .logo-img {
-  position: relative;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 15;
   width: 130px;
+  height: 36px;
+  background: url('../assets/logo.png') no-repeat;
+  background-size: contain;
 
   &::after {
     content: "RelaxPlus";
@@ -22,15 +29,6 @@ body,
     font-size: 36px;
     color: #333;
     font-family: "calibre bold";
-  }
-
-  span {
-    width: 36px;
-    height: 36px;
-    display: block;
-    background: url('../assets/logo.png');
-    background-size: contain;
-    position: relative;
   }
 }
 
@@ -70,6 +68,7 @@ body,
     bottom: 0;
     overflow: auto;
     width: 225px;
+    padding-top: 70px;
     background: #FFF;
 
     .menu{

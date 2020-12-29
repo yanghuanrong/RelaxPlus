@@ -52,20 +52,13 @@
   user-select: none;
   text-decoration: none;
 
-  &>.content{
-    display: inline-block;
-    transition: all .35s ease;
-    transform: scale(1);
-    opacity: 1;
-  }
-
   &:focus {
     background-image: none;
     outline: 0;
   }
 
   &.x-btn-lg {
-    padding: 11px 23px;
+    padding: 8px 33px;
     font-size: 14px;
   }
 
@@ -76,6 +69,13 @@
       width: 1.5em;
       height: 1.5em;
     }
+  }
+
+  &.x-btn-content{
+    display: inline-block;
+    transition: all .35s ease;
+    transform: scale(1);
+    opacity: 1;
   }
 
   &.x-btn-text {

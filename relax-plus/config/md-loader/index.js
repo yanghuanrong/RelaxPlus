@@ -95,7 +95,8 @@ function mdLoader (source) {
 
           const toView = (i) => {
             if(menu.length){
-              const top = document.querySelector('#'+menu[i].id).offsetTop - 30
+              const el = document.querySelector('#'+menu[i].id)
+              const top = el && el.offsetTop - 30
               ScrollTop(top, 400)
             }
           }
@@ -108,7 +109,8 @@ function mdLoader (source) {
             let location = []
 
             for(let i=0; i<menu.length; i++){
-              let top = document.querySelector('#'+menu[i].id).offsetTop - 30
+              let el = document.querySelector('#'+menu[i].id)
+              let top = el && el.offsetTop - 30
               location.push(Math.abs(nowTop - top))
             }
 

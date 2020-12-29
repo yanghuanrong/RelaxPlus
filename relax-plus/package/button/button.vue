@@ -1,7 +1,7 @@
 <template>
   <button class="x-btn" :class="className" :disabled="isDisabled">
     <span v-if="loading" class='x-load'></span>
-    <span class="content" :style="style">
+    <span class="x-btn-content" :style="style">
       <i v-if="icon !== ''" :class="icon" />
       <span v-if="$slots.default">
         <slot></slot>
