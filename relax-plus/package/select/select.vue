@@ -39,7 +39,7 @@
     </div>
 
     <teleport to="body">
-      <transition name="option" ref="option">
+      <transition name="scaleY" ref="option">
         <div class="x-select-option" @click.stop :style="rect" v-show="isShow">
           <div class="x-select-search" v-if="search">
             <div class="x-from-input x-input-icon-before" >
@@ -184,8 +184,9 @@ function useRect(isShow){
 
     top1 = parentHeight + scrollTop
     top2 = top1 - elHeight - el.height - 5
+ 
     const top = parentHeight + elHeight > clientHeight ? top2 : top1
-
+    rect.transformOrigin = parentHeight + elHeight > clientHeight ? 'center bottom' : 'center top'
     rect.top = top + 'px'
     rect.left = el.left + 'px'
     rect.minWidth = el.width + 'px'
@@ -207,8 +208,10 @@ function useRect(isShow){
 
         if(Rect.top + Rect.height + elHeight > clientHeight){
           rect.top = top2 + 'px'
+          rect.transformOrigin = 'center bottom'
         } else {
           rect.top = top1 + 'px'
+          rect.transformOrigin = 'center top'
         }
       }
     })
