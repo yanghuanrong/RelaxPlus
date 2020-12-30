@@ -2,12 +2,17 @@
 @import "highlight";
 @import "docs";
 @import "index";
+@import "demoBlock";
+
+
 
 html,
 body,
 #app {
   height: 100%;
-  background-color: #fafafa;
+  background-color: var(--sub-background-color);
+  transition: background-color .3s ease;
+  color: var(--main-text-color);
 }
 
 .logo-img {
@@ -27,33 +32,34 @@ body,
     top: 0;
     line-height: 36px;
     font-size: 36px;
-    color: #333;
+    color: var(--main-text-color);
     font-family: "calibre bold";
   }
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-}
+.content-menu{
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  display: flex;
 
-.col(@index, @type, @num) when (@index > 0) {
-  .col(@index - 1, @type, @num);
-
-  .col-@{type}-@{index} {
-      grid-column: span @index;
+  .item{
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all .4s ease;
+    line-height: 1.3;
+    text-align: center;
+    margin-left: 10px;
+    color: var(--sub-text-color);
+  
+    &:hover{
+      background-color: var(--hover-background-color);
+    }
   }
 }
-
-
-@media (min-width: 576px) {
-  .col(12, xs, 12);
-}
-
-@media (min-width: 768px) {
-  .col(12, md, 12);
-}
-
 
 .wrapper {
   width: 100%;
@@ -69,26 +75,29 @@ body,
     overflow: auto;
     width: 225px;
     padding-top: 70px;
-    background: #FFF;
+    background-color: var(--main-background-color);
+    transition: background-color .3s ease;
+
 
     .menu{
       padding: 0 20px;
       a{
         font-size: 14px;
         display: block;
-        color: #333;
+        color: var(--main-text-color);
         padding: 8px 10px;
         margin: 4px 0;
+        transition: background-color .3s ease;
       }
       a:hover{
-        background-color: #eee;
+        background-color: var(--hover-background-color);
       }
       dl{
         dt{
-          color: #999;
+          color: var(--sub-text-color);
           padding: 8px 10px;
           padding-bottom: 8px;
-          border-bottom: 1px solid #eee;
+          border-bottom: 1px solid var(--hover-background-color);
         }
       }
     }
@@ -106,12 +115,12 @@ body,
 .h2-nav{
   position: fixed;
   right: 20px;
-  top: 60px;
+  top: 80px;
   width: 105px;
   padding-left: 15px;
   padding-bottom: 30px;
-  border-left: 1px solid #eee;
-  color: #999;
+  border-left: 1px solid var(--hover-background-color);
+  color: var(--sub-text-color);
 
   .dot{
     position: absolute;
@@ -120,7 +129,7 @@ body,
     border-radius: 50%;
     top: 7px;
     left: -3px;
-    background-color: #f9bc0b;
+    background-color: rgb(var(--warning));
     transition: transform .4s ease;
     
     &::after{
@@ -129,7 +138,7 @@ body,
       height: 100%;
       display: block;
       position: absolute;
-      background-color: #f9bc0b;
+      background-color: rgb(var(--warning));
       border-radius: 50%;
       animation: pulseDot 2.5s cubic-bezier(.47, -.2, .13, 1.35) infinite;
     }
@@ -153,72 +162,8 @@ body,
     transition: color .4s ease;
 
     &.active{
-      color: #f9bc0b;
+      color: rgb(var(--warning));
     }
   }
 }
 
-
-
-.components-badge-demo .x-badge{
-  margin-right: 30px;
-  margin-bottom: 12px;
-}
-
-.components-select-demo .x-select {
-  margin-right: 8px;
-  margin-bottom: 12px;
-}
-
-
-.relax-document {
-  .document-title {
-    font-size: 16px;
-    margin-bottom: 6px;
-    color: #666;
-    margin-bottom: 20px;
-
-    h4 {
-      font-weight: normal;
-    }
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-
-    &.document-api {
-      margin-bottom: 20px;
-    }
-
-    thead {
-      th {
-        background-color: #e5eaee;
-        padding: 10px;
-        color: #666;
-        border-bottom: 2px solid #dae1e6
-      }
-    }
-
-    td {
-      padding: 10px;
-      background: #FFF;
-      border-bottom: 1px solid #e5eaee;
-
-
-      &:nth-child(3) {
-        color: #f81d22;
-        width: 15%;
-      }
-
-      &:nth-child(1) {
-        color: #0b8235;
-        width: 15%;
-      }
-
-      &:nth-child(4) {
-        color: #008dff
-      }
-    }
-  }
-}

@@ -32,7 +32,6 @@
 <script>
 import { ref, getCurrentInstance } from 'vue'
 import CollapseTransition from '@RelaxPlus/package/transitions/collapse-transition.vue'
-import './demoBlock.less'
 
 export default {
   components: {

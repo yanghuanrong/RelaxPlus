@@ -4,7 +4,7 @@
   margin-bottom: 30px;
 
   .demo-wrap{
-    background-color: #FFF;
+    background-color: var(--main-background-color);
     border-radius: 3px;
     display: flex;
     flex-wrap: wrap;
@@ -18,7 +18,7 @@
     
     .demo-source{
       padding-bottom: 30px;
-      border-bottom: 2px dotted @border;
+      border-bottom: 2px dotted var(--hover-background-color);
     }
   
     .demo-highlight{
@@ -45,7 +45,7 @@
           transition: all ease .4s;
           
           &:hover{
-            background: #f3f6f8;
+            background: var(--hover-background-color);
           };
         }
       }

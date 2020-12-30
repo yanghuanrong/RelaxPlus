@@ -71,14 +71,13 @@ i.x-arrow{
   top: 50%;
   transform: translateY(-50%);
   right: 20px;
-  @color:#ccc;
 
   &::after,&::before {
     content: "";
     position: absolute;
     width:1px;
     height: 7px;
-    background-color: @color;
+    background-color: var(--line-color);
     left: 4px;
     top: 7px;
     transform-origin: top center;

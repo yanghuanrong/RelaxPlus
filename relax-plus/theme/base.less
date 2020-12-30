@@ -1,5 +1,5 @@
 
-:root {
+:root, [data-color-mode=light]{
   --default: 227, 234, 239; //#e3eaef
   --success: 10, 207, 151; //#0acf97
   --primary: 45, 123, 244;//#2d7bf4;
@@ -9,6 +9,33 @@
   --white: 255, 255, 255;
   --black: 0, 0, 0;
   
-  --text: 68, 68, 68;
-  --line-color: 217, 227, 233;
+  --mix-color: 68, 68, 68;
+  --main-background-color: #ffffff;
+  --sub-background-color: #fafafa;
+  --hover-background-color: rgb(var(--black), .1);
+  --sub-text-color: #98a6ad;
+  --main-text-color: rgb(var(--black));
+  --line-color: rgb(var(--default));
+  --shadow: rgb(var(--black), 0.1);
+}
+
+[data-color-mode=dark]{
+  --default: 227, 234, 239; //#e3eaef
+  --success: 10, 207, 151; //#0acf97
+  --primary: 45, 123, 244;//#2d7bf4;
+  --danger: 241, 85, 108; //#f1556c
+  --info: 78, 183, 235; // #4eb7eb
+  --warning: 249, 188, 11; //#f9bc0b;
+  --white: 255, 255, 255;
+  --black: 0, 0, 0;
+  
+  --mix-color: 255, 255, 255;
+  --main-background-color: #1a1d24;
+  --sub-background-color: #000000;
+  --hover-background-color: rgb(var(--white), .1);
+  --sub-text-color: #98a6ad;
+  --main-text-color: rgb(var(--white));
+  --line-color: rgb(var(--default), .3);
+  --shadow: rgb(var(--black), 0.4);
+
 }

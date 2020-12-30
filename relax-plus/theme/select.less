@@ -1,6 +1,7 @@
 .x-select {
   position: relative;
   display: inline-block;
+  user-select: none;
 
   .x-select-input{
     position: relative;
@@ -34,7 +35,7 @@
 
       i{
         transition: all 0.25s ease-in-out;
-        color: rgb(var(--text));
+        color: var(--line-color);
       }
 
       right: 0;
@@ -68,14 +69,14 @@
 
       &>span{
         padding: 2px 8px;
-        background-color: rgb(var(--line-color));
+        background-color: var(--line-color);
         border-radius: 4px;
       }
 
       .x-select-array-content{
         max-width: 70%;
         padding: 2px 8px;
-        background-color: rgb(var(--line-color));
+        background-color: var(--line-color);
         border-radius: 4px;
         margin-right: 5px;
         display: flex;
@@ -95,6 +96,7 @@
           width: 14px;
           width: auto;
           display: block;
+          margin-left: 5px;
           cursor: pointer;
         }
       }
@@ -110,9 +112,9 @@
 .x-select-option{
     z-index: 2;
     position: absolute;
-    background-color: #FFF;
+    background-color: var(--main-background-color);
     border-radius: 4px;
-    box-shadow: 0 0 8px fade(#000, 10%);
+    box-shadow: 0 0 8px var(--shadow);
     overflow: hidden;
     min-width: 100%;
     margin-top: 3px;
@@ -121,15 +123,11 @@
       white-space: nowrap;
       cursor: pointer;
       padding-left: 25px;
-      background-color: #fff;
       padding: 0 12px;
       height: 30px;
       line-height: 30px;
       overflow: hidden;
-
-      &:hover{
-        background-color: rgb(var(--primary), .2)
-      }
+      color: var(--sub-text-color);
 
       &.is-checked{
         color: rgb(var(--primary));
@@ -137,10 +135,15 @@
         font-weight: bold;
       }
 
+      &:hover{
+        background-color: rgb(var(--primary), .2)
+      }
+
       // 禁用状态
       &.is-disabled{
         cursor: no-drop;
-        color: rgb(var(--text), .4);
+        color: var(--sub-text-color);
+        opacity: .4;
         &:hover{
           background-color: initial;
         }
@@ -158,7 +161,7 @@
       &::-webkit-scrollbar-thumb {
         border-radius: 6px;
         // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-        background: rgba(144, 147, 153, 0.5);
+        background: var(--line-color);
       }
       &::-webkit-scrollbar-track {
         // -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);

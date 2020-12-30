@@ -1,15 +1,25 @@
+[data-color-mode=dark] {
+  .index{
+    .year{
+      opacity: 0.08;
+    }
+  }
+}
+
 .index {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: #FFF;
+  background-color: var(--main-background-color);
   user-select: none;
   display: flex;
   align-items: center;
+  transition: background-color .3s ease;
 
   .year{
+    
     position: absolute;
     top: 50%;
     right: 5%;
@@ -17,7 +27,9 @@
     padding-left: 0.1em;
     font-size: 55em;
     font-family: fantasy;
-    color: #fafafa;
+    color: var(--sub-background-color);
+    filter: blur(2px);
+    opacity: .8;
   }
 
   .content {
@@ -35,6 +47,7 @@
       width: 800px;
       font-size: 3em;
       font-weight: bold;
+      opacity: .9;
       font-family: "calibre bold", sans-serif;
       margin-bottom: 80px;
     }
@@ -46,13 +59,7 @@
 
       .git.x-btn{
         margin-left: 15px;
-
-        &:hover{
-          background: fade(#2d7bf4, 5%);
-          color: #2d7bf4;
-        }
       }
-      
     }
   }
 
@@ -70,7 +77,7 @@
 
     // 三角
     .triangle {
-      background-color: #ed4c65;
+      background-color: rgb(var(--danger));
       text-align: left;
       filter: blur(0.5px);
       position: absolute;
@@ -161,7 +168,7 @@
     }
 
     .ellipse {
-      background-color: #f1f3f4;
+      background-color: var(--sub-background-color);
       width: 13em;
       height: 7.5em;
       border-radius: 7em;
@@ -199,7 +206,7 @@
     }
 
     .square {
-      background-color: fade(#0e9635, 85%);
+      background-color: rgb(var(--success), .85);
       width: 24em;
       height: 24em;
       border-radius: 2em;
@@ -220,7 +227,7 @@
     }
 
     .round {
-      background-color: #f1f3f4;
+      background-color: var(--sub-background-color);
       width: 8em;
       height: 8em;
       border-radius: 100em;
@@ -237,7 +244,7 @@
       filter: blur(0.6px);
       background: orange;
       background-size: 1em 1em, 1em 1em;
-      background-image: linear-gradient(#FFF 0.75em, transparent 0px), linear-gradient(90deg, #FFF 0.75em, transparent 0px);
+      background-image: linear-gradient(var(--main-background-color) 0.75em, transparent 0px), linear-gradient(90deg,var(--main-background-color) 0.75em, transparent 0px);
     }
 
     .combination::after{
