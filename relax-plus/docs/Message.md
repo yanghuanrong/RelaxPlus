@@ -38,10 +38,10 @@ tag: Feedback
 :::demo 
 ```html
 <template>
-   <x-button @click="handerClickInfo">显示信息提示</x-button>
-   <x-button @click="handerClickError">显示错误提示</x-button>
-   <x-button @click="handerClickSuccess">显示成功提示</x-button>
-   <x-button @click="handerClickWarning">显示警告提示</x-button>
+   <x-button type="info" plain @click="open1">显示信息提示</x-button>
+   <x-button type="danger" plain @click="open2">显示错误提示</x-button>
+   <x-button type="success" plain @click="open3">显示成功提示</x-button>
+   <x-button type="warning" plain @click="open4">显示警告提示</x-button>
 </template>
 
 <script>
@@ -50,23 +50,23 @@ tag: Feedback
     setup(){
       const instance = getCurrentInstance()
       const {$message} = instance.appContext.config.globalProperties
-      const handerClickInfo = () => {
+      const open1 = () => {
         $message.info('显示信息提示')
       }
-      const handerClickError = () => {
+      const open2 = () => {
         $message.error('显示错误提示')
       }
-      const handerClickSuccess = () => {
+      const open3 = () => {
         $message.success('显示成功提示')
       }
-      const handerClickWarning = () => {
+      const open4 = () => {
         $message.warning('显示警告提示')
       }
       return {
-        handerClickInfo,
-        handerClickError,
-        handerClickSuccess,
-        handerClickWarning
+        open1,
+        open2,
+        open3,
+        open4
       }
     }
   }
@@ -80,8 +80,8 @@ tag: Feedback
 :::demo 关闭时间为 `0` 的时候需要手动关闭
 ```html
 <template>
-  <x-button @click="loading">显示加载中</x-button>
-  <x-button @click="info">3秒后自动关闭</x-button>
+  <x-button type="primary" plain @click="loading">显示加载中</x-button>
+  <x-button type="primary" plain @click="info">3秒后自动关闭</x-button>
 </template>
 <script>
 import {getCurrentInstance} from 'vue'

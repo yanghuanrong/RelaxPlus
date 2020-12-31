@@ -67,17 +67,24 @@ body,
   overflow: hidden;
   padding-left: 225px;
 
-  .sidebar-menu {
+  .sidebar-nav{
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
-    overflow: auto;
     width: 225px;
-    padding-top: 70px;
+    top: 0;
     background-color: var(--main-background-color);
     transition: background-color .3s ease;
+  }
 
+  .sidebar-menu {
+    position: absolute;
+    left: 0;
+    top: 70px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
 
     .menu{
       padding: 0 20px;

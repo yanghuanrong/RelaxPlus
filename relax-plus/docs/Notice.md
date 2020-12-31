@@ -41,10 +41,10 @@ tag: Feedback
 :::demo
 ```html
 <template>
-   <x-button @click="open1">打开通知提示</x-button>
-   <x-button @click="open2">显示成功提示</x-button>
-   <x-button @click="open3">显示警告提示</x-button>
-   <x-button @click="open4">显示错误提示</x-button>
+   <x-button type="info" plain @click="open1">打开通知提示</x-button>
+   <x-button type="success" plain  @click="open2">显示成功提示</x-button>
+   <x-button type="warning" plain  @click="open3">显示警告提示</x-button>
+   <x-button type="danger" plain  @click="open4">显示错误提示</x-button>
 </template>
 
 <script>
@@ -96,7 +96,7 @@ tag: Feedback
 :::demo
 ```html
 <template>
-   <x-button @click="handerClick">打开提醒(仅标题)</x-button>
+   <x-button type="primary" plain @click="handerClick">打开提醒(仅标题)</x-button>
 </template>
 
 <script>
@@ -126,8 +126,8 @@ tag: Feedback
 :::demo
 ```html
 <template>
-   <x-button @click="handerClick1">显示自定义图标</x-button>
-   <x-button @click="handerClick2">显示自定义图标</x-button>
+   <x-button type="primary" plain @click="handerClick1">显示自定义图标</x-button>
+   <x-button type="primary" plain @click="handerClick2">显示自定义图标</x-button>
 </template>
 
 <script>
@@ -168,7 +168,7 @@ tag: Feedback
 :::demo
 ```html
 <template>
-   <x-button @click="handerClick">手动关闭</x-button>
+   <x-button type="primary" plain @click="handerClick">手动关闭</x-button>
 </template>
 
 <script>

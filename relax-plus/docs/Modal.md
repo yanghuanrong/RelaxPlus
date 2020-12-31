@@ -56,7 +56,7 @@ tag: Feedback
 :::demo
 ```html
 <template>
-  <x-button type="primary" @click="visible = true">显示对话框</x-button>
+  <x-button type="primary" plain @click="visible = true">显示对话框</x-button>
   <x-modal 
     title="戏命师"
     v-model="visible"
