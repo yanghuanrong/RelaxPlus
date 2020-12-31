@@ -51,7 +51,7 @@ tag: Feedback
 :::
 
 ## 自定义样式
-> 通过 slot 自定义样式
+> 通过 `slot` 自定义样式
 :::demo
 ```html
 <template>
@@ -138,3 +138,46 @@ tag: Feedback
 </script>
 ```
 ::: 
+
+## 禁用关闭
+> 可以禁用关闭和遮罩层关闭。
+:::demo
+```html
+<template>
+  <x-button type="primary" @click="visible1 = true">禁用右上角关闭 （含Esc键）</x-button>
+  <x-modal 
+    title="戏命师"
+    :closable="false"
+    v-model="visible1" 
+  >
+    <p>我于杀戮之中绽放 ,亦如黎明中的花朵</p>
+    <p>你，将饱含诗意。我的灵感正在涌现，作品即是一切，艺术值得为之痛苦，我为喝彩而生，你将为其呕心沥血。</p>
+  </x-modal>
+
+  <x-button type="primary" @click="visible2 = true">禁用遮罩层关闭</x-button>
+  <x-modal 
+    title="戏命师"
+    :mask-closable="false"
+    v-model="visible2" 
+  >
+    <p>我于杀戮之中绽放 ,亦如黎明中的花朵</p>
+    <p>你，将饱含诗意。我的灵感正在涌现，作品即是一切，艺术值得为之痛苦，我为喝彩而生，你将为其呕心沥血。</p>
+  </x-modal>
+</template>
+
+<script>
+  import {ref} from 'vue'
+  export default {
+    setup(){
+      const visible1 = ref(false)
+      const visible2 = ref(false)
+
+      return {
+        visible1,
+        visible2,
+      }
+    }
+  }
+</script>
+```
+:::

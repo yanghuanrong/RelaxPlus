@@ -1,52 +1,55 @@
 .x-modal {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
   z-index: 1005;
-}
+  pointer-events: none;
 
-.x-modal-content {
-  position: absolute;
-  width: 500px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 15px 20px;
-  border-radius: 3px;
-  background-color: var(--main-background-color);
-  box-shadow: 0 0 2px var(--shadow);
-
-  .x-modal-close{
+  .x-modal-content {
     position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    line-height: 30px;
-    font-size: 16px;
-    cursor: pointer;
-    color: #999;
-  }
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 20px;
+    border-radius: 3px;
+    background-color: var(--main-background-color);
+    box-shadow: 0 0 2px var(--shadow);
+    pointer-events: all;
 
-  .x-modal-head {
-    color: currentColor;
-    font-size: 16px;
-  }
+    .x-modal-close{
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      line-height: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #999;
+    }
 
-  .x-modal-body{
-    padding: 10px 0;
-    font-size: 12px;
-    color: var(--sub-text-color);
-  }
+    .x-modal-head {
+      color: currentColor;
+      font-size: 16px;
+    }
 
-  .x-modal-footer {
-    text-align: right;
+    .x-modal-body{
+      padding: 10px 0;
+      font-size: 12px;
+      color: var(--sub-text-color);
+    }
 
-    .x-modal-btn{
-      margin-left: 10px;
+    .x-modal-footer {
+      text-align: right;
+
+      .x-modal-btn{
+        margin-left: 10px;
+      }
     }
   }
+
 }

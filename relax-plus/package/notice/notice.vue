@@ -80,7 +80,6 @@ export default {
     }
 
     const beforeLeave = (el) => {
-      console.dir(el)
       el.style.height = el.offsetHeight + 'px'
     }
     const leave = (el) => {
