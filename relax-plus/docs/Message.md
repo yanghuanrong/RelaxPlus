@@ -21,7 +21,7 @@ tag: Feedback
       const instance = getCurrentInstance()
       const {$message} = instance.appContext.config.globalProperties
       const handerClick = () => {
-        $message('要小心那些一无所有的人')
+        $message('你好呀')
       }
       return {
         handerClick
@@ -51,16 +51,16 @@ tag: Feedback
       const instance = getCurrentInstance()
       const {$message} = instance.appContext.config.globalProperties
       const open1 = () => {
-        $message.info('不要害怕未知的事物')
+        $message.info('显示信息提示')
       }
       const open2 = () => {
-        $message.error('我们不受岁月左右')
+        $message.error('显示错误提示')
       }
       const open3 = () => {
-        $message.success('死亡如风，常伴吾身')
+        $message.success('显示成功提示')
       }
       const open4 = () => {
-        $message.warning('若想解决纷争，必先陷入纷争')
+        $message.warning('显示警告提示')
       }
       return {
         open1,
@@ -91,12 +91,12 @@ export default {
     const {$message} = instance.appContext.config.globalProperties
 
     const loading = () => {
-      const message = $message.loading('不要错把仁慈当做弱小', 0)
+      const message = $message.loading('3秒后自动关闭', 0)
       setTimeout(message, 3000)
     }
 
     const info = () => {
-      $message('我一定会回来的', 3)
+      $message('message 消息', 3)
     }
     return {
       loading,
