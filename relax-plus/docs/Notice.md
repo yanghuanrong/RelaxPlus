@@ -11,7 +11,7 @@ tag: Feedback
 :::demo `notice` 会被挂载在 `vue` 全局属性中, 当然也可以引入 `RelaxPlus` 直接使用
 ```html
 <template>
-   <x-button type='primary' @click="handerClick">显示普通提示</x-button>
+   <x-button type='primary' @click="handerClick">显示普通通知</x-button>
 </template>
 
 <script>

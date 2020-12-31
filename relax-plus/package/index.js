@@ -5,6 +5,7 @@ import Icon from './icon/index'
 // Feedback
 import Message from './message/index'
 import Notice from './notice/index'
+import Modal from './modal/index'
 
 // Layout
 import Row from './row/index'
@@ -28,7 +29,8 @@ const components = [
   CheckboxGroup,
   Input,
   Select,
-  SelectOption
+  SelectOption,
+  Modal
 ]
 
 const install = function (app) {
@@ -62,5 +64,6 @@ export default {
   CheckboxGroup,
   Input,
   Select,
-  SelectOption
+  SelectOption,
+  Modal
 }

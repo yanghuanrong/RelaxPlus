@@ -42,6 +42,13 @@
     "routePath": "/message"
   },
   {
+    "title": "Modal 对话框",
+    "tag": "Feedback",
+    "componentName": "Modal",
+    "fileName": "Modal.md",
+    "routePath": "/modal"
+  },
+  {
     "title": "Notice 通知",
     "tag": "Feedback",
     "componentName": "Notice",
