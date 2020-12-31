@@ -22,8 +22,8 @@ tag: Feedback
       const {$notice} = instance.appContext.config.globalProperties
       const handerClick = () => {
         $notice({
-          title: 'Notice 通知',
-          content: '全新的 Notice 通知组件，对比老版本动画更加流畅，细腻，柔和，加入进度条倒计时指示，根本停不下来，太酷了'
+          title: '易',
+          content: '真正的大师永远都怀着一颗学徒的心'
         })
       }
       return {
@@ -56,26 +56,26 @@ tag: Feedback
 
       const open1 = () => {
         $notice.info({
-          title: 'Notice 通知',
-          content: '全新的 Notice 通知组件，对比老版本动画更加流畅，细腻，柔和，加入进度条倒计时指示，根本停不下来，太酷了'
+          title: '塞恩',
+          content: '死后能做的最棒的事情是什么?就是碾碎你的敌人，看着他们先你一步而去，并聆听他们怯懦的哭喊。'
         })
       }
       const open2 = () => {
         $notice.success({
-          title: 'Notice 通知',
-          content: '全新的 Notice 通知组件，对比老版本动画更加流畅，细腻，柔和，加入进度条倒计时指示，根本停不下来，太酷了'
+          title: '崔斯特',
+          content: '每一张牌，都是对你的一份思念，我赌赢了所有，却赢不回你的爱。'
         })
       }
       const open3 = () => {
         $notice.warning({
-          title: 'Notice 通知',
-          content: '全新的 Notice 通知组件，对比老版本动画更加流畅，细腻，柔和，加入进度条倒计时指示，根本停不下来，太酷了'
+          title: '努努',
+          content: '不管是怎么样的天气，不管是什么样的环境，不管有什么样的危险，我的伙伴，雪人，一直都会陪着我。'
         })
       }
       const open4 = () => {
         $notice.error({
-          title: 'Notice 通知',
-          content: '全新的 Notice 通知组件，对比老版本动画更加流畅，细腻，柔和，加入进度条倒计时指示，根本停不下来，太酷了'
+          title: '扭曲树精',
+          content: '守护你是我最后的希望,束缚着的是思念,丢弃的是无奈,最后我会留下一个圈摆放你我的回忆,直到我也干枯,你也远去!'
         })
       }
 
@@ -107,7 +107,7 @@ tag: Feedback
       const {$notice} = instance.appContext.config.globalProperties
       const handerClick = () => {
         $notice.warning({
-          title: '10秒后自动关闭',
+          title: '吾虽浪迹天涯，却未迷失本心',
           duration: 10
         })
       }
@@ -140,7 +140,7 @@ tag: Feedback
       const handerClick1 = () => {
         $notice.error({
           icon: 'x-icon-heart-on',
-          title: '落叶的一生，只是为了归根吗？',
+          title: '吾之初心，永世不忘',
           duration: 20
         })
       }
@@ -179,8 +179,8 @@ tag: Feedback
       const {$notice} = instance.appContext.config.globalProperties
       const handerClick = () => {
         $notice.success({
-          title: 'Notice 通知',
-          content: '全新的 Notice 通知组件，对比老版本动画更加流畅，细腻，柔和，加入进度条倒计时指示，根本停不下来，太酷了',
+          title: '瑞文',
+          content: '纵然前路迷茫，纵然天隔一方，纵然我手中的刀刃已然破碎，也无法阻挡我寻找你的道路。',
           duration: 0
         })
       }
