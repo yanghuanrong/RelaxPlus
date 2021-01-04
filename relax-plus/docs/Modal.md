@@ -238,10 +238,10 @@ tag: Feedback
           cancelText: 'No',
           okText: 'Yes',
           onOk(){
-            $message('你点击了确定')
+            $message('点击了确定')
           },
           onCancel(){
-            $message('你点击了取消')
+            $message('点击了取消')
           }
         })
       }

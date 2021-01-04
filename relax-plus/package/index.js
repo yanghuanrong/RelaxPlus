@@ -33,7 +33,7 @@ const components = [
   Input,
   Select,
   SelectOption,
-  Modal
+  Modal,
 ]
 
 
@@ -70,5 +70,5 @@ export default {
   Input,
   Select,
   SelectOption,
-  Modal
+  Modal,
 }

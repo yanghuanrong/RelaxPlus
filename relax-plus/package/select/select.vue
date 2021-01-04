@@ -177,7 +177,7 @@ function useRect(isShow){
   let parent = null
 
   const focus = (e) => {
-    parent = e .target
+    parent = e.target
     const el = e.target.getBoundingClientRect()
     const scrollTop = document.documentElement.scrollTop
     const parentHeight = el.top + el.height
