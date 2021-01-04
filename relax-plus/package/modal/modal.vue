@@ -124,12 +124,11 @@ export default {
     watch(modelValue, (value) => {
       isShow.value = value
       if(value) {
-        document.body.style.paddingRight = '10px'
         document.body.style.overflow = 'hidden'
       } else {
-        document.body.style.paddingRight = ''
         document.body.style.overflow = ''
       }
+      
     })
 
     onMounted(() => {
@@ -152,8 +151,8 @@ export default {
 
     const iconType = {
       info: "x-icon-info info",
-      error: "x-icon-x-circle danger",
-      success: "x-icon-check-circle suceess",
+      error: "x-icon-x-circle error",
+      success: "x-icon-check-circle success",
       warning: "x-icon-alert-triangle warning",
       confirm: "x-icon-help-circle warning"
     }
