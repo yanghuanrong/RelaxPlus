@@ -216,3 +216,41 @@ tag: Feedback
 ```
 :::
 
+## 确认对话框
+> 设置 `okText` 与 `cancelText` 以自定义按钮文字
+:::demo 设置`onOk` 与 `onCancel` 拿到按钮回调
+```html
+<template>
+  <x-button type="primary" @click="open">显示确认对话框</x-button>
+</template>
+
+<script>
+  import {getCurrentInstance} from 'vue'
+  export default {
+    setup(){
+      const instance = getCurrentInstance()
+      const {$modal, $message} = instance.appContext.config.globalProperties
+
+      const open = (type) => {
+        $modal.confirm({
+          title: '你确定删除吗',
+          content: '删除之后，这个操作不可逆',
+          cancelText: 'No',
+          okText: 'Yes',
+          onOk(){
+            $message('你点击了确定')
+          },
+          onCancel(){
+            $message('你点击了取消')
+          }
+        })
+      }
+
+      return {
+        open
+      }
+    }
+  }
+</script>
+```
+:::

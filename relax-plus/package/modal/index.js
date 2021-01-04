@@ -23,7 +23,7 @@ function Modals (props){
   Modals[oneKey](props)
 }
 
-;['info','error', 'success', 'warning'].forEach((type) => {
+;['info','error', 'success', 'warning', 'confirm'].forEach((type) => {
   oneKey || (oneKey = type)
   Modals[type] = (props) => ModalsCreate(props, type)
 })

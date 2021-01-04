@@ -10,7 +10,7 @@
 
           <div class="x-modal-head">
             <template v-if="!$slots.head">
-              <i v-if="type !== ''" :class="[iconType[type], type]"></i>
+              <i v-if="type !== ''" :class="iconType[type]"></i>
               {{ title }}
             </template>
             <slot v-else name="head"></slot>
@@ -25,7 +25,7 @@
 
           <div class="x-modal-footer">
             <template v-if="!$slots.footer">
-              <Button class="x-modal-btn" plain @click="cancel">{{cancelText}}</Button>
+              <Button class="x-modal-btn" v-if=" !(type !== '' & type !== 'confirm') " plain @click="cancel">{{cancelText}}</Button>
               <Button class="x-modal-btn" type="primary" :loading="loading" @click="ok">{{okText}}</Button>
             </template>
             <slot v-else name="footer"></slot>
@@ -52,6 +52,8 @@ export default {
     Button,
   },
   props: {
+    onOk: Function,
+    onCancel: Function,
     okText: {
       type: String,
       default: '确定'
@@ -85,22 +87,26 @@ export default {
   emits: ["cancel", "ok", "update:modelValue", "loading"],
   setup(props, { emit }) {
     const { loading, modelValue, closable, maskClosable, teleprot } = toRefs(props);
+    const {onOk, onCancel} = props
     const isShow = ref(modelValue.value)
-    const {dispatch} = emitter()
 
     const maskcancel = () => {
       if(maskClosable.value) {
         cancel()
       }
     }
+ 
     const cancel = () => {
       isShow.value = false
       emit("update:modelValue", isShow.value);
       emit("cancel");
+      onCancel && onCancel()
     };
 
     const ok = () => {
       emit("ok");
+      onOk && onOk()
+
       nextTick(() => {
         if (!loading.value) {
         isShow.value = false
@@ -145,10 +151,11 @@ export default {
     }
 
     const iconType = {
-      info: "x-icon-info",
-      error: "x-icon-x-circle",
-      success: "x-icon-check-circle",
-      warning: "x-icon-alert-triangle",
+      info: "x-icon-info info",
+      error: "x-icon-x-circle danger",
+      success: "x-icon-check-circle suceess",
+      warning: "x-icon-alert-triangle warning",
+      confirm: "x-icon-help-circle warning"
     }
 
     return {
