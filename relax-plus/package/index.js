@@ -5,7 +5,7 @@ import Icon from './icon/index'
 // Feedback
 import Message from './message/index'
 import Notice from './notice/index'
-import Modal from './modal/index'
+import modal from './modal/index'
 
 // Layout
 import Row from './row/index'
@@ -18,6 +18,9 @@ import CheckboxGroup from './checkbox-group/index'
 import Input from './input/index'
 import Select from './select/index';
 import SelectOption from './select-option/index';
+
+
+const {Modal, Modals} = modal
 
 const components = [
   Button,
@@ -33,6 +36,7 @@ const components = [
   Modal
 ]
 
+
 const install = function (app) {
   components.forEach((component) => {
     app.component('x'+component.name, component)
@@ -44,6 +48,7 @@ const install = function (app) {
 function applyOptions(app){
   app.config.globalProperties.$message = Message
   app.config.globalProperties.$notice = Notice
+  app.config.globalProperties.$modal = Modals
 }
 
 /* istanbul ignore if */

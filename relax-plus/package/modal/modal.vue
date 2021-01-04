@@ -1,47 +1,74 @@
 <template>
-  <teleport to="body">
-    <transition name="scale">
-      <div class="x-modal" v-show="modelValue">
-        <div class="x-modal-content" :style="style">
+  <div style="display: inline-block">
+  <teleport to="body" :disabled="!teleprot">
+    <transition name="scale" @after-leave="afterLeave" appear>
+      <div class="x-modal" :class="{confirm: type !== ''}" v-show="isShow">
+        <div class="x-modal-content" :class="{'x-modal-confirm-wrap': type !== ''}" :style="style">
           <div class="x-modal-close" v-if="closable" @click="cancel">
             <i class="x-icon-x"></i>
           </div>
+
           <div class="x-modal-head">
             <template v-if="!$slots.head">
+              <i v-if="type !== ''" :class="[iconType[type], type]"></i>
               {{ title }}
             </template>
             <slot v-else name="head"></slot>
           </div>
 
           <div class="x-modal-body">
-            <slot></slot>
+            <template v-if="type !== '' ">
+              {{content}}
+            </template>
+            <slot v-else></slot>
           </div>
 
           <div class="x-modal-footer">
             <template v-if="!$slots.footer">
-              <Button class="x-modal-btn" plain @click="cancel">取消</Button>
-              <Button class="x-modal-btn" type="primary" :loading="loading" @click="ok">确定</Button>
+              <Button class="x-modal-btn" plain @click="cancel">{{cancelText}}</Button>
+              <Button class="x-modal-btn" type="primary" :loading="loading" @click="ok">{{okText}}</Button>
             </template>
             <slot v-else name="footer"></slot>
           </div>
         </div>
       </div>
     </transition>
-    <transition name="fade">
-      <div class="x-mask" @click="maskcancel" v-if="modelValue"></div>
+    <transition name="fade" appear>
+      <div class="x-mask" @click="maskcancel" v-if="isShow"></div>
     </transition>
   </teleport>
+  </div>
 </template>
 
 <script>
-import { toRefs, ref, watch, nextTick, onMounted } from "vue";
+import { toRefs, ref, watch, nextTick, onMounted, getCurrentInstance, Teleport } from "vue";
 import Button from "../button/index";
+import emitter from "../../utils/emiter";
+
 export default {
   name: "Modal",
+  inheritAttrs: false,
   components: {
     Button,
   },
   props: {
+    okText: {
+      type: String,
+      default: '确定'
+    },
+    cancelText: {
+      type: String,
+      default: '取消'
+    },
+    type: {
+      type: String,
+      default: ''
+    },
+    content: String,
+    teleprot: {
+      type: Boolean,
+      default: true
+    },
     modelValue: Boolean,
     title: String,
     loading: Boolean,
@@ -57,24 +84,27 @@ export default {
   },
   emits: ["cancel", "ok", "update:modelValue", "loading"],
   setup(props, { emit }) {
-    const { loading, modelValue, closable, maskClosable } = toRefs(props);
-
-    const cancel = () => {
-      emit("update:modelValue", false);
-      emit("cancel");
-    };
+    const { loading, modelValue, closable, maskClosable, teleprot } = toRefs(props);
+    const isShow = ref(modelValue.value)
+    const {dispatch} = emitter()
 
     const maskcancel = () => {
       if(maskClosable.value) {
         cancel()
       }
     }
+    const cancel = () => {
+      isShow.value = false
+      emit("update:modelValue", isShow.value);
+      emit("cancel");
+    };
 
     const ok = () => {
       emit("ok");
       nextTick(() => {
         if (!loading.value) {
-          emit("update:modelValue", false);
+        isShow.value = false
+        emit("update:modelValue", isShow.value);
         }
       });
     };
@@ -86,10 +116,12 @@ export default {
     });
 
     watch(modelValue, (value) => {
+      isShow.value = value
       if(value) {
-        
+        document.body.style.paddingRight = '10px'
         document.body.style.overflow = 'hidden'
       } else {
+        document.body.style.paddingRight = ''
         document.body.style.overflow = ''
       }
     })
@@ -103,12 +135,29 @@ export default {
         })
       }
     })
+
     
+    const instance = getCurrentInstance()
+    const afterLeave = (el) => {
+      if(!teleprot.value) {
+        instance.vnode.el.parentElement?.removeChild(instance.vnode.el)
+      }
+    }
+
+    const iconType = {
+      info: "x-icon-info",
+      error: "x-icon-x-circle",
+      success: "x-icon-check-circle",
+      warning: "x-icon-alert-triangle",
+    }
 
     return {
+      isShow,
       maskcancel,
       cancel,
       ok,
+      afterLeave,
+      iconType
     };
   },
 };

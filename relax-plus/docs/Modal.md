@@ -113,11 +113,9 @@ tag: Feedback
 </template>
 
 <script>
-  import {ref, getCurrentInstance} from 'vue'
+  import {ref} from 'vue'
   export default {
     setup(){
-      const instance = getCurrentInstance()
-      const {$message} = instance.appContext.config.globalProperties
       const visible = ref(false)
       const loading = ref(false)
 
@@ -181,3 +179,40 @@ tag: Feedback
 </script>
 ```
 :::
+
+
+
+## 实例化方法
+> 不同的状态：信息、成功、警告、错误
+:::demo
+```html
+<template>
+  <x-button type="info" plain @click="open('info')">显示信息对话框</x-button>
+  <x-button type="danger" plain @click="open('error')">显示错误对话框</x-button>
+  <x-button type="success" plain @click="open('success')">显示成功对话框</x-button>
+  <x-button type="warning" plain @click="open('warning')">显示警告对话框</x-button>
+</template>
+
+<script>
+  import {getCurrentInstance} from 'vue'
+  export default {
+    setup(){
+      const instance = getCurrentInstance()
+      const {$modal} = instance.appContext.config.globalProperties
+
+      const open = (type) => {
+        $modal[type]({
+          title: '戏命师',
+          content: '你，将饱含诗意。我的灵感正在涌现，作品即是一切，艺术值得为之痛苦，我为喝彩而生，你将为其呕心沥血。'
+        })
+      }
+
+      return {
+        open
+      }
+    }
+  }
+</script>
+```
+:::
+

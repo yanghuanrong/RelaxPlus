@@ -1,7 +1,36 @@
-import element from './modal.vue'
+import Modal from './modal.vue'
+import { createComponent } from '../../utils/component'
 
-element.install = function (app) {
-  app.component(element.name, element)
+Modal.install = function (app) {
+  app.component(Modal.name, element)
 }
 
-export default element
+function ModalsCreate(option, type) {
+  const props = {
+    ...option,
+    type,
+    teleprot: false,
+    modelValue: true,
+  }
+
+  const component = createComponent(Modal, props)
+  document.body.appendChild(component.vnode.el)
+}
+
+let oneKey = null
+
+function Modals (props){
+  Modals[oneKey](props)
+}
+
+;['info','error', 'success', 'warning'].forEach((type) => {
+  oneKey || (oneKey = type)
+  Modals[type] = (props) => ModalsCreate(props, type)
+})
+
+
+
+export default {
+  Modal,
+  Modals
+}
