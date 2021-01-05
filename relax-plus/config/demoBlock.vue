@@ -6,13 +6,16 @@
     </div>
     <div class="demo-highlight">
       <div class="demo-icon">
+        <x-tooltip content="拷贝代码">
         <div class="demo-icon__item" @click="handleCopy">
           <i class="x-icon-copy"></i>
-          <!-- <i class="x-icon-check"></i> -->
         </div>
+        </x-tooltip>
+        <x-tooltip content="秀代码">
         <div class="demo-icon__item" @click="handleCode">
           <i class="x-icon-codepen"></i>
         </div>
+        </x-tooltip>
       </div>
       
       <CollapseTransition>
