@@ -69,6 +69,13 @@
     "routePath": "/select"
   },
   {
+    "title": "Slider 滑动块",
+    "tag": "Data Entry",
+    "componentName": "Slider",
+    "fileName": "Slider.md",
+    "routePath": "/slider"
+  },
+  {
     "title": "Switch 开关",
     "tag": "Data Entry",
     "componentName": "Switch",

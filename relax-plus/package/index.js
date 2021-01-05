@@ -19,7 +19,7 @@ import CheckboxGroup from './checkbox-group/index'
 import Input from './input/index'
 import Select from './select/index';
 import SelectOption from './select-option/index';
-
+import Slider from './slider/index'
 
 const {Modal, Modals} = modal
 
@@ -35,7 +35,8 @@ const components = [
   Select,
   SelectOption,
   Modal,
-  Tooltip
+  Tooltip,
+  Slider
 ]
 
 
@@ -73,5 +74,6 @@ export default {
   Select,
   SelectOption,
   Modal,
-  Tooltip
+  Tooltip,
+  Slider
 }

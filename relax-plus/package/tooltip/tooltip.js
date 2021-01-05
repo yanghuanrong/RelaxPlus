@@ -1,4 +1,4 @@
-import { getCurrentInstance, onMounted, onUnmounted, toRefs } from "vue";
+import { getCurrentInstance, onMounted, onUnmounted, toRefs, watch } from "vue";
 
 export default {
   name: "Tooltip",
@@ -22,12 +22,13 @@ export default {
           'bottom-end'
         ].includes(value)
     },
+    move: false,
     width: String,
-    content: String
+    content: [String, Number]
   },
   setup(props, { slots }) {
     const instance = getCurrentInstance();
-    const { placement, content, width } = toRefs(props)
+    const { placement, content, width, move } = toRefs(props)
 
     const getFirstElement = () => {
       const slotsDefault = slots.default();
@@ -43,8 +44,11 @@ export default {
 
     const tip = document.createElement('div')
     tip.className = `x-tooltip x-tooltip-${placement.value}`
-    tip.innerHTML = `<span>${content.value}</span>` || ''
+    watch(content, (value) => {
+      tip.innerHTML = `<span>${value}</span>` || ''
+    })
     width && (tip.style.width = width.value)
+    tip.innerHTML = `<span>${content.value}</span>` || ''
     const tid = tip.id = `x-tooltip-${instance.uid}`
 
     const calcStyle = (Rect) => {
@@ -116,7 +120,9 @@ export default {
       tip.classList.add('x-tooltip-show')
     }
 
+    let isMove = false
     const hide = () => {
+      if(isMove) return
       const el = document.getElementById(tid)
       el.classList.remove('x-tooltip-show')
     }
@@ -124,6 +130,23 @@ export default {
     onMounted(() => {
       const el = instance.proxy.$el
       el.addEventListener('mouseenter', show)
+
+      if(move && move.value) {
+        el.addEventListener('mousedown', (e) => {
+          isMove = true
+          const updateStyle = () => {
+            const Rect = e.target.getBoundingClientRect()
+            calcStyle(Rect)
+          }
+          document.addEventListener('mousemove', updateStyle)
+          document.addEventListener('mouseup', () => {
+            document.removeEventListener('mousemove', updateStyle)
+            isMove = false
+            hide()
+          })
+        })
+      }
+     
       el.addEventListener('mouseleave', hide)
     });
 
