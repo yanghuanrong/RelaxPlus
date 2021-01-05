@@ -101,5 +101,5 @@ tag: General
     <span>文字提示</span>
   </x-tooltip>
 </template>
-```html
-:::demo
+```
+:::
