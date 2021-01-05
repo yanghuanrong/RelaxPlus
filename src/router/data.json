@@ -74,5 +74,12 @@
     "componentName": "Switch",
     "fileName": "Switch.md",
     "routePath": "/switch"
+  },
+  {
+    "title": "Tooltip 文字提示",
+    "tag": "General",
+    "componentName": "Tooltip",
+    "fileName": "Tooltip.md",
+    "routePath": "/tooltip"
   }
 ]}

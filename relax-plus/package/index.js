@@ -1,6 +1,7 @@
 // General
 import Button from './button/index'
 import Icon from './icon/index'
+import Tooltip from './tooltip/index'
 
 // Feedback
 import Message from './message/index'
@@ -34,6 +35,7 @@ const components = [
   Select,
   SelectOption,
   Modal,
+  Tooltip
 ]
 
 
@@ -71,4 +73,5 @@ export default {
   Select,
   SelectOption,
   Modal,
+  Tooltip
 }
