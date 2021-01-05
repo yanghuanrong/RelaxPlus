@@ -1,6 +1,6 @@
 <template>
   <div class="x-slider">
-    <tooltip :content="state" :move="true">
+    <tooltip :content="start" :move="true">
       <div 
         class="x-slider-dot"
         :style="{
@@ -10,6 +10,13 @@
       >
       </div>
     </tooltip>
+    <div 
+      class="x-slider-bar"
+      v-if="progress"
+      :style="{
+        width: x + 6 + 'px'
+      }"
+    ></div>
   </div>
 </template>
 
@@ -24,6 +31,7 @@ export default {
   },
   props: {
     modelValue: [Number, Array],
+    progress: Boolean,
     max: {
       type: Number,
       default: 100,
@@ -36,27 +44,42 @@ export default {
   setup(props, {emit}){
     const {modelValue, max} = toRefs(props)
     const instance = getCurrentInstance()
-    const state = ref(modelValue.value)
-    const total = ref(0)
+
+    const start = ref(modelValue.value)
+    const space = ref(0)
 
     let w = 0
     onMounted(() => {
-      const el = instance.vnode.el
-      w = el.getBoundingClientRect().width - 12
-      total.value = w / max.value
+      scalcSpace()
+      scalcDot()
     })
 
+    window.addEventListener('resize', () => {
+      scalcSpace()
+      scalcDot()
+    })
 
+    const scalcSpace = () => {
+      const el = instance.vnode.el
+      w = el.getBoundingClientRect().width - 12
+      space.value = w / max.value
+    }
+
+    const scalcDot = () => {
+      x.value = start.value * space.value
+    }
+
+  
     let touchX = 0
     const x = ref(0)
     const move = (e) => {
       e.preventDefault()
-
       let mx = e.screenX - touchX
       mx < 0 && (mx = 0)
       mx > w && (mx = w)
-      x.value = mx
-      state.value = parseInt(mx / total.value)
+      start.value = parseInt(mx / space.value)
+      emit('update:modelValue', start.value)
+      scalcDot()
     }
 
     const down = (e) => {
@@ -66,15 +89,10 @@ export default {
         document.removeEventListener('mousemove', move)
       })
     }
-   
-
-    // const up = () => {
-    //   document.body.removeEventListener('mousemove', move)
-    // }
 
     return {
       down,
-      state,
+      start,
       x,
     }
   }

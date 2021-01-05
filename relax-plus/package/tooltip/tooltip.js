@@ -116,15 +116,24 @@ export default {
       if (!el) {
         document.body.appendChild(tip)
       }
+      tip.removeEventListener('transitionend', none)
+      tip.style.display = 'block'
       calcStyle(Rect)
-      tip.classList.add('x-tooltip-show')
+      tip && tip.classList.add('x-tooltip-show')
     }
 
     let isMove = false
     const hide = () => {
       if(isMove) return
       const el = document.getElementById(tid)
-      el.classList.remove('x-tooltip-show')
+      if(el){
+        el.classList.remove('x-tooltip-show')
+        el.addEventListener('transitionend', none)
+      }
+    }
+
+    const none = () => {  
+      document.getElementById(tid).style.display = 'none'
     }
 
     onMounted(() => {

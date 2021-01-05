@@ -28,3 +28,27 @@ export default {
 </script>
 ```
 :::
+
+
+## 显示进度条
+> 拖动滑块时，显示数值
+:::demo
+```html
+<template>
+  <x-slider progress v-model="value" />
+</template>
+
+<script>
+import {ref} from 'vue'
+export default {
+  setup(){
+    const value = ref(40)
+
+    return {
+      value,
+    }
+  }
+}
+</script>
+```
+:::
