@@ -30,7 +30,7 @@ tag: Layout
   </x-row>
 </div>
 
-## 基础用法
+## 演示
 > `col` 必须放在 `row` 里面
 :::demo
 ```html

@@ -6,6 +6,18 @@ tag: General
 # Tooltip 文字提示
 > 用于辅助的文字提示，可代替 HTML 元素默认的 title 属性
 
+## 演示
+> 基本使用
+:::demo 文字必须要被标签包裹
+```html
+<template>
+  <x-tooltip content="这是文字提示">
+    <span>文字提示</span>
+  </x-tooltip>
+</template>
+```
+:::
+
 ## 位置
 > left , top , right , bottom 是物理中的 4 个方向, 表示显示的位置
 :::demo 通过`placement`设置不同的位置
@@ -97,7 +109,7 @@ tag: General
 :::demo 文字必须要被标签包裹
 ```html
 <template>
-  <x-tooltip content="这是文字提示" width="100px">
+  <x-tooltip content="这是一段非常长的文字提示，主要是用于演示" width="180px">
     <span>文字提示</span>
   </x-tooltip>
 </template>

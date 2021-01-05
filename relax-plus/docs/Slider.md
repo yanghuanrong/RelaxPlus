@@ -6,7 +6,7 @@ tag: Data Entry
 # Slider 滑动块
 > 滑动范围输入控件
 
-## 基础用法
+## 演示
 > 拖动滑块时，显示数值
 :::demo
 ```html

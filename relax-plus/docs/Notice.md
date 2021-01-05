@@ -6,7 +6,7 @@ tag: Feedback
 # Notice 通知
 > 全局展示通知提醒信息
 
-## 普通通知
+## 演示
 > 最简单的用法，`4.5` 秒后自动关闭。
 :::demo `notice` 会被挂载在 `vue` 全局属性中, 当然也可以引入 `RelaxPlus` 直接使用
 ```html

@@ -6,7 +6,7 @@ tag: General
 # Button 按钮
 > 帅气的Button
 
-## 基础按钮
+## 演示
 > 按钮可以根据 `type` 来设置不同的颜色，提供了6种类型的按钮 `primary` `success` `info` `danger` `warning`
 :::demo
 ```html

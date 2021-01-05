@@ -140,6 +140,7 @@ export default {
       const el = instance.proxy.$el
       el.addEventListener('mouseenter', show)
 
+      let isEnter = true
       if(move && move.value) {
         el.addEventListener('mousedown', (e) => {
           isMove = true
@@ -150,13 +151,19 @@ export default {
           document.addEventListener('mousemove', updateStyle)
           document.addEventListener('mouseup', () => {
             document.removeEventListener('mousemove', updateStyle)
-            isMove = false
-            hide()
+            if(!isEnter){
+              isEnter = true
+              isMove = false
+              hide()
+            }
           })
         })
       }
      
-      el.addEventListener('mouseleave', hide)
+      el.addEventListener('mouseleave', () => {
+        isEnter = false
+        hide()
+      })
     });
 
     onUnmounted(() => {

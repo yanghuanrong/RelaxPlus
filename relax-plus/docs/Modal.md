@@ -6,7 +6,7 @@ tag: Feedback
 # Modal 对话框
 > 模态对话框
 
-## 基础用法
+## 演示
 > 使用 `v-model` 控制打开关闭
 :::demo
 ```html

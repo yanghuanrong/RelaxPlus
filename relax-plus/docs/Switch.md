@@ -6,7 +6,7 @@ tag: Data Entry
 # Switch 开关
 > 开关选择器
 
-## 基本用法
+## 演示
 > 切换状态时，触发事件
 :::demo 当状态改变时，会触发 `change` 事件
 ```html

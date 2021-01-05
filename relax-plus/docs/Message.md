@@ -6,7 +6,7 @@ tag: Feedback
 # Message 消息
 > 消息通知
 
-## 普通提示
+## 演示
 > 最基本的提示，默认在 `1.5` 秒后消失。
 :::demo `message` 会被挂载在 `vue` 全局属性中, 当然也可以引入 `RelaxPlus` 直接使用
 ```html

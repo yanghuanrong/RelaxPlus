@@ -77,7 +77,8 @@ export default {
       let mx = e.screenX - touchX
       mx < 0 && (mx = 0)
       mx > w && (mx = w)
-      start.value = parseInt(mx / space.value)
+      console.log(mx / space.value, Math.round(mx / space.value))
+      start.value = Math.round(mx / space.value)
       emit('update:modelValue', start.value)
       scalcDot()
     }

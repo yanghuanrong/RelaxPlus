@@ -7,7 +7,7 @@ tag: Data Entry
 > 下拉选择
 
 
-## 基本用法
+## 演示
 > 使用 `v-model` 实现数据的双向绑定
 :::demo `v-model` 的值是 `option` 的 `value` 值
 ```html

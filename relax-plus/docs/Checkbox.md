@@ -6,7 +6,7 @@ tag: Data Entry
 # Checkbox 多选框
 > 有可选项且需要选择多项
 
-## 基本用法
+## 演示
 > 使用 `v-model` 双向绑定
 :::demo
 ```html

@@ -6,7 +6,7 @@ tag: General
 # Icon 图标
 > 语义化的矢量图形
 
-## 使用方法
+## 演示
 > 直接通过设置类名为 `x-icon-iconName` 来使用即可。例如：
 :::demo
 ```html
