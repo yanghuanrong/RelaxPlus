@@ -52,3 +52,28 @@ export default {
 </script>
 ```
 :::
+
+
+
+## 双滑块
+> 当`v-model`的值为`array`类型时，开启双滑块
+:::demo
+```html
+<template>
+  <x-slider :min="5" :max="20" v-model="value" />
+</template>
+
+<script>
+import {reactive} from 'vue'
+export default {
+  setup(){
+    const value = reactive([10, 15])
+
+    return {
+      value,
+    }
+  }
+}
+</script>
+```
+:::

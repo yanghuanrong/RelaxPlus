@@ -1,15 +1,27 @@
 <template>
   <div class="x-slider">
-    <tooltip :content="start.num" :move="true">
+    <tooltip v-if="range"  :content="start.num" :move="true">
       <div 
         class="x-slider-dot"
         :style="{
           'left': `${start.x}%`
         }"
-        @mousedown="down"
+        @mousedown="down($event, 'start')"
       >
       </div>
     </tooltip>
+
+    <tooltip :content="end.num" :move="true">
+      <div 
+        class="x-slider-dot"
+        :style="{
+          'left': `${end.x}%`
+        }"
+        @mousedown="down($event, 'end')"
+      >
+      </div>
+    </tooltip>
+
     <div 
       class="x-slider-bar"
       :style="propress"
@@ -18,7 +30,7 @@
 </template>
 
 <script>
-import { reactive, ref, toRefs, getCurrentInstance, onMounted } from 'vue'
+import { reactive, ref, toRefs, getCurrentInstance, onMounted, computed, watchEffect } from 'vue'
 import tooltip from '../tooltip/index'
 
 export default {
@@ -37,17 +49,43 @@ export default {
       default: 0,
     },
   },
+  emits: ['update:modelValue'],
   setup(props, {emit}){
     const {modelValue, max, min} = toRefs(props)
     const instance = getCurrentInstance()
     const propress = reactive({})
     const space = ref(0)
-    
+    const range = ref(Object.prototype.toString.call(modelValue.value) === '[object Array]')
     const start = reactive({
-      num: modelValue.value
+      num: range.value ? modelValue.value[0] : 0
     })
-    
-    const end = reactive({})
+    const end = reactive({
+      num: range.value ? modelValue.value[1] : modelValue.value 
+    })
+
+    const state = reactive({
+      modelValue: null,
+    })
+    watchEffect(() => {
+      state.modelValue = modelValue.value
+    })
+
+    const model = computed({
+      get(){
+        return state.modelValue
+      },
+      set({start, end}){
+        if(range.value){
+          const modelValue = model.value
+          modelValue[0] = start
+          modelValue[1] = end
+          emit('update:modelValue', state.modelValue)
+        } else {
+          state.modelValue = end
+          emit('update:modelValue', state.modelValue)
+        }
+      }
+    })
 
     onMounted(() => {
       useSpace()
@@ -59,19 +97,37 @@ export default {
       })
     })
 
+
     const useSpace = () => {
       const el = instance.vnode.el
       propress.maxWidth = el.getBoundingClientRect().width
       space.value = propress.maxWidth / (max.value - min.value)
     }
+    
+    const usePos = (dot) => ((dot.num - min.value) / (max.value - min.value) * 100)
 
     const useSlider = () => {
-      start.x = (start.num - min.value) / (max.value - min.value) * 100
-      propress.width = start.x + '%'
+      start.x = range.value ? usePos(start) : 0
+      end.x = usePos(end)
+      
+      let a = start
+      let b = end
+      if(end.x >= start.x){
+        a = end
+        b = start
+      }
+      propress.width = a.x - b.x + '%'
+      propress.left = b.x + '%'
+      model.value = {
+        start: b.num,
+        end: a.num
+      }
     }
 
-    const down = (e) => {
-      const touchX = e.screenX - start.num * space.value + space.value * min.value
+    const down = (e, type) => {
+      const dot = type === 'start' ? start : end
+      const touchX = e.screenX - dot.num * space.value + space.value * min.value
+
       document.addEventListener('mousemove', move)
       document.addEventListener('mouseup', (e) => {
         document.removeEventListener('mousemove', move)
@@ -82,16 +138,16 @@ export default {
         let mx = e.screenX - touchX
         mx < 0 && (mx = 0)
         mx > propress.maxWidth && (mx = propress.maxWidth)
-        
-        start.num = Math.round(mx / space.value) + min.value
-        emit('update:modelValue', start.num)
+        const num = Math.round(mx / space.value) + min.value
+        dot.num = num
         useSlider()
-        
       }
     }
 
     return {
       down,
+      range,
+      end,
       start,
       propress
     }
