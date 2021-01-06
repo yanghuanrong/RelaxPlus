@@ -1,10 +1,10 @@
 <template>
   <div class="x-slider">
-    <tooltip :content="start" :move="true">
+    <tooltip :content="start.num" :move="true">
       <div 
         class="x-slider-dot"
         :style="{
-          'transform': `translateX(${x}px)`
+          'left': `${start.x}%`
         }"
         @mousedown="down"
       >
@@ -12,10 +12,7 @@
     </tooltip>
     <div 
       class="x-slider-bar"
-      v-if="progress"
-      :style="{
-        width: x + 6 + 'px'
-      }"
+      :style="propress"
     ></div>
   </div>
 </template>
@@ -31,7 +28,6 @@ export default {
   },
   props: {
     modelValue: [Number, Array],
-    progress: Boolean,
     max: {
       type: Number,
       default: 100,
@@ -42,59 +38,62 @@ export default {
     },
   },
   setup(props, {emit}){
-    const {modelValue, max} = toRefs(props)
+    const {modelValue, max, min} = toRefs(props)
     const instance = getCurrentInstance()
-
-    const start = ref(modelValue.value)
+    const propress = reactive({})
     const space = ref(0)
+    
+    const start = reactive({
+      num: modelValue.value
+    })
+    
+    const end = reactive({})
 
-    let w = 0
     onMounted(() => {
-      scalcSpace()
-      scalcDot()
+      useSpace()
+      useSlider()
+
+      window.addEventListener('resize', () => {
+        useSpace()
+        useSlider()
+      })
     })
 
-    window.addEventListener('resize', () => {
-      scalcSpace()
-      scalcDot()
-    })
-
-    const scalcSpace = () => {
+    const useSpace = () => {
       const el = instance.vnode.el
-      w = el.getBoundingClientRect().width - 12
-      space.value = w / max.value
+      propress.maxWidth = el.getBoundingClientRect().width
+      space.value = propress.maxWidth / (max.value - min.value)
     }
 
-    const scalcDot = () => {
-      x.value = start.value * space.value
-    }
-
-  
-    let touchX = 0
-    const x = ref(0)
-    const move = (e) => {
-      e.preventDefault()
-      let mx = e.screenX - touchX
-      mx < 0 && (mx = 0)
-      mx > w && (mx = w)
-      console.log(mx / space.value, Math.round(mx / space.value))
-      start.value = Math.round(mx / space.value)
-      emit('update:modelValue', start.value)
-      scalcDot()
+    const useSlider = () => {
+      start.x = (start.num - min.value) / (max.value - min.value) * 100
+      propress.width = start.x + '%'
     }
 
     const down = (e) => {
-      touchX = e.screenX - x.value
+      const touchX = e.screenX - start.num * space.value + space.value * min.value
       document.addEventListener('mousemove', move)
       document.addEventListener('mouseup', (e) => {
         document.removeEventListener('mousemove', move)
       })
+
+      function move (e) {
+        e.preventDefault()
+        let mx = e.screenX - touchX
+        mx < 0 && (mx = 0)
+        mx > propress.maxWidth && (mx = propress.maxWidth)
+        
+        start.num = Math.round(mx / space.value) + min.value
+        emit('update:modelValue', start.num)
+        useSlider()
+        
+      }
     }
 
     return {
       down,
       start,
-      x,
+      propress
     }
   }
 }

@@ -18,7 +18,7 @@ tag: Data Entry
 import {ref} from 'vue'
 export default {
   setup(){
-    const value = ref(0)
+    const value = ref(20)
 
     return {
       value,
@@ -30,19 +30,19 @@ export default {
 :::
 
 
-## 显示进度条
-> 拖动滑块时，显示数值
+## 范围选择
+> `min` 和 `max` 可以限制最小值和最大值
 :::demo
 ```html
 <template>
-  <x-slider progress v-model="value" />
+  <x-slider :min="5" :max="10" v-model="value" />
 </template>
 
 <script>
 import {ref} from 'vue'
 export default {
   setup(){
-    const value = ref(40)
+    const value = ref(8)
 
     return {
       value,
