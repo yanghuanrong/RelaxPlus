@@ -12,6 +12,7 @@ tag: Data Entry
 ```html
 <template>
   <x-slider v-model="value" />
+  <x-slider v-model="value" />
 </template>
 
 <script>

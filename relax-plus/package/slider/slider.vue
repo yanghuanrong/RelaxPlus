@@ -66,9 +66,7 @@ export default {
     const state = reactive({
       modelValue: null,
     })
-    watchEffect(() => {
-      state.modelValue = modelValue.value
-    })
+    
 
     const model = computed({
       get(){
@@ -97,6 +95,16 @@ export default {
       })
     })
 
+    const usePos = (dot) => ((dot.num - min.value) / (max.value - min.value) * 100)
+
+    watchEffect(() => {
+      state.modelValue = modelValue.value
+      if(!range.value){
+        end.num = modelValue.value
+        end.x = usePos(end)
+        propress.width = end.x + '%'
+      }
+    })
 
     const useSpace = () => {
       const el = instance.vnode.el
@@ -104,7 +112,6 @@ export default {
       space.value = propress.maxWidth / (max.value - min.value)
     }
     
-    const usePos = (dot) => ((dot.num - min.value) / (max.value - min.value) * 100)
 
     const useSlider = () => {
       start.x = range.value ? usePos(start) : 0
