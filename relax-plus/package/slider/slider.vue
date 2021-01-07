@@ -26,6 +26,11 @@
       class="x-slider-bar"
       :style="propress"
     ></div>
+
+    <div class="x-slider-step" v-if="steps > 0">
+      <i v-for="(i) in steps"></i>
+    </div>
+
   </div>
 </template>
 
@@ -48,14 +53,16 @@ export default {
       type: Number,
       default: 0,
     },
+    step: Boolean
   },
   emits: ['update:modelValue'],
   setup(props, {emit}){
-    const {modelValue, max, min} = toRefs(props)
+    const {modelValue, max, min, step} = toRefs(props)
     const instance = getCurrentInstance()
     const propress = reactive({})
     const space = ref(0)
     const range = ref(Object.prototype.toString.call(modelValue.value) === '[object Array]')
+    const steps = ref(0)
     const start = reactive({
       num: range.value ? modelValue.value[0] : 0
     })
@@ -110,6 +117,8 @@ export default {
       const el = instance.vnode.el
       propress.maxWidth = el.getBoundingClientRect().width
       space.value = propress.maxWidth / (max.value - min.value)
+      step.value && (steps.value = max.value - min.value + 1)
+      console.log(steps.value)
     }
     
 
@@ -156,6 +165,7 @@ export default {
       range,
       end,
       start,
+      steps,
       propress
     }
   }
