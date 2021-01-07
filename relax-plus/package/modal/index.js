@@ -12,7 +12,7 @@ function ModalsCreate(option, type) {
     teleprot: false,
     modelValue: true,
   }
-
+  document.body.style.overflow = 'hidden'
   const component = createComponent(Modal, props)
   document.body.appendChild(component.vnode.el)
 }

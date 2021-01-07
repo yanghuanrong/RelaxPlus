@@ -143,6 +143,7 @@ export default {
     
     const instance = getCurrentInstance()
     const afterLeave = (el) => {
+      document.body.style.overflow = ''
       if(!teleprot.value) {
         instance.vnode.el.parentElement?.removeChild(instance.vnode.el)
       }
