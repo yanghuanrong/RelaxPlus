@@ -128,7 +128,6 @@ export default {
       } else {
         document.body.style.overflow = ''
       }
-      
     })
 
     onMounted(() => {
