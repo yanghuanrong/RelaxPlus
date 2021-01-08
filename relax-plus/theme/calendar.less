@@ -53,14 +53,33 @@
       border-right: 1px solid var(--line-color);
       position: relative;
       transition: all .2s ease-in;
+      cursor: pointer;
 
       &.today{
+        .x-calendar-cell__day{
+          background-color: rgb(var(--primary));
+          color: rgb(var(--white));
+          border-radius: 50%;
+        }
+      }
+
+      &:hover{
+        background-color: rgb(var(--primary), .05);
+      }
+
+      &.active{
         z-index: 2;
+        cursor: auto;
         box-shadow: 0 0 4px rgb(var(--primary), .8);;
         &::after{
           border-color: rgb(var(--primary));
         }
+        &:hover{
+          background-color: transparent;
+        }
       }
+
+      
 
       &::after{
         content: "";
@@ -89,7 +108,12 @@
       }
 
       .x-calendar-cell__day{
-        text-align: right;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 20px;
+        height: 20px;
+        text-align: center;
         color: var(--main-text-color);
       }
 
@@ -99,7 +123,6 @@
       }
 
       &.x-calendar-prev-day,&.x-calendar-next-day{
-        // background-color: var(--sub-background-color);
         .x-calendar-cell__day{
           color: var(--sub-text-color);
           opacity: 0.5;

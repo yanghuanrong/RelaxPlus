@@ -22,13 +22,16 @@
         {{item}}
       </div>
       <div class="x-calendar-cell" 
+        :title="`${item.y}年${item.m}月${item.d}日`"
         v-for="item in cell"
         :class="[
           item.class,
           {
-            today: today(item)
+            today: today(item),
+            active: isAactiveDay(item),
           }
         ]"
+        @click="changeDay(item)"
       >
         <div class="x-calendar-cell__box">
           <div class="x-calendar-cell__day">
@@ -41,7 +44,7 @@
 </template>
 
 <script>
-import { computed, reactive } from "vue";
+import { computed, reactive, ref } from "vue";
 import Button from '../button/index'
 export default {
   name: "Calendar",
@@ -74,7 +77,6 @@ export default {
     }
 
     const nowTime = reactive(getNowTime(new Date()));
-    let dateTime = getToday()
 
     const prevMonth = computed(() => {
       let year = nowTime.year;
@@ -89,7 +91,6 @@ export default {
     });
 
     const nowMonth = computed(() => {
-      const nowTime = getNowTime(new Date());
       const year = nowTime.year;
       const month = nowTime.month;
       return { year, month };
@@ -108,12 +109,7 @@ export default {
       return { year, month };
     });
 
-    function getToday () {
-      const y = nowTime.year;
-      const m = repair(nowTime.month + 1);
-      const d = repair(new Date().getDate());
-      return y + "-" + m + "-" + d;
-    }
+  
 
     const cell = computed(() => {
       const getWeek = new Date(nowTime.year, nowTime.month, 1).getDay() || 7;
@@ -140,7 +136,7 @@ export default {
           type: "Prev",
         });
       }
-
+    
       for (let i = 1; i <= nowMonthDay; i++) {
         const day = i;
         CellData.push({
@@ -172,28 +168,52 @@ export default {
       );
     }
 
+    const dateTime = ref(getToday())
+
+    function getToday () {
+      const y = nowTime.year;
+      const m = repair(nowTime.month + 1);
+      const d = repair(new Date().getDate());
+      return y + "-" + m + "-" + d;
+    }
 
       // 上个月的事件方法
     const changePrevMonth = () => {
       nowTime.year = prevMonth.value.year;
       nowTime.month = prevMonth.value.month;
+
       const month = repair(nowTime.month + 1);
-      dateTime = nowTime.year + "-" + month + "-01";
+      dateTime.value = nowTime.year + "-" + month + "-01";
     }
 
     // 下个月的事件方法
     const changeNextMonth = () => {
       nowTime.year = nextMonth.value.year;
       nowTime.month = nextMonth.value.month;
-      // const month = repair(nowTime.month + 1);
-      // dateTime = nowTime.year + "-" + month + "-01";
+
+      const month = repair(nowTime.month + 1);
+      dateTime.value = nowTime.year + "-" + month + "-01";
     }
 
     // 本月的事件方法
     const changeNowMonth = () => {
-      nowTime.year = nowMonth.value.year;
-      nowTime.month = nowMonth.value.month;
-      // dateTime = getToday();
+      const nowMonth = getNowTime(new Date())
+      nowTime.year = nowMonth.year;
+      nowTime.month = nowMonth.month;
+      dateTime.value = getToday();
+    }
+
+    // 选中的日期
+    const changeDay = ({ y, m, d, type }) => {
+      if (type !== "Now") {
+        type === 'Next' && changeNextMonth()
+        type === 'Prev' && changePrevMonth()
+      }
+      dateTime.value = y + "-" + m + "-" + d;
+    }
+
+    const isAactiveDay = ({ y, m, d }) => {
+      return dateTime.value === `${y}-${m}-${d}`;
     }
 
     const week = ['一', '二', '三', '四', '五', '六', '日']
@@ -203,9 +223,11 @@ export default {
       week,
       nowTime,
       today,
+      isAactiveDay,
       changePrevMonth,
       changeNextMonth,
-      changeNowMonth
+      changeNowMonth,
+      changeDay
     };
   },
 };
