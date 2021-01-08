@@ -21,6 +21,9 @@ import Select from './select/index';
 import SelectOption from './select-option/index';
 import Slider from './slider/index'
 
+// Data Display
+import Calendar from './calendar/index'
+
 const {Modal, Modals} = modal
 
 const components = [
@@ -36,7 +39,8 @@ const components = [
   SelectOption,
   Modal,
   Tooltip,
-  Slider
+  Slider,
+  Calendar
 ]
 
 
@@ -75,5 +79,6 @@ export default {
   SelectOption,
   Modal,
   Tooltip,
-  Slider
+  Slider,
+  Calendar
 }

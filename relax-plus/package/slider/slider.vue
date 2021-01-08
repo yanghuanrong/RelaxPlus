@@ -118,7 +118,6 @@ export default {
       propress.maxWidth = el.getBoundingClientRect().width
       space.value = propress.maxWidth / (max.value - min.value)
       step.value && (steps.value = max.value - min.value + 1)
-      console.log(steps.value)
     }
     
 

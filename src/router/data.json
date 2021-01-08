@@ -7,6 +7,13 @@
     "routePath": "/button"
   },
   {
+    "title": "Calendar 日历",
+    "tag": "Data Display",
+    "componentName": "Calendar",
+    "fileName": "Calendar.md",
+    "routePath": "/calendar"
+  },
+  {
     "title": "Checkbox 多选框",
     "tag": "Data Entry",
     "componentName": "Checkbox",
