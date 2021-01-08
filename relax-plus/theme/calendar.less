@@ -35,6 +35,20 @@
   .x-calendar-group{
     display: flex;
     flex-wrap: wrap;
+    position: relative;
+
+    &::before{
+      content: attr(data-month);
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      font-size: 24em;
+      line-height: 1.2;
+      opacity: 0.02;
+      pointer-events: none;
+      font-family: auto;
+      font-weight: bold;
+    }
 
     .x-calendar-week{
       list-style: none;

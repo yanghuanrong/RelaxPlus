@@ -17,7 +17,7 @@
         <i class="x-icon-circle" style="margin-right: 5px"></i>今天
       </div>
     </div>
-    <div class="x-calendar-group">
+    <div class="x-calendar-group" :data-month="nowTime.month + 1 + '月'">
       <div class="x-calendar-week" v-for="item in week">
         {{item}}
       </div>
@@ -39,6 +39,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -46,13 +47,10 @@
 import { computed, reactive, ref } from "vue";
 import format from './format.js'
 
-import Button from '../button/index'
 export default {
   name: "Calendar",
-  components: {
-    Button
-  },
   setup() {
+
     function getNowTime(date) {
       return {
         year: date.getFullYear(),
