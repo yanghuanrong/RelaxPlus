@@ -20,6 +20,7 @@ import Input from './input/index'
 import Select from './select/index';
 import SelectOption from './select-option/index';
 import Slider from './slider/index'
+import DatePicker from './date-picker/index'
 
 // Data Display
 import Calendar from './calendar/index'
@@ -40,7 +41,8 @@ const components = [
   Modal,
   Tooltip,
   Slider,
-  Calendar
+  Calendar,
+  DatePicker
 ]
 
 
@@ -80,5 +82,6 @@ export default {
   Modal,
   Tooltip,
   Slider,
-  Calendar
+  Calendar,
+  DatePicker
 }

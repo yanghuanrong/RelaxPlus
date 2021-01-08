@@ -39,8 +39,8 @@
     </div>
 
     <teleport to="body">
-      <transition name="scaleY" ref="option">
-        <div class="x-select-option" @click.stop :style="rect" v-show="isShow">
+      <transition name="scaleY" ref="trigger">
+        <div class="x-trigger x-select-option" @click.stop :style="rect" v-show="isShow">
           <div class="x-select-search" v-if="search">
             <div class="x-from-input x-input-icon-before" >
               <i class="x-before x-icon-search"></i>
@@ -61,7 +61,8 @@
 </template>
 
 <script>
-import { onMounted, ref, getCurrentInstance, reactive, provide, computed, onUnmounted, watch } from 'vue';
+import {ref, getCurrentInstance, reactive, provide, computed, watch } from 'vue';
+import useToggle from '../../utils/togger'
 import emitter from '../../utils/emiter'
 export default {
   name: 'Select',
@@ -74,8 +75,14 @@ export default {
     
     provide('Select', getCurrentInstance())
 
-    const {toggle, isShow, hide, searchValue} = useToggle()
-    const {focus, rect, option} = useRect(isShow)
+    const {toggle, isShow, focus, rect, trigger, hide} = useToggle()
+
+    const searchValue = ref('')
+    watch(isShow, (value) => {
+      if(value) {
+        searchValue.value = ''
+      }
+    })
 
     const multiple = computed(() => (Object.prototype.toString.call(props.modelValue) === '[object Array]'))
     const state = multiple.value ? reactive([]) : ref('')
@@ -133,7 +140,7 @@ export default {
       rect,
       multiple,
       state,
-      option,
+      trigger,
       searchValue,
 
       toggle,
@@ -165,106 +172,5 @@ function useClear(state, multiple) {
     mouseout
   }
 }
-
-function useRect(isShow){
-  const rect = reactive({})
-  const option = ref(null)
-  const clientHeight = document.documentElement.clientHeight
-
-  let elHeight = 0
-  let top1 = 0
-  let top2 = 0
-  let parent = null
-
-  const focus = (e) => {
-    parent = e.target
-    const el = e.target.getBoundingClientRect()
-    const scrollTop = document.documentElement.scrollTop
-    const parentHeight = el.top + el.height
-
-    top1 = parentHeight + scrollTop
-    top2 = top1 - elHeight - el.height - 5
- 
-    const top = parentHeight + elHeight > clientHeight ? top2 : top1
-    rect.transformOrigin = parentHeight + elHeight > clientHeight ? 'center bottom' : 'center top'
-    rect.top = top + 'px'
-    rect.left = el.left + 'px'
-    rect.minWidth = el.width + 'px'
-    rect.minHeight = elHeight + 'px'
-  }
-
-  onMounted(() => {
-    const el = option.value
-    el.style.top = "-100%"
-    el.style.display = "block"
-    elHeight = el.offsetHeight
-    el.style.top = ""
-    el.style.display = "none"
-    
-    window.addEventListener('scroll', () => {
-      if(isShow.value && parent) {
-        const Rect = parent.getBoundingClientRect()
-        const scrollTop = document.documentElement.scrollTop
-
-        if(Rect.top + Rect.height + elHeight > clientHeight){
-          rect.top = top2 + 'px'
-          rect.transformOrigin = 'center bottom'
-        } else {
-          rect.top = top1 + 'px'
-          rect.transformOrigin = 'center top'
-        }
-      }
-    })
-
-  })
-
-  return {
-    rect,
-    option,
-    focus
-  }
-}
-
-function useToggle(){
-   const isShow = ref(false)
-  const searchValue = ref('')
-
-  const show = () => {
-    searchValue.value = ''
-    isShow.value = true
-  }
-  const hide = () => {
-    isShow.value = false
-  }
-  const toggle = () => {
-    if (isShow.value) {
-      hide();
-    } else {
-      show();
-    }
-  }
-
-  const currentInstance = getCurrentInstance()
-  const isHide = (e) => {
-    const el = currentInstance.vnode.el
-    if (!el.contains(e.target)) {
-      hide()
-    }
-  }
-  onMounted(() => {
-    document.addEventListener("click", isHide)
-  })
-  onUnmounted(() => {
-    document.removeEventListener("click", isHide)
-  })
-
-  return {
-    toggle,
-    isShow,
-    hide,
-    searchValue
-  }
-}
-
 
 </script>

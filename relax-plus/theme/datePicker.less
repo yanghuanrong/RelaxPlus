@@ -1,0 +1,51 @@
+.x-date-edit{
+  width: 260px;
+}
+.x-datePicker{
+  width: 220px;
+  padding: 10px;
+
+  .x-datePicker-head{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+  }
+
+  .x-datePicker-group{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+
+    .x-datePicker-week{
+      list-style: none;
+      width: calc(100% / 7);
+      color: var(--sub-text-color);
+    }
+
+    .x-datePicker-cell{
+      list-style: none;
+      width: calc(100% / 7);
+      position: relative;
+      transition: all .2s ease-in;
+      cursor: pointer;
+      padding: 5px;
+
+      &.x-prev-day,&.x-next-day{
+        .x-datePicker-cell__box{
+          color: var(--sub-text-color);
+          opacity: 0.5;
+        }
+      }
+
+      &.today{
+        .x-datePicker-cell__box{
+          background-color: rgb(var(--primary));
+          color: rgb(var(--white));
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+}

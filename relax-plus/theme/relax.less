@@ -72,6 +72,7 @@ text-size-adjust: 100%;
 @import "tooltip";
 @import "slider";
 @import "calendar";
+@import "datePicker";
 
 .info{
   color: rgb(var(--info));
@@ -138,4 +139,15 @@ i.x-arrow{
   bottom: 0;
   background-color: rgba(0,0,0,.7);
   z-index: 1000;
+}
+
+.x-trigger{
+  z-index: 2;
+  position: absolute;
+  background-color: var(--main-background-color);
+  border-radius: 4px;
+  box-shadow: 0 0 8px var(--shadow);
+  overflow: hidden;
+  min-width: 100%;
+  margin-top: 3px;
 }

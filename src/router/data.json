@@ -21,6 +21,13 @@
     "routePath": "/checkbox"
   },
   {
+    "title": "DatePicker 日期选择",
+    "tag": "Data Entry",
+    "componentName": "DatePicker",
+    "fileName": "DatePicker.md",
+    "routePath": "/datepicker"
+  },
+  {
     "title": "Grid 栅格",
     "tag": "Layout",
     "componentName": "Grid",
