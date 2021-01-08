@@ -34,9 +34,8 @@
         @click="changeDay(item)"
       >
         <div class="x-calendar-cell__box">
-          <div class="x-calendar-cell__day">
-            {{ item.d }}
-          </div>
+          <div class="x-calendar-cell_holiday">{{isFormat(item)}}</div>
+          <div class="x-calendar-cell__day">{{ item.d }}</div>
         </div>
       </div>
     </div>
@@ -45,6 +44,8 @@
 
 <script>
 import { computed, reactive, ref } from "vue";
+import format from './format.js'
+
 import Button from '../button/index'
 export default {
   name: "Calendar",
@@ -216,6 +217,11 @@ export default {
       return dateTime.value === `${y}-${m}-${d}`;
     }
 
+    const isFormat = ({y,m,d}) => {
+      const date = format.solar2lunar(y, m, d)
+      return date.old_str
+    }
+
     const week = ['一', '二', '三', '四', '五', '六', '日']
 
     return {
@@ -227,7 +233,8 @@ export default {
       changePrevMonth,
       changeNextMonth,
       changeNowMonth,
-      changeDay
+      changeDay,
+      isFormat
     };
   },
 };
