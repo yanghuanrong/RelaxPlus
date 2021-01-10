@@ -1,6 +1,7 @@
 import {computed, reactive, ref} from "vue";
 
 export default function useCalendar() {
+
   function getNowTime(date) {
     return {
       year: date.getFullYear(),
@@ -118,13 +119,12 @@ export default function useCalendar() {
     return CellData;
   })
 
-  const today = ({d}) => {
-    return (
-      parseInt(d) === nowTime.day && nowTime.month == new Date().getMonth()
-    );
-  }
+  const today = ({d}) => (
+    parseInt(d) === nowTime.day && nowTime.month == new Date().getMonth()
+  )
+  
 
-  const dateTime = ref(getToday())
+  const checkTime = ref(getToday())
 
   function getToday() {
     const y = nowTime.year;
@@ -133,13 +133,20 @@ export default function useCalendar() {
     return `${y}-${m}-${d}`;
   }
 
+  function setCheckTime(){
+    const [y,m,d] = checkTime.value.split('-')
+    const days = getYearMonthDayNum( nowTime.year, nowTime.month + 1) 
+    const month = repair(nowTime.month + 1);
+    const day = d > days ? days : d
+    checkTime.value = nowTime.year + "-" + month + "-" + day;
+  }
+
   // 上个月的事件方法
   const changePrevMonth = () => {
     nowTime.year = prevMonth.value.year;
     nowTime.month = prevMonth.value.month;
 
-    const month = repair(nowTime.month + 1);
-    dateTime.value = nowTime.year + "-" + month + "-01";
+     setCheckTime();
   }
 
   // 下个月的事件方法
@@ -147,8 +154,7 @@ export default function useCalendar() {
     nowTime.year = nextMonth.value.year;
     nowTime.month = nextMonth.value.month;
 
-    const month = repair(nowTime.month + 1);
-    dateTime.value = nowTime.year + "-" + month + "-01";
+    setCheckTime();
   }
 
   // 本月的事件方法
@@ -156,7 +162,7 @@ export default function useCalendar() {
     const nowMonth = getNowTime(new Date())
     nowTime.year = nowMonth.year;
     nowTime.month = nowMonth.month;
-    dateTime.value = getToday();
+    checkTime.value = getToday();
   }
 
   // 选中的日期
@@ -165,12 +171,11 @@ export default function useCalendar() {
       type === 'Next' && changeNextMonth()
       type === 'Prev' && changePrevMonth()
     }
-    dateTime.value = `${y}-${m}-${d}`;
+    checkTime.value = `${y}-${m}-${d}`;
   }
+  
 
-  const isAactiveDay = ({y, m, d}) => {
-    return dateTime.value === `${y}-${m}-${d}`;
-  }
+  const isAactiveDay = ({y, m, d}) => (checkTime.value === `${y}-${m}-${d}`)
 
   const week = ['一', '二', '三', '四', '五', '六', '日']
 
@@ -184,6 +189,7 @@ export default function useCalendar() {
     changeNextMonth,
     changeNowMonth,
     changeDay,
-    dateTime
+    repair,
+    checkTime
   }
 }

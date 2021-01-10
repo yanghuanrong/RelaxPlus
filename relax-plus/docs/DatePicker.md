@@ -12,7 +12,6 @@ tag: Data Entry
 ```html
 <template>
   <x-date-picker v-model="value" placeholder="YYYY-MM-DD" />
-  {{value}}
 </template>
 <script>
   import {ref} from 'vue'
@@ -29,4 +28,26 @@ tag: Data Entry
 ```
 :::
 
+
+## 一键选值
+> 设置 `onetap` 开启一键选值
+:::demo
+```html
+<template>
+  <x-date-picker v-model="value" onetap placeholder="YYYY-MM-DD" />
+</template>
+<script>
+  import {ref} from 'vue'
+  export default {
+    setup(){
+      const value = ref('')
+
+      return {
+        value
+      }
+    }
+  }
+</script>
+```
+:::
 

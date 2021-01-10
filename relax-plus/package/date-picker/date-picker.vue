@@ -23,8 +23,9 @@
               <i class="x-icon-chevron-left"></i>
             </div>
             <span>
-              {{nowTime.year}}年{{ 
-                (nowTime.month + 1) < 10 ? '0' + (nowTime.month + 1) : nowTime.month + 1 }}月
+              {{head}}
+              <!-- {{nowTime.year}}年{{ 
+                (nowTime.month + 1) < 10 ? '0' + (nowTime.month + 1) : nowTime.month + 1 }}月 -->
             </span>
             <div class="x-datePicker-btn" @click="changeNextMonth">
               <i class="x-icon-chevron-right"></i>
@@ -50,10 +51,12 @@
               <div class="x-datePicker-cell__box">{{ item.d }}</div>
             </div>
           </div>
-
-          <!-- <div class="x-calendar-btn" @click="changeNowMonth">
-            <i class="x-icon-circle" style="margin-right: 5px"></i>今天
-          </div> -->
+          <div class="x-calendar-foot" v-if="!onetap">
+            <div class="x-calendar-quick">
+              <Button type="text" size="sm" @click="changeToday">今天</Button>
+            </div>
+            <Button type="primary" size="sm" @click="changeClickDay">确定</Button>
+          </div>
         </div>
       </transition>
     </teleport>
@@ -61,43 +64,88 @@
 </template>
 
 <script>
-import { ref, toRefs, watch } from 'vue';
+import { nextTick, ref, toRefs, watch } from 'vue';
 import Input from '../input/index'
 import useToggle from '../../utils/togger'
 import useCalendar from '../../utils/calendar';
+import Button from '../button/button';
 
 export default {
   name: 'DatePicker',
   components: {
-    Input
+    Input,
+    Button
   },
   props: {
     modelValue: String,
     placeholder: String,
+    onetap: Boolean,
   },
   setup(props, {emit}){
     const {modelValue} = toRefs(props)
     const toggle = useToggle()
+    const {hide} = toggle
     const calendar = useCalendar()
-    const {nowTime, dateTime} = calendar
+    const {nowTime, checkTime, repair} = calendar
 
     const state = ref('')
- 
-    const clickDay = ({y,m,d}) => {
-      state.value = `${y}-${m}-${d}`;
-      toggle.hide()
+    const head = ref(headFormat(''))
+
+    function headFormat (value) {
+      const [y,m,d] = value !== '' ? value.split('-') : [
+        nowTime.year,
+        repair(nowTime.month + 1),
+        nowTime.day
+      ]
+      
+      return `${y}年${m}月${d}日`
+    }
+
+    watch(checkTime, (value) => {
+      head.value = headFormat(value)
+    })
+
+    const clickDay = (item) => {
+      if(props.onetap){
+        const {y,m,d} = item
+        state.value = `${y}-${m}-${d}`;
+        nextTick(() => {
+          hide()
+        })
+      }
     }
 
     watch(state, (value) => {
-      dateTime.value = value
-      emit('update:modelValue', value)
+      if(value === ''){
+        calendar.changeNowMonth()
+        emit('update:modelValue', value)
+      } else {
+        checkTime.value = value
+      }
     })
+
+    const changeClickDay = () => {
+      const reg = /[0-9]+/g
+      const [y,m,d] = head.value.match(reg)
+      state.value = `${y}-${m}-${d}`;
+      emit('update:modelValue', state.value)
+      hide()
+    }
+
+    const changeToday = () => {
+      state.value = `${nowTime.year}-${repair(nowTime.month + 1)}-${nowTime.day}`;
+      emit('update:modelValue', state.value)
+      toggle.hide()
+    }
     
     return {
       ...toggle,
       ...calendar,
       state,
+      head,
       clickDay,
+      changeClickDay,
+      changeToday
     }
   }
 }
