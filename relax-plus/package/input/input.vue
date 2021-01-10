@@ -3,7 +3,8 @@
     class="x-from-input"
     :class="{
       'x-input-icon-before': iconBefore && iconBefore !== '',
-      'x-input-icon-after': iconAfter && iconAfter !== ''
+      'x-input-icon-after': iconAfter && iconAfter !== '',
+      'x-input-block': block,
     }"
   >
     <template v-if="type !== 'textarea'">
@@ -42,6 +43,7 @@ export default {
     iconBefore: String,
     iconAfter: String,
     maxlength: Number,
+    block: Boolean,
     modelValue: [String, Number],
   },
   setup(props, { emit }) {

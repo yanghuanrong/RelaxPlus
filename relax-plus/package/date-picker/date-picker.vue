@@ -10,6 +10,7 @@
         'is-focus': isShow,
         'is-blur': !isShow,
       }"
+      block
       @focus="focus"
     />
 
@@ -21,15 +22,12 @@
               <i class="x-icon-chevron-left"></i>
             </div>
             <span>
-              {{nowTime.year}} 年 {{ 
-                (nowTime.month + 1) < 10 ? '0' + (nowTime.month + 1) : nowTime.month + 1 }} 月
+              {{nowTime.year}}年{{ 
+                (nowTime.month + 1) < 10 ? '0' + (nowTime.month + 1) : nowTime.month + 1 }}月
             </span>
             <div class="x-datePicker-btn" @click="changeNextMonth">
               <i class="x-icon-chevron-right"></i>
             </div>
-            <!-- <div class="x-calendar-btn" @click="changeNowMonth">
-              <i class="x-icon-circle" style="margin-right: 5px"></i>今天
-            </div> -->
           </div>
           <div class="x-datePicker-group">
             <div class="x-datePicker-week" v-for="item in week">
@@ -45,11 +43,14 @@
                   active: isAactiveDay(item),
                 }
               ]"
-              @click="changeDay(item)"
+              @click="changeDay(item), clickDay(item)"
             >
               <div class="x-datePicker-cell__box">{{ item.d }}</div>
             </div>
           </div>
+          <!-- <div class="x-calendar-btn" @click="changeNowMonth">
+            <i class="x-icon-circle" style="margin-right: 5px"></i>今天
+          </div> -->
         </div>
       </transition>
     </teleport>
@@ -57,7 +58,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, toRefs } from 'vue';
 import Input from '../input/index'
 import useToggle from '../../utils/togger'
 import useCalendar from '../../utils/calendar';
@@ -68,18 +69,27 @@ export default {
     Input
   },
   props: {
-    modelValue: [Array, String],
+    modelValue: String,
     placeholder: String,
   },
-  setup(){
+  setup(props, {emit}){
+    const {modelValue} = toRefs(props)
+
     const toggle = useToggle()
+    const {hide} = toggle
     const calendar = useCalendar()
     const state = ref('')
+    const clickDay = ({y,m,d}) => {
+      state.value = `${y}-${m}-${d}`;
+      emit('update:modelValue', state.value)
+      hide()
+    }
     
     return {
       ...toggle,
       ...calendar,
       state,
+      clickDay,
     }
   }
 }

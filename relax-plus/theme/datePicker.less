@@ -1,15 +1,20 @@
 .x-date-edit{
-  // width: 260px;
   display: inline-block;
 }
 .x-datePicker{
-  width: 220px;
+  width: 240px;
   padding: 10px;
+  user-select: none;
 
   .x-datePicker-head{
     display: flex;
     justify-content: space-between;
     padding-bottom: 10px;
+
+    .x-datePicker-btn{
+      cursor: pointer;
+      padding: 0 3px;
+    }
   }
 
   .x-datePicker-group{
@@ -29,8 +34,32 @@
       width: calc(100% / 7);
       position: relative;
       transition: all .2s ease-in;
-      cursor: pointer;
       padding: 5px;
+
+      .x-datePicker-cell__box{
+        border: 1px solid transparent;
+        cursor: pointer;
+        border-radius: 3px;
+        transition: all .2s ease;
+          
+        &:hover{
+          background-color: rgb(var(--primary), .05);
+        }
+      }
+      &.today{
+        .x-datePicker-cell__box{
+          color: rgb(var(--primary));
+          background-color: rgb(var(--primary), .05);
+          border: 1px solid rgb(var(--primary));
+        }
+      }
+      &.active{
+        .x-datePicker-cell__box{
+          border: 1px solid rgb(var(--primary));
+          background-color: rgb(var(--primary));
+          color: rgb(var(--white));
+        }
+      }
 
       &.x-prev-day,&.x-next-day{
         .x-datePicker-cell__box{
@@ -39,13 +68,7 @@
         }
       }
 
-      &.today{
-        .x-datePicker-cell__box{
-          background-color: rgb(var(--primary));
-          color: rgb(var(--white));
-          border-radius: 50%;
-        }
-      }
+  
     }
   }
 

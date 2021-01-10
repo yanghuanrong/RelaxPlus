@@ -6,8 +6,8 @@
           <i class="x-icon-chevron-left"></i>
         </div>
         <span>
-          {{nowTime.year}} 年 {{ 
-            (nowTime.month + 1) < 10 ? '0' + (nowTime.month + 1) : nowTime.month + 1 }} 月
+          {{nowTime.year}}年{{ 
+            (nowTime.month + 1) < 10 ? '0' + (nowTime.month + 1) : nowTime.month + 1 }}月
         </span>
         <div class="x-calendar-btn" @click="changeNextMonth">
           <i class="x-icon-chevron-right"></i>
