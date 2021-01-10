@@ -11,7 +11,8 @@ tag: Data Entry
 :::demo
 ```html
 <template>
-  <x-date-picker v-model="value" placeholder="YYYY-MM-DD"></x-date-picker>
+  <x-date-picker v-model="value" placeholder="YYYY-MM-DD" />
+  {{value}}
 </template>
 <script>
   import {ref} from 'vue'

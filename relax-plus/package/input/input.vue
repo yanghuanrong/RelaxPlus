@@ -63,9 +63,7 @@ export default {
       emit("update:modelValue", text.value);
     }
 
-    const textLength = computed(() => {
-      return text.value.length
-    })
+    const textLength = computed(() => text.value.length)
 
     return {
       handerInput,

@@ -184,5 +184,6 @@ export default function useCalendar() {
     changeNextMonth,
     changeNowMonth,
     changeDay,
+    dateTime
   }
 }

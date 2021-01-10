@@ -30,6 +30,7 @@
               <i class="x-icon-chevron-right"></i>
             </div>
           </div>
+
           <div class="x-datePicker-group">
             <div class="x-datePicker-week" v-for="item in week">
               {{item}}
@@ -49,6 +50,7 @@
               <div class="x-datePicker-cell__box">{{ item.d }}</div>
             </div>
           </div>
+
           <!-- <div class="x-calendar-btn" @click="changeNowMonth">
             <i class="x-icon-circle" style="margin-right: 5px"></i>今天
           </div> -->
@@ -59,7 +61,7 @@
 </template>
 
 <script>
-import { ref, toRefs } from 'vue';
+import { ref, toRefs, watch } from 'vue';
 import Input from '../input/index'
 import useToggle from '../../utils/togger'
 import useCalendar from '../../utils/calendar';
@@ -75,16 +77,21 @@ export default {
   },
   setup(props, {emit}){
     const {modelValue} = toRefs(props)
-
     const toggle = useToggle()
-    const {hide} = toggle
     const calendar = useCalendar()
+    const {nowTime, dateTime} = calendar
+
     const state = ref('')
+ 
     const clickDay = ({y,m,d}) => {
       state.value = `${y}-${m}-${d}`;
-      emit('update:modelValue', state.value)
-      hide()
+      toggle.hide()
     }
+
+    watch(state, (value) => {
+      dateTime.value = value
+      emit('update:modelValue', value)
+    })
     
     return {
       ...toggle,
