@@ -9,10 +9,6 @@
 
       .x-before {
         left: 8px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--line-color);
-        position: absolute;
       }
     }
 
@@ -23,10 +19,32 @@
 
       .x-after {
         right: 8px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--line-color);
-        position: absolute;
+      }
+    }
+
+    .x-after,.x-before,.x-icon-x{
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--line-color);
+      position: absolute;
+      transition: color .25s ease;
+    }
+
+    .x-icon-x{
+      right: 6px;
+      cursor: pointer;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--line-color);
+      border-radius: 50%;
+      transition: all .25s ease;
+      color: rgb(var(--white));
+
+      &:hover{
+        background-color: rgb(var(--danger));
       }
     }
 
@@ -80,6 +98,10 @@
     &.is-focus {
       border-color: rgb(var(--primary));
       box-shadow: 0 0 0 2px rgb(var(--primary), .3);
+
+      &:focus+i{
+        color: rgb(var(--primary)) !important;
+      }
     }
 
     &.is-blur {

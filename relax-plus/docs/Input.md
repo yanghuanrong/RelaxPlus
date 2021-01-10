@@ -47,6 +47,20 @@ export default {
 :::
 
 
+
+## 可清空
+> 通过设置 `clearable` 可以开启输入框的清空
+:::demo
+```html
+<template>
+  <x-input placeholder="请输入" clearable />
+</template>
+```
+:::
+
+clearable
+
+
 ## 文本域
 > 设置 `type` 属性为 `textarea`
 :::demo `maxlength` 可以限制 `textarea` 的输入长度
