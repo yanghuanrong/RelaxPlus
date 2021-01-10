@@ -10,6 +10,7 @@
         'is-focus': isShow,
         'is-blur': !isShow,
       }"
+      clearable
       block
       @focus="focus"
     />

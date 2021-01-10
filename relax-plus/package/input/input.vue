@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { ref, toRefs, watchEffect } from "vue";
+import { computed, ref, toRefs, watchEffect } from "vue";
 export default {
   name: "Input",
   inheritAttrs: false,
@@ -53,7 +53,6 @@ export default {
   setup(props, { emit }) {
     const {modelValue} = toRefs(props)
     const text = ref('');
-    const textLength = ref(modelValue && modelValue.value.length || 0)
 
     watchEffect(() => {
       text.value = modelValue && modelValue.value || ''
@@ -61,9 +60,12 @@ export default {
 
     const handerInput = (e) => {
       text.value = e ? e.target.value : ''
-      textLength.value = text.value.length
       emit("update:modelValue", text.value);
-    };
+    }
+
+    const textLength = computed(() => {
+      return text.value.length
+    })
 
     return {
       handerInput,
