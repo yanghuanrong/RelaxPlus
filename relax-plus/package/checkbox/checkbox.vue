@@ -20,7 +20,7 @@
 
 <script>
 import {inject, reactive, watchEffect, computed} from 'vue'
-    
+import {isArray} from '../../utils/isType'
 export default {
   name: 'Checkbox',
   props: {
@@ -46,7 +46,7 @@ export default {
         return state.modelValue
       },
       set({checked, label}){
-        if(Object.prototype.toString.call(model.value) === '[object Array]'){
+        if (isArray(model.value)) {
           const modelValue = model.value
           const labelIndex = modelValue.indexOf(label)
 
@@ -64,7 +64,7 @@ export default {
     })
 
     const isCheked = computed(() => {
-      if(Object.prototype.toString.call(model.value) === '[object Array]'){
+      if (isArray(model.value)) {
         return model.value.indexOf(props.label) !== -1
       } else {
         return model.value

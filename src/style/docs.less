@@ -81,7 +81,27 @@
     &>.x-calendar{
       margin-bottom: 10px;
     }
+    
+    .demo-carousel{
+      height: 250px;
+      width: 100%;
+      background-color: rgb(var(--success));
+      color: rgb(var(--white));
+      font-size: 3em;
+      text-align: center;
+      line-height: 250px;
       
+      &:nth-of-type(2n){
+        background-color: rgb(var(--primary));
+      }
+      &:nth-of-type(3n){
+        background-color: rgb(var(--danger));
+      }
+      &:nth-of-type(4n){
+        background-color: rgb(var(--warning));
+      }
+    }
+
     &>.x-row {
       margin-bottom: 10px;
 

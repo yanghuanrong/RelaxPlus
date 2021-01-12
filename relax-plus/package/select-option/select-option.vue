@@ -18,6 +18,8 @@
 import { inject, computed, watchEffect, reactive, ref, getCurrentInstance } from 'vue';
 import CollapseTransition from '../transitions/collapse-transition'
 import emitter from '../../utils/emiter'
+import {isArray} from '../../utils/isType'
+
 export default {
   name: 'Option',
   props: {
@@ -48,7 +50,7 @@ export default {
         return state.modelValue
       },
       set({checked, value}){
-        if(Object.prototype.toString.call(model.value) === '[object Array]'){
+        if (isArray(model.value)){
           const modelValue = model.value
           const labelIndex = modelValue.indexOf(value)
 
@@ -73,7 +75,7 @@ export default {
     })
 
     const isChecked = computed(() => {
-      if(Object.prototype.toString.call(model.value) === '[object Array]'){
+      if (isArray(model.value)){
         return model.value.includes(value)
       } else {
         return model.value === value

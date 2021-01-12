@@ -6,6 +6,7 @@
 
 <script>
 import {inject, computed} from 'vue'
+import {isNumber, isString} from '../../utils/isType'
 export default {
   name: 'Col',
   props: {
@@ -30,10 +31,10 @@ export default {
     
     let isSpan = true
     ;['xs', 'sm', 'md', 'lg'].forEach(item => {
-      if ( Object.prototype.toString.call(props[item]) === '[object Number]' ) {
+      if (isNumber(props[item])) {
         isSpan = false
         classes.push(`x-col-${item}-${props[item]}`)
-      } else if (Object.prototype.toString.call(props[item]) === '[object String]') {
+      } else if (isString(props[item])) {
         isSpan = false
         props[item].span && classes.push(`x-col-${item}-${props[item].span}`)
         props[item].offset && classes.push(`x-col-offset-${item}-${props[item].span}`)

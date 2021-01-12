@@ -37,7 +37,7 @@
 <script>
 import { reactive, ref, toRefs, getCurrentInstance, onMounted, computed, watchEffect } from 'vue'
 import tooltip from '../tooltip/index'
-
+import {isArray} from '../../utils/isType'
 export default {
   name:'Slider',
   components: {
@@ -61,7 +61,7 @@ export default {
     const instance = getCurrentInstance()
     const propress = reactive({})
     const space = ref(0)
-    const range = ref(Object.prototype.toString.call(modelValue.value) === '[object Array]')
+    const range = ref(isArray(modelValue.value))
     const steps = ref(0)
     const start = reactive({
       num: range.value ? modelValue.value[0] : 0

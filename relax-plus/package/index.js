@@ -24,6 +24,8 @@ import DatePicker from './date-picker/index'
 
 // Data Display
 import Calendar from './calendar/index'
+import Carousel from './carousel/index'
+import CarouselItem from './carousel-item/index'
 
 const {Modal, Modals} = modal
 
@@ -42,7 +44,9 @@ const components = [
   Tooltip,
   Slider,
   Calendar,
-  DatePicker
+  DatePicker,
+  Carousel,
+  CarouselItem
 ]
 
 
@@ -83,5 +87,7 @@ export default {
   Tooltip,
   Slider,
   Calendar,
-  DatePicker
+  DatePicker,
+  Carousel,
+  CarouselItem
 }

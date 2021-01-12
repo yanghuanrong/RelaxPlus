@@ -52,7 +52,6 @@ tag: Data Entry
 :::
 
 
-
 ## 禁用
 > 设置 `onetap` 开启一键选值
 :::demo

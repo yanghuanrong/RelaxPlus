@@ -14,6 +14,13 @@
     "routePath": "/calendar"
   },
   {
+    "title": "Carousel 轮播",
+    "tag": "Data Display",
+    "componentName": "Carousel",
+    "fileName": "Carousel.md",
+    "routePath": "/carousel"
+  },
+  {
     "title": "Checkbox 多选框",
     "tag": "Data Entry",
     "componentName": "Checkbox",

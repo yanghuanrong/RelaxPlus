@@ -64,6 +64,8 @@
 import {ref, getCurrentInstance, reactive, provide, computed, watch } from 'vue';
 import useToggle from '../../utils/togger'
 import emitter from '../../utils/emiter'
+import {isArray} from '../../utils/isType'
+
 export default {
   name: 'Select',
   props: {
@@ -84,7 +86,7 @@ export default {
       }
     })
 
-    const multiple = computed(() => (Object.prototype.toString.call(props.modelValue) === '[object Array]'))
+    const multiple = computed(() => (isArray(props.modelValue)))
     const state = multiple.value ? reactive([]) : ref('')
 
     const {on, broadcast} = emitter()

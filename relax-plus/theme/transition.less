@@ -7,6 +7,27 @@
   opacity: 0;
 }
 
+/*轮播图*/
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active{
+  transition: all .3s ease;
+}
+.slide-left-leave-to{
+  transform: translateX(100%);
+}
+.slide-left-enter-from{
+  transform: translateX(-100%);
+}
+.slide-right-leave-to{
+  transform: translateX(-100%);
+}
+.slide-right-enter-from{
+  transform: translateX(100%);
+}
+
+
 
 /*
   Message组件
