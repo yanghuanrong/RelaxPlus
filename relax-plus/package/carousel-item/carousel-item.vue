@@ -1,7 +1,6 @@
 <template>
   <transition :name="inName" mode="out-in">
     <div class="x-carousel-item" v-show="isShow">
-      {{isName}}
       <slot></slot>
     </div>
   </transition>
