@@ -51,3 +51,14 @@ tag: Data Entry
 ```
 :::
 
+
+
+## 禁用
+> 设置 `onetap` 开启一键选值
+:::demo
+```html
+<template>
+  <x-date-picker disabled placeholder="YYYY-MM-DD" />
+</template>
+```
+:::

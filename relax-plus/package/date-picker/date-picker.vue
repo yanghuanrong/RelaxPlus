@@ -10,6 +10,7 @@
         'is-focus': isShow,
         'is-blur': !isShow,
       }"
+      :disabled="disabled"
       clearable
       block
       @focus="focus"
@@ -19,16 +20,16 @@
       <transition name="scaleY" ref="trigger">
         <div class="x-trigger x-datePicker" @click.stop :style="rect" v-show="isShow">
           <div class="x-datePicker-head">
-            <div class="x-datePicker-btn" @click="changePrevMonth">
-              <i class="x-icon-chevron-left"></i>
+            <div class="x-datePicker-btn">
+              <span class="x-icon-chevrons-left"  @click="changePrevYear"></span>
+              <span class="x-icon-chevron-left"  @click="changePrevMonth"></span>
             </div>
             <span>
               {{head}}
-              <!-- {{nowTime.year}}年{{ 
-                (nowTime.month + 1) < 10 ? '0' + (nowTime.month + 1) : nowTime.month + 1 }}月 -->
             </span>
-            <div class="x-datePicker-btn" @click="changeNextMonth">
-              <i class="x-icon-chevron-right"></i>
+            <div class="x-datePicker-btn" >
+              <span class="x-icon-chevron-right" @click="changeNextMonth"></span>
+              <span class="x-icon-chevrons-right" @click="changeNextYear"></span>
             </div>
           </div>
 
@@ -80,6 +81,7 @@ export default {
     modelValue: String,
     placeholder: String,
     onetap: Boolean,
+    disabled: Boolean
   },
   setup(props, {emit}){
     const {modelValue} = toRefs(props)

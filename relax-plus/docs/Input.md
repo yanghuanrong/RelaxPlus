@@ -35,6 +35,17 @@ export default {
 :::
 
 
+## 禁用
+> 通过 `disabled` 属性指定是否禁用 input 组件
+:::demo
+```html
+<template>
+  <x-input placeholder="请输入" type="text" disabled />
+</template>
+```
+:::
+
+
 ## 前缀和后缀图标
 > 通过设置 `icon-before` 和 `icon-after` 设置前缀及后缀图标
 :::demo

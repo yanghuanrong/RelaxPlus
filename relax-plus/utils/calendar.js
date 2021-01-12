@@ -120,10 +120,11 @@ export default function useCalendar() {
   })
 
   const today = ({d}) => (
-    parseInt(d) === nowTime.day && nowTime.month == new Date().getMonth()
+    parseInt(d) === nowTime.day 
+    && nowTime.month == new Date().getMonth() 
+    && nowTime.year === new Date().getFullYear()
   )
   
-
   const checkTime = ref(getToday())
 
   function getToday() {
@@ -141,28 +142,37 @@ export default function useCalendar() {
     checkTime.value = nowTime.year + "-" + month + "-" + day;
   }
 
-  // 上个月的事件方法
-  const changePrevMonth = () => {
-    nowTime.year = prevMonth.value.year;
-    nowTime.month = prevMonth.value.month;
-
-     setCheckTime();
-  }
-
-  // 下个月的事件方法
-  const changeNextMonth = () => {
-    nowTime.year = nextMonth.value.year;
-    nowTime.month = nextMonth.value.month;
-
-    setCheckTime();
-  }
-
   // 本月的事件方法
   const changeNowMonth = () => {
     const nowMonth = getNowTime(new Date())
     nowTime.year = nowMonth.year;
     nowTime.month = nowMonth.month;
     checkTime.value = getToday();
+  }
+
+  // 上个月的事件方法
+  const changePrevMonth = () => {
+    nowTime.year = prevMonth.value.year;
+    nowTime.month = prevMonth.value.month;
+    setCheckTime();
+  }
+
+  // 下个月的事件方法
+  const changeNextMonth = () => {
+    nowTime.year = nextMonth.value.year;
+    nowTime.month = nextMonth.value.month;
+    setCheckTime();
+  }
+
+  // 下一年的事件方法
+  const changeNextYear = () => {
+    nowTime.year ++
+    setCheckTime();
+  }
+  // 下一年的事件方法
+  const changePrevYear = () => {
+    nowTime.year --
+    setCheckTime();
   }
 
   // 选中的日期
@@ -187,6 +197,8 @@ export default function useCalendar() {
     isAactiveDay,
     changePrevMonth,
     changeNextMonth,
+    changeNextYear,
+    changePrevYear,
     changeNowMonth,
     changeDay,
     repair,

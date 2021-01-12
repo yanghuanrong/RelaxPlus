@@ -12,8 +12,16 @@
     padding-bottom: 10px;
 
     .x-datePicker-btn{
-      cursor: pointer;
-      padding: 0 3px;
+      span{
+        cursor: pointer;
+        padding: 0 3px;
+        border-radius: 3px;
+        transition: all .25s ease;
+
+        &:hover{
+          background-color: var(--hover-background-color);
+        }
+      }
     }
   }
 
