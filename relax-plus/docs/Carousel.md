@@ -20,6 +20,7 @@ tag: Data Display
 ```
 :::
 
+
 ## 自动播放
 > 设置 `autoplay` 开启自动播放
 :::demo
