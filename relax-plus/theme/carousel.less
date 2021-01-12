@@ -1,6 +1,14 @@
 .x-carousel{
   position: relative;
 
+  &:hover{
+    .x-carousel-left, .x-carousel-right{
+      opacity: 1;
+      visibility: visible;
+      transform: translate(0, -50%);
+    }
+  }
+
   .x-carousel-left, .x-carousel-right{
     position: absolute;
     width: 40px;
@@ -16,15 +24,47 @@
     font-size: 18px;
     color: rgb(var(--white));
     cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity,transform,visibility;
+    transition-duration: .2s;
+    transition-timing-function: ease;
   }
   .x-carousel-left{
     left: 10px;
+    transform: translate(-10%, -50%);
   }
   .x-carousel-right{
     right: 10px;
+    transform: translate(10%, -50%);
   }
   .x-carousel-item{
     position: absolute;
+  }
+  .x-carousel-dot{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+
+    i{
+      margin: 0 5px;
+      display: block;
+      border-radius: 2em;
+      width: 8px;
+      height: 8px;
+      background-color: rgb(var(--white));
+      opacity: 0.7;
+      transition: all .3s ease;
+
+      &.active{
+        opacity: 1;
+        width: 16px;
+      }
+    }
+
   }
   .x-carousel-warp{
     height: inherit;

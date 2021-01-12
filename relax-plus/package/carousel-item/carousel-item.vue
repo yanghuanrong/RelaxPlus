@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { computed, getCurrentInstance, inject, onMounted, watch, watchEffect } from 'vue'
+import { computed, getCurrentInstance, inject } from 'vue'
 import emitter from '../../utils/emiter'
 import {isArray} from '../../utils/isType'
 export default {

@@ -6,6 +6,9 @@
     <div class="x-carousel-right" @click="setCarousel(1, 'slide-right')">
       <i class="x-icon-chevron-right"></i>
     </div>
+    <div class="x-carousel-dot">
+      <i v-for="(item,i) in items" :class="{active: inActive === i}"></i>
+    </div>
     <div class="x-carousel-warp">
       <slot></slot>
     </div>
@@ -13,7 +16,7 @@
 </template>
 
 <script>
-import { getCurrentInstance, provide, reactive, ref, watchEffect } from 'vue'
+import { getCurrentInstance, onUnmounted, provide, reactive, ref, toRefs, watchEffect } from 'vue'
 import emitter from '../../utils/emiter'
 import { isArray } from '../../utils/isType'
 
@@ -21,7 +24,12 @@ export default {
   name: 'Carousel',
   props: {
     width: String,
-    height: String
+    height: String,
+    autoplay: Boolean,
+    interval: {
+      type: Number,
+      default: 3,
+    },
   },
   setup(props, {slots}){
     const instance = getCurrentInstance()
@@ -29,6 +37,7 @@ export default {
     const inUid = ref(0)
     const items = reactive([])
     const transitionName = ref('slide-right')
+    const { autoplay, interval } = toRefs(props)
     provide('carousel-active', inUid)
     provide('carousel-name', transitionName)
     const { on } = emitter()
@@ -53,8 +62,27 @@ export default {
       }
     }
 
+    if(autoplay && autoplay.value) {
+      let time = setInterval(() => {
+        setCarousel(1, 'slide-right')
+      }, interval.value * 1000)
+
+      onUnmounted(() => {
+        if(time){
+          clearInterval(time)
+          time = null
+        }
+        console.log(time)
+      })
+    }
+
+
+    
+
     return {
-      setCarousel
+      setCarousel,
+      inActive,
+      items
     }
 
   }
