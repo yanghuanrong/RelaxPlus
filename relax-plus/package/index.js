@@ -26,6 +26,8 @@ import DatePicker from './date-picker/index'
 import Calendar from './calendar/index'
 import Carousel from './carousel/index'
 import CarouselItem from './carousel-item/index'
+import Tabs from './tabs/index'
+import TabPane from './tab-pane/index'
 
 const {Modal, Modals} = modal
 
@@ -46,7 +48,9 @@ const components = [
   Calendar,
   DatePicker,
   Carousel,
-  CarouselItem
+  CarouselItem,
+  Tabs,
+  TabPane
 ]
 
 

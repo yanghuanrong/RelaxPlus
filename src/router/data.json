@@ -104,6 +104,13 @@
     "routePath": "/switch"
   },
   {
+    "title": "Tabs 标签页",
+    "tag": "Data Display",
+    "componentName": "Tabs",
+    "fileName": "Tabs.md",
+    "routePath": "/tabs"
+  },
+  {
     "title": "Tooltip 文字提示",
     "tag": "General",
     "componentName": "Tooltip",
