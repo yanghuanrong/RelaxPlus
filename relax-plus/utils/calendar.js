@@ -119,11 +119,16 @@ export default function useCalendar() {
     return CellData;
   })
 
-  const today = ({d}) => (
-    parseInt(d) === nowTime.day 
-    && nowTime.month == new Date().getMonth() 
-    && nowTime.year === new Date().getFullYear()
-  )
+  const today = ({y,m,d}) => {
+    const {month, year} = nowTime
+    return (
+      parseInt(d) === nowTime.day 
+      && month == new Date().getMonth() 
+      && year === new Date().getFullYear()
+      && year === y
+      && repair(month+1) === m
+    )
+  }
   
   const checkTime = ref(getToday())
 
@@ -186,7 +191,7 @@ export default function useCalendar() {
   
 
   const isAactiveDay = ({y, m, d}) => (checkTime.value === `${y}-${m}-${d}`)
-
+  
   const week = ['一', '二', '三', '四', '五', '六', '日']
 
   return {
