@@ -6,10 +6,13 @@
         :ref="setItemRef"
         v-for="(item, i) in nav"
         @click="setTabs(item, i)"
-        :class="{
-          active: active.index === i
-        }"
-      >{{item}}</div>
+        :class="[
+          item.disabled && 'x-tabs-disabled',
+          {
+            active: active.index === i
+          }
+        ]"
+      >{{item.label}}</div>
       <i class="x-tabs-line" :style="line"></i>
     </div>
     <div class="x-tabs-view">
@@ -30,7 +33,7 @@ export default {
     const line = reactive({})
     provide('active', active)
     
-    on('label', (value) => {
+    on('props', (value) => {
       if ( !active.label ) {
         setTabs(value, 0)
       }
@@ -38,7 +41,8 @@ export default {
     })
 
     const setTabs = (item, i) => {
-      active.label = item
+      if(item.disabled) return
+      active.label = item.label
       active.index = i
 
       nextTick(() => {

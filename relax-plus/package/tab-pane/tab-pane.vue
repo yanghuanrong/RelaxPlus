@@ -10,13 +10,14 @@ import emtter from '../../utils/emiter'
 export default {
   name: 'TabPane',
   props: {
-    label: String
+    label: String,
+    disabled: Boolean
   },
   setup(props){
     const { label } = props
     const { dispatch } = emtter()
     const active = inject('active')
-    dispatch('label', label)
+    dispatch('props', props)
 
     const isShow = computed(() => {
       return active.label === label
