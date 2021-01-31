@@ -16,7 +16,7 @@
 
 <script>
 import { inject, computed, watchEffect, reactive, ref, getCurrentInstance } from 'vue';
-import CollapseTransition from '../transitions/collapse-transition'
+import CollapseTransition from '../transitions/collapse-transition.vue'
 import emitter from '../../utils/emiter'
 import {isArray} from '../../utils/isType'
 

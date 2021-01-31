@@ -69,7 +69,7 @@ import { nextTick, ref, toRefs, watch } from 'vue';
 import Input from '../input/index'
 import useToggle from '../../utils/togger'
 import useCalendar from '../../utils/calendar';
-import Button from '../button/button';
+import Button from '../button/button.vue';
 
 export default {
   name: 'DatePicker',
