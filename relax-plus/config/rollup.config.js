@@ -9,7 +9,7 @@ export default {
   output: {
       format: 'umd',
       name: 'RelaxPlus',
-      file: path.resolve('relax-plus/lib/relax.min.js')
+      file: path.resolve('lib/relax.min.js')
   },
   plugins: [
     json(),

@@ -1,14 +1,16 @@
 {
   "name": "relaxplus",
-  "version": "0.1.0",
+  "description": "A group of ui components examples for using Vue 3.x",
+  "version": "0.1.1",
   "main": "relax-plus/lib/relax.min.js",
   "style": "relax-plus/lib/relax.css",
   "author": "yanghuanrong",
+  "Keywords": "vue3 ui components relax relaxplus",
   "scripts": {
     "serve": "yarn data && vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:ui": "rollup --config relax-plus/config/rollup.config.js",
-    "build:css": "lessc relax-plus/theme/relax.less relax-plus/lib/relax.css",
+    "build:css": "lessc relax-plus/theme/relax.less lib/relax.css",
     "data": "node relax-plus/config/create-route.js"
   },
   "dependencies": {
