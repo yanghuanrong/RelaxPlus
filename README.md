@@ -1,44 +1,38 @@
-# RelaxPlus 
+<div style="text-align:center">
 
-> 写组件的方式学习VUE3！  [演示地址](https://bsie.gitee.io/relaxplus/#/button)
+![Image text](https://gitee.com/bsie/RelaxPlus/raw/master/src/assets/logo.png)
 
+# RelaxPlus
 
-## 关于
-> `RelaxPlus`是 [RelaxUI](https://yanghuanrong.github.io/RelaxUI/docs/) 的重大升级，学习沉淀了一段时间后，解决了很多在`RelaxUI`中没有解决的问题。 
+💖[文档地址](https://bsie.gitee.io/relaxplus/)
 
-- 😎 终于采用了 md 文件进行文档编写以及 demo 演示。webpack 猛如虎，感谢打虎英雄皱叶青，质的飞越
-- 🔨 组件支持打包了，在 npm 中安装可以不用在引入源码，非常轻盈
-- 👀 学习了vue3的相关知识，在开发中感受了vue3的力量
-- 💖 文档 UI 界面发生了变化，更加友好，简洁，高端，大气，上档次...同时提升了审美，设计让世界更美好
-- ✨ RelaxPlus 的源码得到了加强，更加成熟，健壮
-- 🚀 自动化部署 workflows 工作流，麻烦一次，舒服很多次
+</div>
 
+## 介绍
+`RelaxPlus`是作者精心打磨的vue3组件库，最早的版本可以追溯到2017年（基于vue2），它非常轻量、精美。适合用于vue3组件学习。
 
-## 迁移组件
-> 除了会对之前的组件进行迁移，在能力允许的范围内会编写其他的组件，丰富 `RelaxPlus`
-- ✔ Button 按钮
-- ✔ Icon 图标
-- ✖ Badge 标记
-- ✔ Grid 栅格
-- ✔ Input 输入框
-- ✔ Checkbox 多选框
-- ✔ Select 选择器
-- ✔ Switch 开关
-- ✖ DatePicker 日期选择器
-- ✔ Calendar 日历
-- ✖ Form 表单
-- ✔ Message 消息
-- ✔ Notice 通知
-
-## 提交代码
+## 安装
 ```
-feat：新功能（feature）
-fix：修补bug
-docs：文档（documentation）
-style： 格式（不影响代码运行的变动）
-refactor：重构（即不是新增功能，也不是修改bug的代码变动）
-test：增加测试
-chore：构建过程或辅助工具的变动
-release: 发布
+npm install vue3-relaxui
+// or
+yarn add vue3-relaxui
 ```
+## 快速上手
+```js
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+
+// 引入RelaxPlus
+import RelaxPlus from 'vue3-relaxui'
+import 'vue3-relaxui/lib/relax.css'
+
+createApp(App)
+.use(router)
+.use(RelaxPlus) // 注册到Vue中
+.mount('#app')
+```
+## 浏览器支持
+支持现代浏览器，不支持 ie
+
 

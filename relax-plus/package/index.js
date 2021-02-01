@@ -1,3 +1,4 @@
+import pkg from '../../package.json'
 // General
 import Button from './button/index'
 import Icon from './icon/index'
@@ -68,12 +69,12 @@ function applyOptions(app){
   app.config.globalProperties.$modal = Modals
 }
 
-/* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
 }
 
 export default {
+  version: pkg.version,
   install,
   Button,
   Icon,

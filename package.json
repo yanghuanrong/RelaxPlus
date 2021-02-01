@@ -1,16 +1,20 @@
 {
-  "name": "RelaxPlus",
+  "name": "vue3-relaxui",
   "version": "0.1.0",
-  "private": true,
+  "main": "relax-plus/lib/relax.min.js",
+  "style": "relax-plus/lib/relax.css",
+  "author": "yanghuanrong",
   "scripts": {
     "serve": "yarn data && vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:ui": "rollup --config relax-plus/config/rollup.config.js",
-    "build:css": "webpack --config relax-plus/config/style.config.js",
+    "build:css": "lessc relax-plus/theme/relax.less relax-plus/lib/relax.css",
     "data": "node relax-plus/config/create-route.js"
   },
   "dependencies": {
+    "@rollup/plugin-json": "^4.1.0",
     "core-js": "^3.6.5",
+    "global": "^4.4.0",
     "gray-matter": "^4.0.2",
     "highlight.js": "^10.4.1",
     "loader-utils": "^2.0.0",
@@ -31,9 +35,10 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
-    "less": "^3.0.4",
+    "less": "^4.1.1",
     "less-loader": "^5.0.0"
   },
+  "license": "ISC",
   "browserslist": [
     "> 1%",
     "last 2 versions",
