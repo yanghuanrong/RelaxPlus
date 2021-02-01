@@ -49,7 +49,7 @@ yarn build
 # 打包组件, 需要全局安装rollup
 yarn build:ui
 
-# 打包文档, 样式需要全局安装less
+# 打包样式, 需要全局安装less
 yarn build:css
 ```
 
