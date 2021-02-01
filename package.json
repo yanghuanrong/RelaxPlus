@@ -1,6 +1,6 @@
 {
-  "name": "vue3-relaxui",
-  "version": "0.1.0",
+  "name": "vue3-relaxplus",
+  "version": "0.1.1",
   "main": "relax-plus/lib/relax.min.js",
   "style": "relax-plus/lib/relax.css",
   "author": "yanghuanrong",
