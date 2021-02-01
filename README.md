@@ -36,6 +36,22 @@ createApp(App)
 .mount('#app')
 ```
 
+## 开发
+下载项目进行依赖安装 `npm install` or `yarn`
+
+```
+# 运行
+yarn serve
+
+# 打包文档
+yarn build
+
+# 打包组件, 需要全局安装rollup
+yarn build:ui
+
+# 打包文档, 样式需要全局安装less
+yarn build:css
+```
 
 ## 浏览器支持
 仅支持现代浏览器，谁去管 ie 呀？
@@ -43,3 +59,4 @@ createApp(App)
 
 ## 赞赏
 您的 star 是对作者最大的支持和动力！
+

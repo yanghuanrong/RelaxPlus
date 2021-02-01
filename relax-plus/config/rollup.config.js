@@ -1,9 +1,9 @@
+import path from 'path'
 import pkg from '../../package.json'
 import vue from 'rollup-plugin-vue';
-import {uglify} from "rollup-plugin-uglify";
-import babel from 'rollup-plugin-babel';
-import path from 'path'
+import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import json from '@rollup/plugin-json'
+import { terser } from 'rollup-plugin-terser'
 
 const createBanner = () => {
   const time = new Date().toLocaleDateString()
@@ -17,18 +17,15 @@ const createBanner = () => {
 export default {
   input: path.resolve('relax-plus/package/index.js'),
   output: {
-      banner: createBanner(),
-      format: 'umd',
+      format: 'esm',
       name: 'RelaxPlus',
-      file: path.resolve('lib/relax.min.js')
+      file: path.resolve('lib/relax.min.js'),
+      plugins: [getBabelOutputPlugin({ presets: ['@babel/preset-env'] })],
+      banner: createBanner()
   },
   plugins: [
-    json(),
     vue(),
-    babel({
-      runtimeHelpers: true,
-      exclude: "node_modules/**"
-    }),
-    uglify()
+    json(),
+    terser({ compress: { drop_console: true } })
   ]
 }
