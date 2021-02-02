@@ -1,9 +1,22 @@
 <template>
   <div style="display: inline-block">
   <teleport to="body" :disabled="!teleprot">
-    <transition name="scale" @after-leave="afterLeave" appear>
-      <div class="x-modal" :class="{confirm: type !== ''}" v-show="isShow">
-        <div class="x-modal-content" :class="{'x-modal-confirm-wrap': type !== ''}" :style="style">
+    <transition name="fade" appear>
+      <div class="x-mask" @click="maskcancel" v-if="isShow"></div>
+    </transition>
+      <div class="x-modal" :class="{confirm: type !== ''}">
+        <transition 
+          name="scale" 
+          @before-enter="beforeEnter"
+          @before-leave="beforeLeave"
+          @after-leave="afterLeave" 
+          appear
+        >
+          <div class="x-modal-content"  
+            v-show="isShow" 
+            :class="{'x-modal-confirm-wrap': type !== ''}" 
+            :style="modalStyle"
+          >
           <div class="x-modal-close" v-if="closable" @click="cancel">
             <i class="x-icon-x"></i>
           </div>
@@ -31,19 +44,15 @@
             <slot v-else name="footer"></slot>
           </div>
         </div>
+        </transition>
       </div>
-    </transition>
-    <transition name="fade" appear>
-      <div class="x-mask" @click="maskcancel" v-if="isShow"></div>
-    </transition>
   </teleport>
   </div>
 </template>
 
 <script>
-import { toRefs, ref, watch, nextTick, onMounted, getCurrentInstance, Teleport } from "vue";
+import { toRefs, ref, watch, nextTick, onMounted, getCurrentInstance, computed } from "vue";
 import Button from "../button/index";
-import emitter from "../../utils/emiter";
 
 export default {
   name: "Modal",
@@ -71,6 +80,7 @@ export default {
       type: Boolean,
       default: true
     },
+    mouseClick: Object,
     modelValue: Boolean,
     title: String,
     loading: Boolean,
@@ -79,6 +89,14 @@ export default {
       type: Boolean,
       default: true,
     },
+    width: {
+      type: Number,
+      default: 500
+    },
+    top: {
+      type: Number,
+      default: 100
+    },
     maskClosable: {
       type: Boolean,
       default: true,
@@ -86,8 +104,8 @@ export default {
   },
   emits: ["cancel", "ok", "update:modelValue", "loading"],
   setup(props, { emit }) {
-    const { loading, modelValue, closable, maskClosable, teleprot } = toRefs(props);
-    const {onOk, onCancel} = props
+    const { loading, modelValue, closable, maskClosable, top, width, teleprot } = toRefs(props);
+    const {onOk, onCancel, mouseClick, style} = props
     const isShow = ref(modelValue.value)
 
     const maskcancel = () => {
@@ -130,6 +148,8 @@ export default {
       }
     })
 
+    let mousePosition = mouseClick
+
     onMounted(() => {
       if(closable.value) {
         document.addEventListener('keydown', ({key}) => {
@@ -138,16 +158,58 @@ export default {
           }
         })
       }
-    })
 
+      const getClickPosition = (e) => {
+        if( !modelValue.value) {
+          mousePosition = {
+            x: e.clientX,
+            y: e.clientY,
+          };
+          setTimeout(() => (mousePosition = null), 100);
+        }
+      }
+      document.addEventListener('click', getClickPosition, true)
+      
+    })
     
     const instance = getCurrentInstance()
+
+    const modalStyle = computed(() => {
+      const dest = { 
+        width: width.value + 'px',
+        top: top.value + 'px',
+        ...style
+       }
+      return dest
+    })
+    
+    
+
+    const beforeEnter = (el) => {
+      if(mousePosition){
+        const {x, y} = mousePosition
+        const width = parseFloat(modalStyle.value.width)
+        const top = parseFloat(modalStyle.value.top)
+        el.style.transformOrigin = `${x - width}px ${y - top}px 0`
+      }
+    }
+    
+    const beforeLeave = (el) => {
+      if(mousePosition){
+        const {x, y} = mousePosition
+        const width = parseFloat(modalStyle.value.width)
+        const top = parseFloat(modalStyle.value.top)
+        el.style.transformOrigin = `${x - width}px ${y - top}px 0`
+      }
+    }
+
     const afterLeave = (el) => {
       document.body.style.overflow = ''
       if(!teleprot.value) {
         instance.vnode.el.parentElement?.removeChild(instance.vnode.el)
       }
     }
+
 
     const iconType = {
       info: "x-icon-info info",
@@ -162,8 +224,11 @@ export default {
       maskcancel,
       cancel,
       ok,
-      afterLeave,
-      iconType
+      iconType,
+      modalStyle,
+      beforeEnter,
+      beforeLeave,
+      afterLeave
     };
   },
 };

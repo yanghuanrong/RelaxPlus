@@ -1,14 +1,14 @@
 <template>
   <transition 
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @after-enter="beforeEnter"
-        @before-leave="beforeLeave"
-        @leave="leave"
-        @after-leave="afterLeave"
-      >
-        <slot></slot>
-      </transition>
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="beforeEnter"
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+    >
+      <slot></slot>
+  </transition>
 </template>
 
 <script>

@@ -53,7 +53,7 @@ tag: Data Entry
 
 
 ## 禁用
-> 设置 `onetap` 开启一键选值
+> 设置 `disabled` 禁用日期选择
 :::demo
 ```html
 <template>
