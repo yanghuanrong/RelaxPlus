@@ -1,6 +1,6 @@
 {
   "name": "relaxplus",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "A group of ui components examples for using Vue 3.x",
   "main": "relax-plus/lib/relax.min.js",
   "style": "relax-plus/lib/relax.css",
