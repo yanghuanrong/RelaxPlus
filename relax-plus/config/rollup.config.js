@@ -1,7 +1,7 @@
 import path from 'path'
 import pkg from '../../package.json'
 import vue from 'rollup-plugin-vue';
-import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
+import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import json from '@rollup/plugin-json'
 import { terser } from 'rollup-plugin-terser'
 

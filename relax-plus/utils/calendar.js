@@ -1,7 +1,7 @@
 import {computed, reactive, ref} from "vue";
 
 export default function useCalendar() {
-
+  
   function getNowTime(date) {
     return {
       year: date.getFullYear(),
@@ -23,10 +23,10 @@ export default function useCalendar() {
   }
 
   function repair(d) {
-    return d < 10 ? `0${d}` : d;
+    return d < 10 ? `0${d}` : `${d}`;
   }
 
-  const nowTime = reactive(getNowTime(new Date()));
+  const nowTime = reactive(getNowTime(new Date()))
 
   const prevMonth = computed(() => {
     let year = nowTime.year;
@@ -181,7 +181,7 @@ export default function useCalendar() {
   }
 
   // 选中的日期
-  const changeDay = ({y, m, d, type}) => {
+  const changeDay = ({y, m, d, type = 'Now'}) => {
     if (type !== "Now") {
       type === 'Next' && changeNextMonth()
       type === 'Prev' && changePrevMonth()

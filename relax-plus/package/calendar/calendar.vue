@@ -34,8 +34,8 @@
         @click="changeDay(item)"
       >
         <div class="x-calendar-cell__box">
-          <div class="x-calendar-cell_holiday">{{isFormat(item)}}</div>
           <div class="x-calendar-cell__day">{{ item.d }}</div>
+          <slot name="dateCell" :data="item"></slot>
         </div>
       </div>
     </div>
@@ -43,23 +43,14 @@
 </template>
 
 <script>
-import format from './format'
 import useCalendar from '../../utils/calendar';
 
 export default {
   name: "Calendar",
   setup() {
-    
     const calendar = useCalendar()
 
-    const isFormat = ({y, m, d}) => {
-      const date = format.solar2lunar(y, m, d)
-      return date.old_str
-    }
-
-
     return {
-      isFormat,
       ...calendar
     }
   },

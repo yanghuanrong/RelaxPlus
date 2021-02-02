@@ -94,7 +94,6 @@
       }
 
       
-
       &::after{
         content: "";
         position: absolute;
@@ -134,10 +133,12 @@
       .x-calendar-cell__box{
         padding: 10px;
         height: inherit;
+        overflow: auto;
+        padding-right: 25px;
       }
 
       &.x-prev-day,&.x-next-day{
-        .x-calendar-cell__day, .x-calendar-cell_holiday{
+        .x-calendar-cell__day{
           color: var(--sub-text-color);
           opacity: 0.5;
         }

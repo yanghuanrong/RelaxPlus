@@ -84,10 +84,10 @@ export default {
     disabled: Boolean
   },
   setup(props, {emit}){
-    const {modelValue} = toRefs(props)
+    const { modelValue } = toRefs(props)
     const toggle = useToggle()
-    const {hide} = toggle
-    const calendar = useCalendar()
+    const {hide, isShow} = toggle
+    const calendar = useCalendar(props)
     const {nowTime, checkTime, repair} = calendar
 
     const state = ref('')
@@ -97,7 +97,7 @@ export default {
       const [y,m,d] = value !== '' ? value.split('-') : [
         nowTime.year,
         repair(nowTime.month + 1),
-        nowTime.day
+        repair(nowTime.day)
       ]
       
       return `${y}年${m}月${d}日`
@@ -126,18 +126,36 @@ export default {
       }
     })
 
+    watch(isShow, (value) => {
+      if(value) {
+        if(modelValue.value === '') {
+          calendar.changeNowMonth()
+        } else {
+          const [y,m,d] = modelValue.value.split('-')
+          calendar.changeDay({y,m,d})
+          nowTime.year = parseInt(y)
+          nowTime.month = parseInt(m) - 1
+        }
+      } else {
+        emit('update:modelValue', state.value)
+      }
+    })
+
     const changeClickDay = () => {
       const reg = /[0-9]+/g
       const [y,m,d] = head.value.match(reg)
       state.value = `${y}-${m}-${d}`;
-      emit('update:modelValue', state.value)
       hide()
     }
 
     const changeToday = () => {
-      state.value = `${nowTime.year}-${repair(nowTime.month + 1)}-${nowTime.day}`;
-      emit('update:modelValue', state.value)
-      toggle.hide()
+      const date = new Date()
+      let y = date.getFullYear()
+      let m = repair(date.getMonth() + 1)
+      let d = repair(date.getDate())
+      
+      state.value = `${y}-${m}-${d}`;
+      hide()
     }
     
     return {

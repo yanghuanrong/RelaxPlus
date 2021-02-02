@@ -5065,11 +5065,11 @@ html {
 .x-calendar .x-calendar-group .x-calendar-cell .x-calendar-cell__box {
   padding: 10px;
   height: inherit;
+  overflow: auto;
+  padding-right: 25px;
 }
 .x-calendar .x-calendar-group .x-calendar-cell.x-prev-day .x-calendar-cell__day,
-.x-calendar .x-calendar-group .x-calendar-cell.x-next-day .x-calendar-cell__day,
-.x-calendar .x-calendar-group .x-calendar-cell.x-prev-day .x-calendar-cell_holiday,
-.x-calendar .x-calendar-group .x-calendar-cell.x-next-day .x-calendar-cell_holiday {
+.x-calendar .x-calendar-group .x-calendar-cell.x-next-day .x-calendar-cell__day {
   color: var(--sub-text-color);
   opacity: 0.5;
 }
