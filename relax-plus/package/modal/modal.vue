@@ -7,8 +7,8 @@
       <div class="x-modal" :class="{confirm: type !== ''}">
         <transition 
           name="scale" 
-          @before-enter="beforeEnter"
-          @before-leave="beforeLeave"
+          @before-enter="setOrigin"
+          @before-leave="setOrigin"
           @after-leave="afterLeave" 
           appear
         >
@@ -184,20 +184,10 @@ export default {
     })
     
     
-
-    const beforeEnter = (el) => {
+    const setOrigin = (el) => {
       if(mousePosition){
         const {x, y} = mousePosition
-        const width = parseFloat(modalStyle.value.width)
-        const top = parseFloat(modalStyle.value.top)
-        el.style.transformOrigin = `${x - width}px ${y - top}px 0`
-      }
-    }
-    
-    const beforeLeave = (el) => {
-      if(mousePosition){
-        const {x, y} = mousePosition
-        const width = parseFloat(modalStyle.value.width)
+        const width = (document.documentElement.clientWidth - parseFloat(modalStyle.value.width)) / 2
         const top = parseFloat(modalStyle.value.top)
         el.style.transformOrigin = `${x - width}px ${y - top}px 0`
       }
@@ -226,8 +216,7 @@ export default {
       ok,
       iconType,
       modalStyle,
-      beforeEnter,
-      beforeLeave,
+      setOrigin,
       afterLeave
     };
   },
