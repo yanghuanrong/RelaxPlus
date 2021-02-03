@@ -160,37 +160,6 @@
       list-style-type: disc;
     }
   }
-  .badge-success{
-    --color: rgb(var(--success));
-  }
-  
-  .badge-warning{
-    --color: rgb(var(--warning));
-  }
-
-  .badge-error{
-    --color: rgb(var(--danger));
-  }
-
-  .badge-warning, .badge-success, .badge-error{
-    text-overflow:ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-
-    &::before{
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      display: inline-block;
-
-      margin-right: 8px;
-      background-color: var(--color);
-    }
-  }
-
-  
-
 
   .components-grid-demo {
     margin-bottom: 30px;

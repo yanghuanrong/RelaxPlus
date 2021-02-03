@@ -1,4 +1,4 @@
-import pkg from '../../package.json'
+import {version} from '../../package.json'
 // General
 import Button from './button/index'
 import Icon from './icon/index'
@@ -29,6 +29,7 @@ import Carousel from './carousel/index'
 import CarouselItem from './carousel-item/index'
 import Tabs from './tabs/index'
 import TabPane from './tab-pane/index'
+import Badge from './badge/index'
 
 const {Modal, Modals} = modal
 
@@ -51,7 +52,8 @@ const components = [
   Carousel,
   CarouselItem,
   Tabs,
-  TabPane
+  TabPane,
+  Badge
 ]
 
 
@@ -73,26 +75,10 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
 }
 
-export default {
-  version: pkg.version,
+const RelaxPlus = {
+  version,
   install,
-  Button,
-  Icon,
-  Message,
-  Switch,
-  Notice,
-  Row,
-  Col,
-  Checkbox,
-  CheckboxGroup,
-  Input,
-  Select,
-  SelectOption,
-  Modal,
-  Tooltip,
-  Slider,
-  Calendar,
-  DatePicker,
-  Carousel,
-  CarouselItem
+  ...components
 }
+
+export default RelaxPlus

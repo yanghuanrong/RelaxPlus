@@ -7,7 +7,6 @@ import '@RelaxPlus/theme/relax.less'
 import demoBlock from '@RelaxPlus/config/demoBlock.vue'
 import '@/style/global.less'
 
-
 createApp(App)
 .use(router)
 .use(RelaxUI)

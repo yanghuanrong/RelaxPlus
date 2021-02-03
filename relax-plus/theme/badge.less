@@ -1,0 +1,28 @@
+.x-badge-success{
+  --color: rgb(var(--success));
+}
+
+.x-badge-warning{
+  --color: rgb(var(--warning));
+}
+
+.x-badge-error{
+  --color: rgb(var(--danger));
+}
+
+.x-badge-warning, .x-badge-success, .x-badge-error{
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &::before{
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+
+    margin-right: 8px;
+    background-color: var(--color);
+  }
+}
