@@ -1,5 +1,12 @@
 {"data":[
   {
+    "title": "Badge 徽标",
+    "tag": "Data Display",
+    "componentName": "badge",
+    "fileName": "badge.md",
+    "routePath": "/badge"
+  },
+  {
     "title": "Button 按钮",
     "tag": "General",
     "componentName": "Button",

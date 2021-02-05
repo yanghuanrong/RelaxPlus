@@ -13,7 +13,9 @@ tag: Data Display
 <template>
   <x-calendar>
     <template #dateCell="{data}">
-      <x-badge v-for="item in getListData(data)" :status="item.type" :text="item.content"></x-badge>
+      <div v-for="item in getListData(data)">
+      <x-badge :status="item.type" :text="item.content"></x-badge>
+      </div>
     </template>
   </x-calendar>
 </template>

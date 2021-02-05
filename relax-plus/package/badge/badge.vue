@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <div :class="'x-badge-'+status">{{text}}</div>
-  </div>
+  <span :class="[
+    'x-badge-'+status,
+    text && 'x-badge-text'
+  ]">{{text}}</span>
 </template>
 
 <script>
@@ -19,6 +20,7 @@ export default {
           'warning',
           'info',
           'danger',
+          'default',
         ].includes(value)
     },
   }

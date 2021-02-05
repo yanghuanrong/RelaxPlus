@@ -10,10 +10,22 @@
   --color: rgb(var(--danger));
 }
 
-.x-badge-warning, .x-badge-success, .x-badge-error{
-  text-overflow:ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+.x-badge-default{
+  --color: rgb(var(--default));
+}
+
+.x-badge-warning, 
+.x-badge-success, 
+.x-badge-error,
+.x-badge-default{
+ 
+  &.x-badge-text{
+    width: 100%;
+    display: inline-block;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 
   &::before{
     content: "";
