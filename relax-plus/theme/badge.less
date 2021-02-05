@@ -1,40 +1,68 @@
-.x-badge-success{
-  --color: rgb(var(--success));
-}
+.x-badge{
 
-.x-badge-warning{
-  --color: rgb(var(--warning));
-}
-
-.x-badge-error{
-  --color: rgb(var(--danger));
-}
-
-.x-badge-default{
-  --color: rgb(var(--default));
-}
-
-.x-badge-warning, 
-.x-badge-success, 
-.x-badge-error,
-.x-badge-default{
- 
-  &.x-badge-text{
-    width: 100%;
-    display: inline-block;
-    text-overflow:ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  .x-badge-success{
+    --color: rgb(var(--success));
+  }
+  
+  .x-badge-warning{
+    --color: rgb(var(--warning));
+  }
+  
+  .x-badge-error{
+    --color: rgb(var(--danger));
+  }
+  
+  .x-badge-default{
+    --color: rgb(var(--default));
   }
 
-  &::before{
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    display: inline-block;
+  .x-badge-warning, 
+  .x-badge-success, 
+  .x-badge-error,
+  .x-badge-default{
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+      background-color: var(--color);
+  }
 
-    margin-right: 8px;
-    background-color: var(--color);
+  .x-badge-shine{
+    position: relative;
+
+    &::after{
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: block;
+      background-color: var(--color);
+      animation: shine 2.5s cubic-bezier(.47, -.2, .13, 1.35) infinite;
+    }
+  }
+
+  .x-badge-count{
+    background-color: rgb(var(--danger));
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 0 5px;
+    color: rgb(var(--white));
+  }
+
+  @keyframes shine {
+    0% {
+      transform: scale(1);
+      opacity: 0.48;
+    }
+
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
   }
 }

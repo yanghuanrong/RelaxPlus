@@ -27,3 +27,36 @@ tag: Data Display
 </template>
 ```
 :::
+
+
+
+## 闪耀
+> 添加`shine`，开启闪耀徽标
+:::demo
+```html
+<template>
+  <x-badge shine status="success" />
+  <x-badge shine status="error" />
+  <x-badge shine status="default" />
+  <x-badge shine status="warning" />
+  <br />
+  <x-badge shine status="success" text="Success" />
+  <br />
+  <x-badge shine status="error" text="Error" />
+  <br />
+  <x-badge shine status="default" text="Default" />
+  <br />
+  <x-badge shine status="warning" text="warning" />
+</template>
+```
+:::
+
+## 独立使用
+> 不包裹任何元素独立使用
+:::demo
+```html
+<template>
+  <x-badge count="24" />
+</template>
+```
+:::
