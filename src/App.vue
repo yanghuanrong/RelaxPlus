@@ -1,30 +1,38 @@
 <template>
   <div class="wrapper">
     <div class="sidebar-nav">
-    <div class="sidebar-menu">
-      <teleport to="body">
-      <router-link to="/" title="RelaxPlus">
-        <div class="logo-img">
-          <span></span>
+      <div class="sidebar-menu">
+        <teleport to="body">
+          <router-link to="/" title="RelaxPlus">
+            <div class="logo-img">
+              <span></span>
+            </div>
+          </router-link>
+        </teleport>
+
+        <x-scroll>
+        <div v-for="menu in nav" class="menu">
+          <dl v-if="menu.child">
+            <dt># {{ menu.title }}</dt>
+            <dd v-for="submenu in menu.child">
+              <router-link :to="submenu.routePath">{{
+                submenu.title
+              }}</router-link>
+            </dd>
+          </dl>
+          <router-link v-else :to="menu.routePath">{{ menu.title }}</router-link>
         </div>
-      </router-link>
-      </teleport>
-      <div v-for="menu in nav" class="menu">
-        <dl v-if="menu.child">
-          <dt># {{ menu.title }}</dt>
-          <dd v-for="submenu in menu.child">
-            <router-link :to="submenu.routePath">{{
-              submenu.title
-            }}</router-link>
-          </dd>
-        </dl>
-        <router-link v-else :to="menu.routePath">{{ menu.title }}</router-link>
+        </x-scroll>
+
       </div>
     </div>
-    </div>
-    <div class="content-page">
-      <router-view />
-    </div>
+
+    <x-scroll >
+      <div class="content-page">
+        <router-view />
+      </div>
+    </x-scroll>
+
   </div>
   <div class="content-menu">
     <x-tooltip content="去仓库" placement="bottom">

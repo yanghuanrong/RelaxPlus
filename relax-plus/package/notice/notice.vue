@@ -46,7 +46,6 @@ export default {
     const instance = getCurrentInstance()
     const isShow = ref(true)
     const bar = ref(0)
-    const suspended = ref(false)
 
     let s = 100
     const t = duration * 1000

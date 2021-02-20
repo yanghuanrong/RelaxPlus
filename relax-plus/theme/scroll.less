@@ -1,0 +1,31 @@
+.x-scroll {
+  overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+
+  .x-scroll-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: -17px;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .x-scroll-bar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+
+    .x-scroll-thumb {
+      position: relative;
+      width: 100%;
+      background: var(--scroll);
+      cursor: pointer;
+    }
+  }
+}

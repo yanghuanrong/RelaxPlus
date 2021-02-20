@@ -2,8 +2,8 @@
   {
     "title": "Badge 徽标",
     "tag": "Data Display",
-    "componentName": "badge",
-    "fileName": "badge.md",
+    "componentName": "Badge",
+    "fileName": "Badge.md",
     "routePath": "/badge"
   },
   {
@@ -88,6 +88,13 @@
     "componentName": "Quickstart",
     "fileName": "Quickstart.md",
     "routePath": "/quickstart"
+  },
+  {
+    "title": "Scroll 滚动",
+    "tag": "Data Display",
+    "componentName": "Scroll",
+    "fileName": "Scroll.md",
+    "routePath": "/scroll"
   },
   {
     "title": "Select 选择",

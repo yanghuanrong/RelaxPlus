@@ -30,6 +30,7 @@ import CarouselItem from './carousel-item/index'
 import Tabs from './tabs/index'
 import TabPane from './tab-pane/index'
 import Badge from './badge/index'
+import Scroll from './scroll/index'
 
 const {Modal, Modals} = modal
 
@@ -53,7 +54,8 @@ const components = [
   CarouselItem,
   Tabs,
   TabPane,
-  Badge
+  Badge,
+  Scroll
 ]
 
 
