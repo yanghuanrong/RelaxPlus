@@ -17,11 +17,11 @@ tag: Data Display
   <x-badge status="default" />
   <x-badge status="warning" />
   <br />
-  <x-badge status="success" text="Success" />
+  <x-badge status="success" text="success" />
   <br />
-  <x-badge status="error" text="Error" />
+  <x-badge status="error" text="error" />
   <br />
-  <x-badge status="default" text="Default" />
+  <x-badge status="default" text="default" />
   <br />
   <x-badge status="warning" text="warning" />
 </template>
@@ -40,11 +40,11 @@ tag: Data Display
   <x-badge shine status="default" />
   <x-badge shine status="warning" />
   <br />
-  <x-badge shine status="success" text="Success" />
+  <x-badge shine status="success" text="success" />
   <br />
-  <x-badge shine status="error" text="Error" />
+  <x-badge shine status="error" text="error" />
   <br />
-  <x-badge shine status="default" text="Default" />
+  <x-badge shine status="default" text="default" />
   <br />
   <x-badge shine status="warning" text="warning" />
 </template>

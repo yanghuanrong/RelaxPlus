@@ -23,11 +23,12 @@ export default {
       default: '',
       validator: value =>
         [
+          '',
           'success',
           'primary',
           'warning',
           'info',
-          'danger',
+          'error',
           'default',
         ].includes(value)
     },

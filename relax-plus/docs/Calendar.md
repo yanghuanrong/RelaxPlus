@@ -14,7 +14,7 @@ tag: Data Display
   <x-calendar>
     <template #dateCell="{data}">
       <div v-for="item in getListData(data)" class="events">
-      <x-badge :status="item.type" :text="item.content"></x-badge>
+        <x-badge :status="item.type" :text="item.content"></x-badge>
       </div>
     </template>
   </x-calendar>
@@ -42,7 +42,7 @@ tag: Data Display
           case '15':
             listData = [
               { type: 'warning', content: 'This is warning event' },
-              { type: 'success', content: 'This is very long usual event。。....' },
+              { type: 'success', content: 'This is very long usual event....' },
               { type: 'error', content: 'This is error event 1.' },
               { type: 'error', content: 'This is error event 2.' },
               { type: 'error', content: 'This is error event 3.' },

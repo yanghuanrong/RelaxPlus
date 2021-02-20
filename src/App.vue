@@ -27,11 +27,7 @@
       </div>
     </div>
 
-    <x-scroll >
-      <div class="content-page">
-        <router-view />
-      </div>
-    </x-scroll>
+    <View/>
 
   </div>
   <div class="content-menu">
@@ -51,8 +47,12 @@
 
 <script>
 import routes from "@/router/data";
+import View from './views/View'
 import { ref } from 'vue';
 export default {
+  components: {
+    View
+  },
   setup() {
     const nav = useNav()
 
