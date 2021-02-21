@@ -32,7 +32,7 @@
       <div></div>
     </div>
 
-    <div class="year">2021</div>
+    <!-- <div class="year">2021</div> -->
 
     <div class="element">
       <div class="triangle-move">
