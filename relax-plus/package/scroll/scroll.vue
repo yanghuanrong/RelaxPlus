@@ -92,8 +92,6 @@ export default {
         }
 
         if(el.children[0].scrollHeight <= el.offsetHeight) {
-          // console.log('没有滚动条')
-          // console.log(BarHeight.value)
           BarHeight.value = 0
         }
 

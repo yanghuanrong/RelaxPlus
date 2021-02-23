@@ -1,0 +1,110 @@
+.x-radio {
+  --color: var(--danger);
+  cursor: pointer;
+  margin-right: 10px;
+  user-select: none;
+  line-height: 1.3;
+
+  &:hover {
+    input[type="radio"]+span::before {
+      border-color: rgb(var(--danger));
+    }
+  }
+
+  input[type="radio"]+span {
+    display: inline-block;
+    padding-left: 6px;
+    position: relative;
+    font-weight: normal;
+
+    &::before {
+      content: "";
+      background-color: rgb(--white);
+      border-radius: 50%;
+      border: 1px solid var(--line-color);
+      display: inline-block;
+      left: 0;
+      margin-left: -14px;
+      position: absolute;
+      transition: 0.3s ease-in-out;
+      width: 16px;
+      height: 16px;
+      outline: none !important;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: -8px;
+      display: table;
+      width: 4px;
+      height: 8px;
+      border: 1px solid rgb(var(--white));
+      border-top-width: 0;
+      border-left-width: 0;
+      transform: rotate(45deg) scale(0);
+      opacity: 0;
+      transition: all .4s ease;
+    }
+
+    &:active::before {
+      box-shadow: 0 0 0 2px rgb(var(--color), .5);
+    }
+  }
+
+  input[type="radio"] {
+    cursor: pointer;
+    opacity: 0;
+    z-index: 1;
+    outline: none !important;
+  }
+
+  &.x-radio-checked {
+    input[type="radio"]+span {
+      &::after {
+        opacity: 1;
+        transform: rotate(45deg) scale(1);
+      }
+
+      &::before {
+        background-color: rgb(var(--color));
+        border-color: rgb(var(--color));
+      }
+    }
+
+    &.x-radio-disabled {
+      input[type="radio"]+span {
+        &::before{
+          background-color: var(--line-color);
+        }
+        &::after{
+          border: 1px solid rgb(var(--mix-color), .4);
+          border-top-width: 0;
+          border-left-width: 0;
+          transform: rotate(45deg);
+          border-color: rgb(var(--mix-color), .4);
+        }
+      }
+    }
+  }
+
+  &.x-radio-disabled {
+    cursor: not-allowed;
+
+    input[type="radio"]+span {
+      opacity: 0.65;
+
+      &::before {
+        background-color: var(--line-color);
+        border-color: var(--line-color);
+      }
+
+      &:active::before {
+        box-shadow: none;
+      }
+    }
+
+    
+  }
+}

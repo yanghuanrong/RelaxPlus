@@ -22,6 +22,8 @@ import Select from './select/index';
 import SelectOption from './select-option/index';
 import Slider from './slider/index'
 import DatePicker from './date-picker/index'
+import Radio from './radio/index'
+import RadioGroup from './radio-group/index'
 
 // Data Display
 import Calendar from './calendar/index'
@@ -55,7 +57,9 @@ const components = [
   Tabs,
   TabPane,
   Badge,
-  Scroll
+  Scroll,
+  Radio,
+  RadioGroup
 ]
 
 

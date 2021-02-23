@@ -90,6 +90,13 @@
     "routePath": "/quickstart"
   },
   {
+    "title": "Radio 单选框",
+    "tag": "Data Entry",
+    "componentName": "Radio",
+    "fileName": "Radio.md",
+    "routePath": "/radio"
+  },
+  {
     "title": "Scroll 滚动",
     "tag": "Data Display",
     "componentName": "Scroll",
