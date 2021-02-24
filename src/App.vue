@@ -31,6 +31,7 @@
 
   </div>
   <div class="content-menu">
+    <x-badge :count="`${version}`" />
     <x-tooltip content="去仓库" placement="bottom">
     <a href="https://github.com/yanghuanrong/RelaxPlus" target="__blank" class="item">
       <i class="x-icon-github"></i>
@@ -49,6 +50,8 @@
 import routes from "@/router/data";
 import View from './views/View'
 import { ref } from 'vue';
+import pkg from '../package.json'
+
 export default {
   components: {
     View
@@ -61,7 +64,8 @@ export default {
     return {
       nav,
       toggle,
-      handleToggle
+      handleToggle,
+      version: pkg.version
     };
   },
 }
