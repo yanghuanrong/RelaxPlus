@@ -32,7 +32,16 @@ import CarouselItem from './carousel-item/index'
 import Tabs from './tabs/index'
 import TabPane from './tab-pane/index'
 import Badge from './badge/index'
+
+// Others
 import Scroll from './scroll/index'
+
+// Navigation
+import Menu from './menu/index'
+import SubMenu from './sub-menu/index'
+import MenuItem from './menu-item/index'
+import MenuItemGroup from './menu-item-group/index'
+
 
 const {Modal, Modals} = modal
 
@@ -59,7 +68,11 @@ const components = [
   Badge,
   Scroll,
   Radio,
-  RadioGroup
+  RadioGroup,
+  Menu,
+  MenuItem,
+  SubMenu,
+  MenuItemGroup
 ]
 
 

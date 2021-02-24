@@ -63,6 +63,13 @@
     "routePath": "/input"
   },
   {
+    "title": "Menu 导航菜单",
+    "tag": "Navigation",
+    "componentName": "Menu",
+    "fileName": "Menu.md",
+    "routePath": "/menu"
+  },
+  {
     "title": "Message 消息",
     "tag": "Feedback",
     "componentName": "Message",
@@ -98,7 +105,7 @@
   },
   {
     "title": "Scroll 滚动",
-    "tag": "Data Display",
+    "tag": "Others",
     "componentName": "Scroll",
     "fileName": "Scroll.md",
     "routePath": "/scroll"

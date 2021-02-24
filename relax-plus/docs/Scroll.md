@@ -1,6 +1,6 @@
 ---
 title: Scroll 滚动
-tag: Data Display
+tag: Others
 ---
 
 # Scroll 滚动
