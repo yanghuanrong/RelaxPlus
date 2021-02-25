@@ -17,24 +17,29 @@ body,
 
 .logo-img {
   position: fixed;
-  left: 20px;
-  top: 20px;
+  left: 25px;
+  top: 15px;
   z-index: 15;
-  width: 30px;
-  height: 30px;
-  background: url('../assets/logo.png') no-repeat;
-  background-size: contain;
+  font-size: 32px;
 
   &::after {
-    content: "RelaxPlus";
-    position: absolute;
-    left: 35px;
-    top: -3px;
-    line-height: 36px;
-    font-size: 36px;
+    content: "<RelaxPlus>";
     color: var(--main-text-color);
     font-family: "calibre bold";
   }
+}
+
+.qrcode{
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 120px;
+  height: 120px;
+  
+  img{
+    display: block;
+    width: 100%;
+  };
 }
 
 .content-menu{

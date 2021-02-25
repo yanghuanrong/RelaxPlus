@@ -4,9 +4,7 @@
       <div class="sidebar-menu">
         <teleport to="body">
           <router-link to="/" title="RelaxPlus">
-            <div class="logo-img">
-              <span></span>
-            </div>
+            <div class="logo-img"></div>
           </router-link>
         </teleport>
 

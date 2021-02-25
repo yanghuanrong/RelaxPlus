@@ -4,7 +4,12 @@
       <slot name="title"></slot>
       <i class="x-arrow" :class="{'is-active': isActive}"></i>
     </div>
-    <CollapseTransition>
+    <transition name="scaleY" ref="trigger" v-if="horizontal">
+      <ul class="x-menu" v-show="isActive">
+        <slot></slot>
+      </ul>
+    </transition>
+    <CollapseTransition v-else>
       <ul class="x-menu" v-show="isActive">
         <slot></slot>
       </ul>
@@ -13,7 +18,7 @@
 </template>
 
 <script>
-import { inject, ref, toRefs, watch, watchEffect } from 'vue'
+import { inject, ref, toRefs, watch, getCurrentInstance, onMounted } from 'vue'
 import CollapseTransition from '../transitions/collapse-transition.vue'
 import emiter from '../../utils/emiter'
 
@@ -31,7 +36,8 @@ export default {
     const menu = inject('menu', {props: {}})
     const isActive = ref(false)
     const isChild = ref('')
-    
+    const Instance = getCurrentInstance()
+    const horizontal = menu.props.mode === 'horizontal'
     
     watch(menu.currName, (value) => {
       if(menu.props.uniqueOpened) {
@@ -42,8 +48,12 @@ export default {
           isActive.value = true
         }
       }
+      if(horizontal){
+        if(value !== name.value) {
+          isActive.value = false
+        }
+      }
     })
-
     on('item-click', (item) => {
       isChild.value = item
     })
@@ -53,7 +63,19 @@ export default {
       isActive.value = !isActive.value
     }
 
+    onMounted(() => {
+      if(horizontal) {
+        document.addEventListener("click", (e) => {
+          const el = Instance.vnode.el
+          if (!el.contains(e.target)) {
+            isActive.value = false
+          }
+        })
+      }
+    })
+
     return {
+      horizontal,
       handleClick,
       isActive
     }

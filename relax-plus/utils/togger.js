@@ -61,7 +61,6 @@ export default function useToggle(){
     window.addEventListener('scroll', () => {
       if(isShow.value && parent) {
         const Rect = parent.getBoundingClientRect()
-        const scrollTop = document.documentElement.scrollTop
 
         if(Rect.top + Rect.height + elHeight > clientHeight){
           rect.top = top2 + 'px'

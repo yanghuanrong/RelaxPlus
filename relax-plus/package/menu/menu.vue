@@ -1,5 +1,5 @@
 <template>
-  <ul class='x-menu'>
+  <ul class='x-menu' :class="`x-menu-${mode}`">
     <slot></slot>
   </ul>
 </template>
@@ -10,7 +10,16 @@ import emiter from '../../utils/emiter'
 export default {
   name: 'Menu',
   props: {
-    uniqueOpened: Boolean
+    uniqueOpened: Boolean,
+    mode: {
+      type: String,
+      default: 'vertical',
+      validator: value =>
+      [
+        'vertical',
+        'horizontal',
+      ].includes(value)
+    }
   },
   setup(props){
     const instance = getCurrentInstance()

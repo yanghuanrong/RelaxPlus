@@ -8,6 +8,7 @@
         {{item.name}}
       </div>
     </div>
+    <div class="qrcode"><img src="@/assets/qrcode.jpg" alt=""></div>
   </div>
   </x-scroll>
 </template>
