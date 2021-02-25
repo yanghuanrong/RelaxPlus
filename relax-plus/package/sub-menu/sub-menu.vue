@@ -1,5 +1,5 @@
 <template>
-  <li class="x-submenu" @click="handleClick">
+  <li class="x-submenu" :class="{'is-active': isActive}" @click="handleClick">
     <div class="x-menu-title">
       <slot name="title"></slot>
       <i class="x-arrow" :class="{'is-active': isActive}"></i>

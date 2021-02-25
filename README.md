@@ -2,7 +2,6 @@
 
 ![image](https://gitee.com/bsie/RelaxPlus/raw/master/src/assets/logo.png)
 
-# RelaxPlus
 
 🔥 [文档网址](https://bsie.gitee.io/relaxplus/)
 

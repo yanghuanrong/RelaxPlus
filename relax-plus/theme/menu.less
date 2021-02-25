@@ -6,10 +6,6 @@
   border-right: 1px solid var(--line-color);
   background-color: var(--main-background-color);
 
-  .x-menu{
-    border-right: 0;
-  }
-
   &.x-menu-horizontal{
     display: flex;
     border-right: 0;
@@ -17,6 +13,22 @@
 
     .x-submenu{
       z-index: 1;
+
+      &.is-active {
+        color: rgb(var(--primary));
+        transition: color .4s ease;
+        
+        &::after{
+          content: "";
+          position: absolute;
+          bottom: -1px;
+          right: 0;
+          display: block;
+          background-color: rgb(var(--primary));
+          height: 3px;
+          width: 100%;
+        }
+      }
 
       &>.x-menu{
         position: absolute;
@@ -31,20 +43,45 @@
       }
     }
 
+    &>.x-menu-item{
+
+      &.active{
+        background-color: transparent;
+
+        &:after{
+          width: 100%;
+          height: 3px;
+        }
+      
+      }
+      
+    }
+
     .x-menu-group {
       .x-menu-item {
         padding: 8px 20px;
+
+        &.active {
+          &::after{
+            display: none;
+          }
+        }
       }
 
       .x-menu-title {
         padding: 8px 20px;
       }
     }
+
+  }
+
+  
+  .x-menu{
+    border-right: 0;
   }
 
   &>.x-menu-item:hover {
-    background-color: rgba(var(--primary), 0.1);
-    transition: background-color .4s ease;
+    color: rgb(var(--primary));
   }
 
   &>.x-menu-item {
@@ -53,11 +90,23 @@
     padding: 12px 20px;
     color: var(--main-text-color);
     font-size: 14px;
+    position: relative;
 
     &.active {
       color: rgb(var(--primary));
       background-color: rgba(var(--primary), 0.1);
       transition: color .4s ease;
+      
+      &::after{
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        right: 0;
+        display: block;
+        background-color: rgb(var(--primary));
+        height: 100%;
+        width: 3px;
+      }
     }
 
     & .x-menu-item {
@@ -88,9 +137,8 @@
         margin-left: 10px;
       }
 
-      &:hover {
-        background-color: rgba(var(--primary), 0.1);
-        transition: background-color .4s ease;
+      &:hover{
+        color: rgba(var(--primary), 1);
       }
  
     }
