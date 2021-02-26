@@ -11,9 +11,13 @@ const routes = [
 ]
 
 data.map((item) => {
+  const title = item.title.split(' ').reverse().join(' ')
   routes.push({
     path: item.routePath,
     name: item.componentName,
+    meta: {
+      title
+    },
     component: () => import('@RelaxPlus/docs/' + item.fileName)
   })
 })
@@ -21,6 +25,10 @@ data.map((item) => {
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.afterEach((to) => {
+  document.title = `${to.meta.title} - RelaxPlus`
 })
 
 export default router
