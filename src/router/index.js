@@ -28,7 +28,8 @@ const router = createRouter({
 })
 
 router.afterEach((to) => {
-  document.title = `${to.meta.title} - RelaxPlus`
+  const title = to.meta.title ? `${to.meta.title} - RelaxPlus` : `RelaxPlus`
+  document.title = title
 })
 
 export default router
