@@ -24,6 +24,7 @@
   "dependencies": {
     "@rollup/plugin-babel": "^5.2.3",
     "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-url": "^6.0.0",
     "core-js": "^3.6.5",
     "global": "^4.4.0",
     "gray-matter": "^4.0.2",

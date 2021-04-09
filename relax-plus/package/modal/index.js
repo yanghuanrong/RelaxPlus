@@ -1,18 +1,18 @@
 import Modal from './modal.vue'
 import { createComponent } from '../../utils/component'
 
-Modal.install = function (app) {
+Modal.install = function(app) {
   app.component(Modal.name, element)
 }
 
-let mouseClick 
+let mouseClick
 const getClickPosition = (e) => {
   mouseClick = {
     x: e.clientX,
     y: e.clientY,
-  };
-  setTimeout(() => (mouseClick = null), 100);
-};
+  }
+  setTimeout(() => (mouseClick = null), 100)
+}
 document.addEventListener('click', getClickPosition, true)
 
 function ModalsCreate(option, type) {
@@ -31,16 +31,13 @@ function ModalsCreate(option, type) {
 
 let oneKey = null
 
-function Modals (props){
+function Modals(props) {
   Modals[oneKey](props)
 }
 
-;['info','error', 'success', 'warning', 'confirm'].forEach((type) => {
+;['info', 'error', 'success', 'warning', 'confirm'].forEach((type) => {
   oneKey || (oneKey = type)
-  Modals[type] = (props) => ModalsCreate(props, type)
+  Modal[type] = (props) => ModalsCreate(props, type)
 })
 
-export default {
-  Modal,
-  Modals
-}
+export default Modal

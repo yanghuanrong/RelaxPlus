@@ -1,4 +1,5 @@
-import {version} from '../../package.json'
+import { version } from '../../package.json'
+
 // General
 import Button from './button/index'
 import Icon from './icon/index'
@@ -13,13 +14,13 @@ import modal from './modal/index'
 import Row from './row/index'
 import Col from './col/index'
 
-// Data Entry 
+// Data Entry
 import Switch from './switch/index'
 import Checkbox from './checkbox/index'
 import CheckboxGroup from './checkbox-group/index'
 import Input from './input/index'
-import Select from './select/index';
-import SelectOption from './select-option/index';
+import Select from './select/index'
+import SelectOption from './select-option/index'
 import Slider from './slider/index'
 import DatePicker from './date-picker/index'
 import Radio from './radio/index'
@@ -42,8 +43,7 @@ import SubMenu from './sub-menu/index'
 import MenuItem from './menu-item/index'
 import MenuItemGroup from './menu-item-group/index'
 
-
-const {Modal, Modals} = modal
+const { Modal, Modals } = modal
 
 const components = [
   Button,
@@ -72,19 +72,18 @@ const components = [
   Menu,
   MenuItem,
   SubMenu,
-  MenuItemGroup
+  MenuItemGroup,
 ]
 
-
-const install = function (app) {
+const install = function(app) {
   components.forEach((component) => {
-    app.component('x'+component.name, component)
+    app.component('x' + component.name, component)
   })
 
   applyOptions(app)
 }
 
-function applyOptions(app){
+function applyOptions(app) {
   app.config.globalProperties.$message = Message
   app.config.globalProperties.$notice = Notice
   app.config.globalProperties.$modal = Modals
@@ -97,7 +96,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 const RelaxPlus = {
   version,
   install,
-  ...components
+  ...components,
 }
 
 export default RelaxPlus

@@ -1,7 +1,7 @@
 import path from 'path'
 import pkg from '../../package.json'
-import vue from 'rollup-plugin-vue';
-import { getBabelOutputPlugin } from '@rollup/plugin-babel';
+import vue from 'rollup-plugin-vue'
+import { getBabelOutputPlugin } from '@rollup/plugin-babel'
 import json from '@rollup/plugin-json'
 import { terser } from 'rollup-plugin-terser'
 
@@ -17,15 +17,11 @@ const createBanner = () => {
 export default {
   input: path.resolve('relax-plus/package/index.js'),
   output: {
-      format: 'esm',
-      name: 'RelaxPlus',
-      file: path.resolve('lib/relax.min.js'),
-      plugins: [getBabelOutputPlugin({ presets: ['@babel/preset-env'] })],
-      banner: createBanner()
+    format: 'esm',
+    name: 'RelaxPlus',
+    file: path.resolve('lib/relax.min.js'),
+    plugins: [getBabelOutputPlugin({ presets: ['@babel/preset-env'] })],
+    banner: createBanner(),
   },
-  plugins: [
-    vue(),
-    json(),
-    terser({ compress: { drop_console: true } })
-  ]
+  plugins: [vue(), json(), terser({ compress: { drop_console: true } })],
 }
