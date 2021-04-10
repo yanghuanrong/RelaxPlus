@@ -1,12 +1,18 @@
 const path = require('path')
 
 module.exports = {
-  // 扩展 webpack 配置
+  pages: {
+    index: {
+      entry: 'examples/main.js',
+      template: 'public/index.html',
+      filename: 'index.html'
+    }
+  },
   publicPath: './',
   chainWebpack: (config) => {
     config.resolve.alias
-      .set('@RelaxPlus', path.resolve('relax-plus'))
-      .set('RelaxPlus', path.resolve('relax-plus/index.js'))
+      .set('RelaxPlus', path.resolve('relax-plus'))
+      .set('@', path.resolve('examples'))
 
     config.module
       .rule('md')

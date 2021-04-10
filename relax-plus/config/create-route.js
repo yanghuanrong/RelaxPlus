@@ -24,7 +24,7 @@ fs.readdir(path(__dirname, blogPath), (err, files) => {
     })
   })
   const dataJSON = `{"data":${JSON.stringify(fileJSON, null, 2)}}`
-  const dataPath = path(__dirname, `../../src/router/data.json`)
+  const dataPath = path(__dirname, `../../examples/router/data.json`)
   fs.writeFile(dataPath, dataJSON, err => {
     console.log('Data update success')
     if (err) {

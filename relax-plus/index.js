@@ -1,5 +1,6 @@
 import { version } from '../package.json'
 import { isObject, isFunction } from './utils/isType'
+import './theme/relax.less'
 const ctx = require.context('./package', true, /\index.js$/)
 
 const RegName = /(?<=\.\/).*?(?=\/index.js)/

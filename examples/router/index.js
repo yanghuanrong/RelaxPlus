@@ -18,7 +18,7 @@ data.map((item) => {
     meta: {
       title
     },
-    component: () => import('@RelaxPlus/docs/' + item.fileName)
+    component: () => import('RelaxPlus/docs/' + item.fileName)
   })
 })
 

@@ -34,7 +34,7 @@
 
 <script>
 import { ref, getCurrentInstance } from 'vue'
-import CollapseTransition from '@RelaxPlus/package/transitions/collapse-transition.vue'
+import CollapseTransition from '../package/transitions/collapse-transition.vue'
 
 export default {
   components: {
