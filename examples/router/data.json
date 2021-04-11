@@ -2,147 +2,147 @@
   {
     "title": "Badge 徽标",
     "tag": "Data Display",
-    "componentName": "Badge",
-    "fileName": "Badge.md",
+    "componentName": "badge",
+    "componentPath": "badge/README.md",
     "routePath": "/badge"
   },
   {
     "title": "Button 按钮",
     "tag": "General",
-    "componentName": "Button",
-    "fileName": "Button.md",
+    "componentName": "button",
+    "componentPath": "button/README.md",
     "routePath": "/button"
   },
   {
     "title": "Calendar 日历",
     "tag": "Data Display",
-    "componentName": "Calendar",
-    "fileName": "Calendar.md",
+    "componentName": "calendar",
+    "componentPath": "calendar/README.md",
     "routePath": "/calendar"
   },
   {
     "title": "Carousel 轮播",
     "tag": "Data Display",
-    "componentName": "Carousel",
-    "fileName": "Carousel.md",
+    "componentName": "carousel",
+    "componentPath": "carousel/README.md",
     "routePath": "/carousel"
   },
   {
     "title": "Checkbox 多选框",
     "tag": "Data Entry",
-    "componentName": "Checkbox",
-    "fileName": "Checkbox.md",
+    "componentName": "checkbox",
+    "componentPath": "checkbox/README.md",
     "routePath": "/checkbox"
   },
   {
     "title": "DatePicker 日期选择",
     "tag": "Data Entry",
-    "componentName": "DatePicker",
-    "fileName": "DatePicker.md",
-    "routePath": "/datepicker"
-  },
-  {
-    "title": "Grid 栅格",
-    "tag": "Layout",
-    "componentName": "Grid",
-    "fileName": "Grid.md",
-    "routePath": "/grid"
+    "componentName": "date-picker",
+    "componentPath": "date-picker/README.md",
+    "routePath": "/date-picker"
   },
   {
     "title": "Icon 图标",
     "tag": "General",
-    "componentName": "Icon",
-    "fileName": "Icon.md",
+    "componentName": "icon",
+    "componentPath": "icon/README.md",
     "routePath": "/icon"
   },
   {
     "title": "Input 输入框",
     "tag": "Data Entry",
-    "componentName": "Input",
-    "fileName": "Input.md",
+    "componentName": "input",
+    "componentPath": "input/README.md",
     "routePath": "/input"
   },
   {
     "title": "Menu 导航菜单",
     "tag": "Navigation",
-    "componentName": "Menu",
-    "fileName": "Menu.md",
+    "componentName": "menu",
+    "componentPath": "menu/README.md",
     "routePath": "/menu"
   },
   {
     "title": "Message 消息",
     "tag": "Feedback",
-    "componentName": "Message",
-    "fileName": "Message.md",
+    "componentName": "message",
+    "componentPath": "message/README.md",
     "routePath": "/message"
   },
   {
     "title": "Modal 对话框",
     "tag": "Feedback",
-    "componentName": "Modal",
-    "fileName": "Modal.md",
+    "componentName": "modal",
+    "componentPath": "modal/README.md",
     "routePath": "/modal"
   },
   {
     "title": "Notice 通知",
     "tag": "Feedback",
-    "componentName": "Notice",
-    "fileName": "Notice.md",
+    "componentName": "notice",
+    "componentPath": "notice/README.md",
     "routePath": "/notice"
   },
   {
     "title": "快速上手",
-    "componentName": "Quickstart",
-    "fileName": "Quickstart.md",
-    "routePath": "/quickstart"
+    "componentName": "quick-start",
+    "componentPath": "quick-start/README.md",
+    "routePath": "/quick-start"
   },
   {
     "title": "Radio 单选框",
     "tag": "Data Entry",
-    "componentName": "Radio",
-    "fileName": "Radio.md",
+    "componentName": "radio",
+    "componentPath": "radio/README.md",
     "routePath": "/radio"
+  },
+  {
+    "title": "Grid 栅格",
+    "tag": "Layout",
+    "componentName": "row",
+    "componentPath": "row/README.md",
+    "routePath": "/row"
   },
   {
     "title": "Scroll 滚动",
     "tag": "Others",
-    "componentName": "Scroll",
-    "fileName": "Scroll.md",
+    "componentName": "scroll",
+    "componentPath": "scroll/README.md",
     "routePath": "/scroll"
   },
   {
     "title": "Select 选择",
     "tag": "Data Entry",
-    "componentName": "Select",
-    "fileName": "Select.md",
+    "componentName": "select",
+    "componentPath": "select/README.md",
     "routePath": "/select"
   },
   {
     "title": "Slider 滑动块",
     "tag": "Data Entry",
-    "componentName": "Slider",
-    "fileName": "Slider.md",
+    "componentName": "slider",
+    "componentPath": "slider/README.md",
     "routePath": "/slider"
   },
   {
     "title": "Switch 开关",
     "tag": "Data Entry",
-    "componentName": "Switch",
-    "fileName": "Switch.md",
+    "componentName": "switch",
+    "componentPath": "switch/README.md",
     "routePath": "/switch"
   },
   {
     "title": "Tabs 标签页",
     "tag": "Data Display",
-    "componentName": "Tabs",
-    "fileName": "Tabs.md",
+    "componentName": "tabs",
+    "componentPath": "tabs/README.md",
     "routePath": "/tabs"
   },
   {
     "title": "Tooltip 文字提示",
     "tag": "General",
-    "componentName": "Tooltip",
-    "fileName": "Tooltip.md",
+    "componentName": "tooltip",
+    "componentPath": "tooltip/README.md",
     "routePath": "/tooltip"
   }
 ]}

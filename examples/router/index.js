@@ -1,30 +1,34 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import {data} from './data.json'
+import { data } from './data.json'
 import Home from '../views/Home.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
 ]
 
-data.map((item) => {
-  const title = item.title.split(' ').reverse().join(' ')
+data.forEach((item) => {
+  const title = item.title
+    .split(' ')
+    .reverse()
+    .join(' ')
+  console.log(title)
   routes.push({
     path: item.routePath,
     name: item.componentName,
     meta: {
-      title
+      title,
     },
-    component: () => import('RelaxPlus/docs/' + item.fileName)
+    component: () => import('RelaxPlus/package/' + item.componentPath),
   })
 })
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 })
 
 router.afterEach((to) => {

@@ -1,6 +1,6 @@
 <div align="center">
 
-![image](https://gitee.com/bsie/RelaxPlus/raw/master/src/assets/logo.png)
+![image](https://gitee.com/bsie/RelaxPlus/raw/master/examples/assets/logo.png)
 
 
 🔥 [文档网址](https://bsie.gitee.io/relaxplus/)
