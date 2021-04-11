@@ -9,10 +9,10 @@
         </teleport>
 
         <x-scroll>
-          <div v-for="menu in nav" class="menu">
+          <div v-for="(menu, i) in nav" class="menu" :key="i">
             <dl v-if="menu.child">
               <dt># {{ menu.title }}</dt>
-              <dd v-for="submenu in menu.child">
+              <dd v-for="(submenu, k) in menu.child" :key="i + k">
                 <router-link :to="submenu.routePath">{{
                   submenu.title
                 }}</router-link>

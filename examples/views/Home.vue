@@ -7,7 +7,7 @@
       </div>
 
       <div class="github">
-        <router-link to="/quickstart">
+        <router-link to="/quick-start">
           <x-button type="primary" icon="x-icon-star-on" size="lg" round
             >开始享用</x-button
           >
