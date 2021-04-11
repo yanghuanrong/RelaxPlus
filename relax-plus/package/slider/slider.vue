@@ -1,6 +1,6 @@
 <template>
   <div class="x-slider">
-    <tooltip v-if="range" :content="start.num" :move="true">
+    <tooltip v-if="range" :content="start.num" v-model="isTooltip">
       <div
         class="x-slider-dot"
         :style="{
@@ -10,7 +10,7 @@
       ></div>
     </tooltip>
 
-    <tooltip :content="end.num" :move="true">
+    <tooltip :content="end.num" v-model="isTooltip">
       <div
         class="x-slider-dot"
         :style="{
@@ -37,7 +37,9 @@ import {
   onMounted,
   computed,
   watchEffect,
+  nextTick,
 } from 'vue'
+import { on, off } from '../../utils/dom'
 import tooltip from '../tooltip/index'
 import { isArray } from '../../utils/isType'
 export default {
@@ -56,12 +58,14 @@ export default {
       default: 0,
     },
     step: Boolean,
+    showTooltip: Boolean,
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    const { modelValue, max, min, step } = toRefs(props)
+    const { modelValue, max, min, step, showTooltip } = toRefs(props)
     const instance = getCurrentInstance()
     const propress = reactive({})
+    const isTooltip = ref(false)
     const space = ref(0)
     const range = ref(isArray(modelValue.value))
     const steps = ref(0)
@@ -144,12 +148,14 @@ export default {
       const dot = type === 'start' ? start : end
       const touchX = e.screenX - dot.num * space.value + space.value * min.value
 
-      document.addEventListener('mousemove', move)
-      document.addEventListener('mouseup', (e) => {
-        document.removeEventListener('mousemove', move)
+      on(document, 'mousemove', move)
+      on(document, 'mouseup', () => {
+        off(document, 'mousemove', move)
+        isTooltip.value = false
       })
 
       function move(e) {
+        isTooltip.value = true
         e.preventDefault()
         let mx = e.screenX - touchX
         mx < 0 && (mx = 0)
@@ -167,6 +173,7 @@ export default {
       start,
       steps,
       propress,
+      isTooltip,
     }
   },
 }

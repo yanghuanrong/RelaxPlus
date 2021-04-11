@@ -1,4 +1,13 @@
-import { getCurrentInstance, onMounted, onUnmounted, toRefs, watch } from 'vue'
+import {
+  getCurrentInstance,
+  onMounted,
+  onUnmounted,
+  toRefs,
+  ref,
+  watchEffect,
+  nextTick,
+} from 'vue'
+import { on, off, remove, add } from '../../utils/dom'
 
 export default {
   name: 'Tooltip',
@@ -22,15 +31,16 @@ export default {
           'bottom-end',
         ].includes(value),
     },
-    move: false,
+    modelValue: Boolean,
     width: String,
     content: [String, Number],
   },
   setup(props, { slots }) {
     const instance = getCurrentInstance()
-    const { placement, content, width, move } = toRefs(props)
+    const { placement, content, width, modelValue } = toRefs(props)
+    const isShow = ref(false)
 
-    const getFirstElement = () => {
+    function getFirstElement() {
       const slotsDefault = slots.default()
       if (!Array.isArray(slotsDefault)) return null
       let element = null
@@ -44,92 +54,32 @@ export default {
 
     const tip = document.createElement('div')
     tip.className = `x-tooltip x-tooltip-${placement.value}`
-    watch(content, (value) => {
-      tip.innerHTML = `<span>${value}</span>` || ''
-    })
     width && (tip.style.width = width.value)
-    tip.innerHTML = `<span>${content.value}</span>` || ''
     const tid = (tip.id = `x-tooltip-${instance.uid}`)
 
-    const calcStyle = (Rect) => {
-      let y = document.documentElement.scrollTop
-      let x = 0
-      switch (placement.value) {
-        case 'top-start':
-          x += Rect.x
-          y += Rect.y - tip.offsetHeight
-          break
-        case 'top':
-          x += Rect.x + (Rect.width - tip.offsetWidth) * 0.5
-          y += Rect.y - tip.offsetHeight
-          break
-        case 'top-end':
-          x += Rect.x + Rect.width - tip.offsetWidth
-          y += Rect.y - tip.offsetHeight
-          break
-        case 'left-start':
-          x += Rect.x - tip.offsetWidth
-          y += Rect.y
-          break
-        case 'left':
-          x += Rect.x - tip.offsetWidth
-          y += Rect.y + (Rect.height - tip.offsetHeight) * 0.5
-          break
-        case 'left-end':
-          x += Rect.x - tip.offsetWidth
-          y += Rect.y + Rect.height - tip.offsetHeight
-          break
-        case 'right-start':
-          x += Rect.x + Rect.width
-          y += Rect.y
-          break
-        case 'right':
-          x += Rect.x + Rect.width
-          y += Rect.y + (Rect.height - tip.offsetHeight) * 0.5
-          break
-        case 'right-end':
-          x += Rect.x + Rect.width
-          y += Rect.y + Rect.height - tip.offsetHeight
-          break
-        case 'bottom-start':
-          x += Rect.x
-          y += Rect.y + Rect.height
-          break
-        case 'bottom':
-          x += Rect.x + (Rect.width - tip.offsetWidth) * 0.5
-          y += Rect.y + Rect.height
-          break
-        case 'bottom-end':
-          x += Rect.x + Rect.width - tip.offsetWidth
-          y += Rect.y + Rect.height
-          break
-        default:
-          break
+    function hide() {
+      const el = document.getElementById(tid)
+      if (el) {
+        remove(el, 'x-tooltip-show')
+        on(el, 'transitionend', none)
       }
-      tip.style.left = x + 'px'
-      tip.style.top = y + 'px'
     }
 
-    const show = (e) => {
-      const Rect = e.target.getBoundingClientRect()
+    function update() {
+      const Rect = instance.proxy.$el.getBoundingClientRect()
       const el = document.getElementById(tid)
       if (!el) {
         document.body.appendChild(tip)
       }
-      tip.removeEventListener('transitionend', none)
+      off(tip, 'transitionend', none)
       tip.style.display = 'block'
-      calcStyle(Rect)
-      tip && tip.classList.add('x-tooltip-show')
+      const { x, y } = calcStyle(Rect, tip, placement.value)
+      tip.style.top = y + 'px'
+      tip.style.left = x + 'px'
     }
 
-    let isMove = false
-    const hide = () => {
-      if (isMove) return
-      const el = document.getElementById(tid)
-      if (el) {
-        el.classList.remove('x-tooltip-show')
-        el.addEventListener('transitionend', none)
-      }
+    function show() {
+      tip && add(tip, 'x-tooltip-show')
     }
 
     const none = () => {
@@ -138,31 +88,24 @@ export default {
 
     onMounted(() => {
       const el = instance.proxy.$el
-      el.addEventListener('mouseenter', show)
 
-      let isEnter = true
-      if (move && move.value) {
-        el.addEventListener('mousedown', (e) => {
-          isMove = true
-          const updateStyle = () => {
-            const Rect = e.target.getBoundingClientRect()
-            calcStyle(Rect)
-          }
-          document.addEventListener('mousemove', updateStyle)
-          document.addEventListener('mouseup', () => {
-            document.removeEventListener('mousemove', updateStyle)
-            if (!isEnter) {
-              isEnter = true
-              isMove = false
-              hide()
-            }
-          })
-        })
-      }
+      watchEffect(() => {
+        tip.innerHTML = `<span>${content.value}</span>` || ''
+        nextTick(update)
+        if (modelValue.value || isShow.value) {
+          show()
+        } else {
+          hide()
+        }
+      })
 
-      el.addEventListener('mouseleave', () => {
-        isEnter = false
-        hide()
+      on(el, 'mouseenter', () => {
+        if (!modelValue && !modelValue.value) return
+        isShow.value = true
+      })
+      on(el, 'mouseleave', () => {
+        if (modelValue && modelValue.value) return
+        isShow.value = false
       })
     })
 
@@ -175,4 +118,62 @@ export default {
       return getFirstElement()
     }
   },
+}
+
+function calcStyle(Rect, tip, key) {
+  let y = document.documentElement.scrollTop
+  let x = 0
+
+  const placement = {
+    'top-start': () => {
+      x += Rect.x
+      y += Rect.y - tip.offsetHeight
+    },
+    top: () => {
+      x += Rect.x + (Rect.width - tip.offsetWidth) * 0.5
+      y += Rect.y - tip.offsetHeight
+    },
+    'top-end': () => {
+      x += Rect.x + Rect.width - tip.offsetWidth
+      y += Rect.y - tip.offsetHeight
+    },
+    'left-start': () => {
+      x += Rect.x - tip.offsetWidth
+      y += Rect.y
+    },
+    left: () => {
+      x += Rect.x - tip.offsetWidth
+      y += Rect.y + (Rect.height - tip.offsetHeight) * 0.5
+    },
+    'left-end': () => {
+      x += Rect.x - tip.offsetWidth
+      y += Rect.y + Rect.height - tip.offsetHeight
+    },
+    'right-start': () => {
+      x += Rect.x + Rect.width
+      y += Rect.y
+    },
+    right: () => {
+      x += Rect.x + Rect.width
+      y += Rect.y + (Rect.height - tip.offsetHeight) * 0.5
+    },
+    'right-end': () => {
+      x += Rect.x + Rect.width
+      y += Rect.y + Rect.height - tip.offsetHeight
+    },
+    'bottom-start': () => {
+      x += Rect.x
+      y += Rect.y + Rect.height
+    },
+    bottom: () => {
+      x += Rect.x + (Rect.width - tip.offsetWidth) * 0.5
+      y += Rect.y + Rect.height
+    },
+    'bottom-end': () => {
+      x += Rect.x + Rect.width - tip.offsetWidth
+      y += Rect.y + Rect.height
+    },
+  }
+  placement[key]()
+  return { x, y }
 }

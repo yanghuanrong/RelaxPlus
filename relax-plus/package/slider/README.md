@@ -11,7 +11,7 @@ tag: Data Entry
 :::demo
 ```html
 <template>
-  <x-slider v-model="value" />
+  <x-slider v-model="value" :show-tooltip="true" />
   <x-slider v-model="value" />
 </template>
 
