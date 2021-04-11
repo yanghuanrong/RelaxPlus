@@ -1,9 +1,9 @@
 <template>
   <div class="x-date-edit">
-    <Input 
-      readonly 
+    <Input
+      readonly
       :placeholder="placeholder"
-      icon-before="x-icon-calendar" 
+      icon-before="x-icon-calendar"
       v-model="state"
       @click.prevent="toggle"
       :class="{
@@ -18,34 +18,47 @@
 
     <teleport to="body">
       <transition name="scaleY" ref="trigger">
-        <div class="x-trigger x-datePicker" @click.stop :style="rect" v-show="isShow">
+        <div
+          class="x-trigger x-datePicker"
+          @click.stop
+          :style="rect"
+          v-show="isShow"
+        >
           <div class="x-datePicker-head">
             <div class="x-datePicker-btn">
-              <span class="x-icon-chevrons-left"  @click="changePrevYear"></span>
-              <span class="x-icon-chevron-left"  @click="changePrevMonth"></span>
+              <span class="x-icon-chevrons-left" @click="changePrevYear"></span>
+              <span class="x-icon-chevron-left" @click="changePrevMonth"></span>
             </div>
             <span>
-              {{head}}
+              {{ head }}
             </span>
-            <div class="x-datePicker-btn" >
-              <span class="x-icon-chevron-right" @click="changeNextMonth"></span>
-              <span class="x-icon-chevrons-right" @click="changeNextYear"></span>
+            <div class="x-datePicker-btn">
+              <span
+                class="x-icon-chevron-right"
+                @click="changeNextMonth"
+              ></span>
+              <span
+                class="x-icon-chevrons-right"
+                @click="changeNextYear"
+              ></span>
             </div>
           </div>
 
           <div class="x-datePicker-group">
-            <div class="x-datePicker-week" v-for="item in week">
-              {{item}}
+            <div class="x-datePicker-week" v-for="(item, i) in week" :key="i">
+              {{ item }}
             </div>
-            <div class="x-datePicker-cell" 
+            <div
+              class="x-datePicker-cell"
               :title="`${item.y}年${item.m}月${item.d}日`"
-              v-for="item in cell"
+              v-for="(item, i) in cell"
+              :key="i"
               :class="[
                 item.class,
                 {
                   today: today(item),
                   active: isAactiveDay(item),
-                }
+                },
               ]"
               @click="changeDay(item), clickDay(item)"
             >
@@ -56,7 +69,9 @@
             <div class="x-calendar-quick">
               <Button type="text" size="sm" @click="changeToday">今天</Button>
             </div>
-            <Button type="primary" size="sm" @click="changeClickDay">确定</Button>
+            <Button type="primary" size="sm" @click="changeClickDay"
+              >确定</Button
+            >
           </div>
         </div>
       </transition>
@@ -65,41 +80,40 @@
 </template>
 
 <script>
-import { nextTick, ref, toRefs, watch } from 'vue';
+import { nextTick, ref, toRefs, watch } from 'vue'
 import Input from '../input/index'
 import useToggle from '../../utils/togger'
-import useCalendar from '../../utils/calendar';
-import Button from '../button/button.vue';
+import useCalendar from '../../utils/calendar'
+import Button from '../button/button.vue'
 
 export default {
   name: 'DatePicker',
   components: {
     Input,
-    Button
+    Button,
   },
   props: {
     modelValue: String,
     placeholder: String,
     onetap: Boolean,
-    disabled: Boolean
+    disabled: Boolean,
   },
-  setup(props, {emit}){
+  setup(props, { emit }) {
     const { modelValue } = toRefs(props)
     const toggle = useToggle()
-    const {hide, isShow} = toggle
+    const { hide, isShow } = toggle
     const calendar = useCalendar(props)
-    const {nowTime, checkTime, repair} = calendar
+    const { nowTime, checkTime, repair } = calendar
 
     const state = ref('')
     const head = ref(headFormat(''))
 
-    function headFormat (value) {
-      const [y,m,d] = value !== '' ? value.split('-') : [
-        nowTime.year,
-        repair(nowTime.month + 1),
-        repair(nowTime.day)
-      ]
-      
+    function headFormat(value) {
+      const [y, m, d] =
+        value !== ''
+          ? value.split('-')
+          : [nowTime.year, repair(nowTime.month + 1), repair(nowTime.day)]
+
       return `${y}年${m}月${d}日`
     }
 
@@ -108,9 +122,9 @@ export default {
     })
 
     const clickDay = (item) => {
-      if(props.onetap){
-        const {y,m,d} = item
-        state.value = `${y}-${m}-${d}`;
+      if (props.onetap) {
+        const { y, m, d } = item
+        state.value = `${y}-${m}-${d}`
         nextTick(() => {
           hide()
         })
@@ -118,7 +132,7 @@ export default {
     }
 
     watch(state, (value) => {
-      if(value === ''){
+      if (value === '') {
         calendar.changeNowMonth()
         emit('update:modelValue', value)
       } else {
@@ -127,12 +141,12 @@ export default {
     })
 
     watch(isShow, (value) => {
-      if(value) {
-        if(modelValue.value === '') {
+      if (value) {
+        if (modelValue.value === '') {
           calendar.changeNowMonth()
         } else {
-          const [y,m,d] = modelValue.value.split('-')
-          calendar.changeDay({y,m,d})
+          const [y, m, d] = modelValue.value.split('-')
+          calendar.changeDay({ y, m, d })
           nowTime.year = parseInt(y)
           nowTime.month = parseInt(m) - 1
         }
@@ -143,8 +157,8 @@ export default {
 
     const changeClickDay = () => {
       const reg = /[0-9]+/g
-      const [y,m,d] = head.value.match(reg)
-      state.value = `${y}-${m}-${d}`;
+      const [y, m, d] = head.value.match(reg)
+      state.value = `${y}-${m}-${d}`
       hide()
     }
 
@@ -153,11 +167,11 @@ export default {
       let y = date.getFullYear()
       let m = repair(date.getMonth() + 1)
       let d = repair(date.getDate())
-      
-      state.value = `${y}-${m}-${d}`;
+
+      state.value = `${y}-${m}-${d}`
       hide()
     }
-    
+
     return {
       ...toggle,
       ...calendar,
@@ -165,13 +179,8 @@ export default {
       head,
       clickDay,
       changeClickDay,
-      changeToday
+      changeToday,
     }
-  }
+  },
 }
-
-
-
-
-
 </script>

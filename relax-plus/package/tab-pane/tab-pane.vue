@@ -11,9 +11,9 @@ export default {
   name: 'TabPane',
   props: {
     label: String,
-    disabled: Boolean
+    disabled: Boolean,
   },
-  setup(props){
+  setup(props) {
     const { label } = props
     const { dispatch } = emtter()
     const active = inject('active')
@@ -24,8 +24,8 @@ export default {
     })
 
     return {
-      isShow
+      isShow,
     }
-  }
+  },
 }
 </script>

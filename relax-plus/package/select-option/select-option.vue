@@ -1,24 +1,31 @@
 <template>
   <CollapseTransition>
-    <div 
+    <div
       class="x-option"
       :class="{
         'is-checked': isChecked,
-        'is-disabled': disabled
+        'is-disabled': disabled,
       }"
       @click.stop="handerClick"
       v-show="isShow"
     >
-      {{label || value}}
+      {{ label || value }}
     </div>
   </CollapseTransition>
 </template>
 
 <script>
-import { inject, computed, watchEffect, reactive, ref, getCurrentInstance } from 'vue';
+import {
+  inject,
+  computed,
+  watchEffect,
+  reactive,
+  ref,
+  getCurrentInstance,
+} from 'vue'
 import CollapseTransition from '../transitions/collapse-transition.vue'
 import emitter from '../../utils/emiter'
-import {isArray} from '../../utils/isType'
+import { isArray } from '../../utils/isType'
 
 export default {
   name: 'Option',
@@ -28,54 +35,56 @@ export default {
     disabled: Boolean,
   },
   components: {
-    CollapseTransition
+    CollapseTransition,
   },
-  setup(props){
-    const {value, label, disabled} = props
-    const {dispatch, on} = emitter()
+  setup(props) {
+    const { value, label, disabled } = props
+    const { dispatch, on } = emitter()
     const uid = getCurrentInstance().uid
 
-    const Select = inject('Select', {props: {}})
+    const Select = inject('Select', { props: {} })
 
     const state = reactive({
-      modelValue: null
+      modelValue: null,
     })
-  
+
     watchEffect(() => {
       state.modelValue = Select.props.modelValue
     })
 
     const model = computed({
-      get(){
+      get() {
         return state.modelValue
       },
-      set({checked, value}){
-        if (isArray(model.value)){
+      set({ checked, value }) {
+        if (isArray(model.value)) {
           const modelValue = model.value
           const labelIndex = modelValue.indexOf(value)
 
           labelIndex === -1 && checked === true && modelValue.push(value)
-          labelIndex !== -1 && checked === false && modelValue.splice(labelIndex, 1)
+          labelIndex !== -1 &&
+            checked === false &&
+            modelValue.splice(labelIndex, 1)
 
           state.modelValue = modelValue
           dispatch('selectOption', {
             value: modelValue,
             label,
-            checked
+            checked,
           })
         } else {
           state.modelValue = value
           dispatch('selectOption', {
             value,
             label,
-            checked
+            checked,
           })
         }
-      }
+      },
     })
 
     const isChecked = computed(() => {
-      if (isArray(model.value)){
+      if (isArray(model.value)) {
         return model.value.includes(value)
       } else {
         return model.value === value
@@ -83,17 +92,17 @@ export default {
     })
 
     const handerClick = () => {
-      if(disabled) return
+      if (disabled) return
       model.value = {
         checked: !isChecked.value,
-        value
+        value,
       }
     }
-  
+
     dispatch('selectDefault', {
       value,
       label,
-      checked: isChecked.value
+      checked: isChecked.value,
     })
 
     const isShow = ref(true)
@@ -105,8 +114,8 @@ export default {
       handerClick,
       isShow,
       isChecked,
-      uid
+      uid,
     }
-  }
+  },
 }
 </script>

@@ -1,6 +1,5 @@
 import element from './notice.vue'
-import {createComponent} from '../../utils/component'
-
+import { createComponent } from '../../utils/component'
 
 let NoticeWrap
 function createNoticeWrap() {
@@ -11,10 +10,10 @@ function createNoticeWrap() {
 }
 
 function noticeCreate(props, type) {
-  if(!props.title){
+  if (!props.title) {
     return
   }
-  if(type){
+  if (type) {
     props.type = type
   }
 
@@ -25,14 +24,12 @@ function noticeCreate(props, type) {
   NoticeWrap.appendChild(component.vnode.el)
 }
 
-
-function noitce (props){
+function noitce(props) {
   noticeCreate(props)
 }
 
-;['info','error', 'success', 'warning'].forEach((type) => {
+;['info', 'error', 'success', 'warning'].forEach((type) => {
   noitce[type] = (props) => noticeCreate(props, type)
 })
-
 
 export default noitce

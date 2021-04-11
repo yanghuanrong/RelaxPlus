@@ -15,7 +15,7 @@ data.forEach((item) => {
     .split(' ')
     .reverse()
     .join(' ')
-  console.log(title)
+
   routes.push({
     path: item.routePath,
     name: item.componentName,

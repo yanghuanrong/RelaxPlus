@@ -1,6 +1,6 @@
 import element from './badge.vue'
 
-element.install = function (app) {
+element.install = function(app) {
   app.component(element.name, element)
 }
 

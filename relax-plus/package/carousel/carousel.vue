@@ -1,6 +1,6 @@
 <template>
-  <div 
-    class="x-carousel" 
+  <div
+    class="x-carousel"
     :style="`width:${width}; height: ${height}`"
     @mouseover="mouseover"
     @mouseleave="mouseleave"
@@ -15,9 +15,10 @@
       <slot></slot>
     </div>
     <div class="x-carousel-dot">
-      <i 
-        v-for="(item,i) in items" 
-        :class="{active: inActive === i}"
+      <i
+        v-for="(item, i) in items"
+        :key="i"
+        :class="{ active: inActive === i }"
         @click="handerDot(i)"
       ></i>
     </div>
@@ -25,9 +26,8 @@
 </template>
 
 <script>
-import { getCurrentInstance, onUnmounted, provide, reactive, ref, toRefs, watchEffect } from 'vue'
+import { onUnmounted, provide, reactive, ref, toRefs, watchEffect } from 'vue'
 import emitter from '../../utils/emiter'
-import { isArray } from '../../utils/isType'
 
 export default {
   name: 'Carousel',
@@ -40,8 +40,7 @@ export default {
       default: 3,
     },
   },
-  setup(props, {slots}){
-    const instance = getCurrentInstance()
+  setup(props) {
     const inActive = ref(0)
     const inUid = ref(0)
     const items = reactive([])
@@ -63,23 +62,23 @@ export default {
       inActive.value += i
       transitionName.value = name
 
-      if(inActive.value < 0){
+      if (inActive.value < 0) {
         inActive.value = items.length - 1
       }
-      if(inActive.value >= items.length){
+      if (inActive.value >= items.length) {
         inActive.value = 0
       }
     }
 
     let time = null
     const timeStop = () => {
-      if(time){
+      if (time) {
         clearInterval(time)
         time = null
       }
     }
     const timeStar = () => {
-      if(autoplay && autoplay.value && !time) {
+      if (autoplay && autoplay.value && !time) {
         time = setInterval(() => {
           setCarousel(1, 'slide-right')
         }, interval.value * 1000)
@@ -98,7 +97,7 @@ export default {
       const now = i - inActive.value
       setCarousel(now, now < 0 ? 'slide-left' : 'slide-right')
     }
-    
+
     timeStar()
     onUnmounted(() => {
       timeStop()
@@ -110,9 +109,8 @@ export default {
       items,
       mouseleave,
       mouseover,
-      handerDot
+      handerDot,
     }
-
-  }
+  },
 }
 </script>

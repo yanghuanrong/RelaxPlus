@@ -1,9 +1,9 @@
 <template>
-  <div 
+  <div
     class="x-from-input"
     :class="{
       'x-input-icon-before': iconBefore && iconBefore !== '',
-      'x-input-icon-after': iconAfter && iconAfter !== '' || clearable,
+      'x-input-icon-after': (iconAfter && iconAfter !== '') || clearable,
       'x-input-block': block,
     }"
   >
@@ -15,10 +15,22 @@
         @input="handerInput"
         :value="text"
       />
-      <i class="x-after" v-if="iconAfter && iconAfter !== ''" :class="iconAfter"></i>
-      <i class="x-before" v-if="iconBefore && iconBefore !== ''" :class="iconBefore"></i>
+      <i
+        class="x-after"
+        v-if="iconAfter && iconAfter !== ''"
+        :class="iconAfter"
+      ></i>
+      <i
+        class="x-before"
+        v-if="iconBefore && iconBefore !== ''"
+        :class="iconBefore"
+      ></i>
       <transition name="fade">
-        <span class="x-icon-x" v-if="clearable && textLength > 0" @click="handerInput()"></span>
+        <span
+          class="x-icon-x"
+          v-if="clearable && textLength > 0"
+          @click="handerInput()"
+        ></span>
       </transition>
     </template>
     <template v-else>
@@ -28,18 +40,19 @@
         @input="handerInput"
         :value="text"
         :maxlength="maxlength"
-      > </textarea>
-      <span class='x-textarea-maxlength'>
-        {{textLength}}/{{maxlength}}
+      >
+      </textarea>
+      <span class="x-textarea-maxlength">
+        {{ textLength }}/{{ maxlength }}
       </span>
     </template>
   </div>
 </template>
 
 <script>
-import { computed, ref, toRefs, watchEffect } from "vue";
+import { computed, ref, toRefs, watchEffect } from 'vue'
 export default {
-  name: "Input",
+  name: 'Input',
   inheritAttrs: false,
   props: {
     type: String,
@@ -51,16 +64,16 @@ export default {
     modelValue: [String, Number],
   },
   setup(props, { emit }) {
-    const {modelValue} = toRefs(props)
-    const text = ref('');
+    const { modelValue } = toRefs(props)
+    const text = ref('')
 
     watchEffect(() => {
-      text.value = modelValue && modelValue.value || ''
+      text.value = (modelValue && modelValue.value) || ''
     })
 
     const handerInput = (e) => {
       text.value = e ? e.target.value : ''
-      emit("update:modelValue", text.value);
+      emit('update:modelValue', text.value)
     }
 
     const textLength = computed(() => text.value.length)
@@ -68,8 +81,8 @@ export default {
     return {
       handerInput,
       text,
-      textLength
-    };
+      textLength,
+    }
   },
-};
+}
 </script>

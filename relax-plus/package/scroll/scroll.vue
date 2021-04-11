@@ -1,47 +1,69 @@
 <template>
-  <div class="x-scroll" :style="{ height: `${viewHeight}px`}" @mouseenter="mouseover" @mouseleave="mouseout">
-    <div class="x-scroll-content" :style="{paddingRight: `${size}px`}" @scroll="viewScroll">
+  <div
+    class="x-scroll"
+    :style="{ height: `${viewHeight}px` }"
+    @mouseenter="mouseover"
+    @mouseleave="mouseout"
+  >
+    <div
+      class="x-scroll-content"
+      :style="{ paddingRight: `${size}px` }"
+      @scroll="viewScroll"
+    >
       <slot></slot>
     </div>
     <transition name="fade">
-    <div class="x-scroll-bar" v-show="!alwaysVisible || isShow" :style="{ width: `${size}px` }" @mousedown="thumbDrag($event)">
       <div
-        class="x-scroll-thumb" 
-        ref="thumb"
-        :style="{
-          height: `${BarHeight}px`,
-          top: `${BarTop}px`,
-          borderRadius: `${size}px`
-        }">
+        class="x-scroll-bar"
+        v-show="!alwaysVisible || isShow"
+        :style="{ width: `${size}px` }"
+        @mousedown="thumbDrag($event)"
+      >
+        <div
+          class="x-scroll-thumb"
+          ref="thumb"
+          :style="{
+            height: `${BarHeight}px`,
+            top: `${BarTop}px`,
+            borderRadius: `${size}px`,
+          }"
+        ></div>
       </div>
-    </div>
     </transition>
   </div>
 </template>
 
 <script>
-import { getCurrentInstance, onMounted, onUnmounted, ref, toRefs, watch, watchEffect } from 'vue'
+import {
+  getCurrentInstance,
+  onMounted,
+  onUnmounted,
+  ref,
+  toRefs,
+  watch,
+  watchEffect,
+} from 'vue'
 export default {
-  name: "Scroll",
+  name: 'Scroll',
   props: {
     height: Number,
     to: Number,
     alwaysVisible: {
       type: Boolean,
-      default: true
+      default: true,
     },
     size: {
       type: Number,
-      default: 6
-    }
+      default: 6,
+    },
   },
   emits: ['onScroll', 'update:to'],
-  setup(props, {emit}){
+  setup(props, { emit }) {
     const instance = getCurrentInstance()
     const BarHeight = ref(30)
     const BarTop = ref(0)
     const thumb = ref(null)
-    const {to, height} = toRefs(props)
+    const { to, height } = toRefs(props)
     const viewHeight = ref(0)
     const isShow = ref(false)
 
@@ -53,9 +75,8 @@ export default {
       emit('onScroll', catchTop)
       emit('update:to', view.scrollTop)
     }
-    
-    
-    if(to) {
+
+    if (to) {
       watch(to, (val) => {
         const el = instance.vnode.el
         const view = el.children[0]
@@ -63,7 +84,7 @@ export default {
       })
     }
 
-    if(height){
+    if (height) {
       watchEffect(() => {
         viewHeight.value = height.value
       })
@@ -73,12 +94,12 @@ export default {
     onMounted(() => {
       const el = instance.vnode.el
 
-      if(to){
+      if (to) {
         const view = el.children[0]
         view.scrollTop = to.value
       }
 
-      if(!height){
+      if (!height) {
         viewHeight.value = el.parentNode.offsetHeight
         window.addEventListener('resize', () => {
           viewHeight.value = el.parentNode.offsetHeight
@@ -86,31 +107,30 @@ export default {
       }
 
       observer = new MutationObserver(() => {
-        BarHeight.value = el.offsetHeight * el.offsetHeight / el.children[0].scrollHeight
-        if(BarHeight.value <= 30) {
+        BarHeight.value =
+          (el.offsetHeight * el.offsetHeight) / el.children[0].scrollHeight
+        if (BarHeight.value <= 30) {
           BarHeight.value = 30
         }
 
-        if(el.children[0].scrollHeight <= el.offsetHeight) {
+        if (el.children[0].scrollHeight <= el.offsetHeight) {
           BarHeight.value = 0
         }
-
-      });
+      })
 
       observer.observe(el, {
         childList: true, // 子节点的变动（新增、删除或者更改）
         attributes: true, // 属性的变动
         characterData: true, // 节点内容或节点文本的变动
-        subtree: true // 是否将观察器应用于该节点的所有后代节点
-      });
+        subtree: true, // 是否将观察器应用于该节点的所有后代节点
+      })
       // console.log(el.offsetHeight, el.children[0].scrollHeight)
-
     })
 
     onUnmounted(() => {
-      observer.disconnect();
+      observer.disconnect()
     })
-    
+
     let isDrag = false
     let isArea = false
 
@@ -120,7 +140,7 @@ export default {
     }
     const mouseout = () => {
       isArea = false
-      if(!isDrag) {
+      if (!isDrag) {
         isShow.value = false
       }
     }
@@ -132,27 +152,30 @@ export default {
       const touchY = e.clientY - BarTop.value
       const element = e.target
 
-      if(element.className === 'x-scroll-bar') {
+      if (element.className === 'x-scroll-bar') {
         const top = e.clientY - element.getBoundingClientRect().top
-        view.scrollTop = view.scrollHeight * ( top / element.offsetHeight ) - element.offsetHeight / 2
+        view.scrollTop =
+          view.scrollHeight * (top / element.offsetHeight) -
+          element.offsetHeight / 2
       } else {
         const move = (ev) => {
           isDrag = true
-          const bt = (ev.clientY - touchY) / (view.offsetHeight - thumb.value.offsetHeight)
+          const bt =
+            (ev.clientY - touchY) /
+            (view.offsetHeight - thumb.value.offsetHeight)
           const top = (view.scrollHeight - view.offsetHeight) * bt
           view.scrollTop = top
         }
         document.addEventListener('mousemove', move)
         document.addEventListener('mouseup', () => {
           isDrag = false
-          if(!isArea) {
+          if (!isArea) {
             isShow.value = false
           }
           document.removeEventListener('mousemove', move)
         })
       }
     }
-
 
     return {
       BarHeight,
@@ -163,9 +186,8 @@ export default {
       thumbDrag,
       isShow,
       mouseover,
-      mouseout
+      mouseout,
     }
-
-  }
+  },
 }
 </script>

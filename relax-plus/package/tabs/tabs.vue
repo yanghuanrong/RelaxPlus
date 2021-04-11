@@ -1,18 +1,21 @@
 <template>
   <div class="x-tabs">
     <div class="x-tabs-nav">
-      <div 
+      <div
         class="x-tabs-menu"
         :ref="setItemRef"
         v-for="(item, i) in nav"
+        :key="i"
         @click="setTabs(item, i)"
         :class="[
           item.disabled && 'x-tabs-disabled',
           {
-            active: active.index === i
-          }
+            active: active.index === i,
+          },
         ]"
-      >{{item.label}}</div>
+      >
+        {{ item.label }}
+      </div>
       <i class="x-tabs-line" :style="line"></i>
     </div>
     <div class="x-tabs-view">
@@ -26,22 +29,22 @@ import { provide, reactive, onBeforeUpdate, onMounted, nextTick } from 'vue'
 import emtter from '../../utils/emiter'
 export default {
   name: 'Tabs',
-  setup(){
-    const {on} = emtter()
+  setup() {
+    const { on } = emtter()
     const nav = reactive([])
     const active = reactive({})
     const line = reactive({})
     provide('active', active)
-    
+
     on('props', (value) => {
-      if ( !active.label ) {
+      if (!active.label) {
         setTabs(value, 0)
       }
       nav.push(value)
     })
 
     const setTabs = (item, i) => {
-      if(item.disabled) return
+      if (item.disabled) return
       active.label = item.label
       active.index = i
 
@@ -53,7 +56,7 @@ export default {
     }
 
     let itemRefs = []
-    const setItemRef = el => {
+    const setItemRef = (el) => {
       itemRefs.push(el)
     }
     onBeforeUpdate(() => {
@@ -65,8 +68,8 @@ export default {
       active,
       setTabs,
       setItemRef,
-      line
+      line,
     }
-  }
+  },
 }
 </script>

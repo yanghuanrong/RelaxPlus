@@ -1,6 +1,6 @@
-import { onMounted, ref, getCurrentInstance, reactive, onUnmounted } from 'vue';
+import { onMounted, ref, getCurrentInstance, reactive, onUnmounted } from 'vue'
 
-export default function useToggle(){
+export default function useToggle() {
   const rect = reactive({})
   const trigger = ref(null)
   const isShow = ref(false)
@@ -20,15 +20,16 @@ export default function useToggle(){
 
     top1 = parentHeight + scrollTop
     top2 = top1 - elHeight - el.height - 5
- 
+
     const top = parentHeight + elHeight > clientHeight ? top2 : top1
-    rect.transformOrigin = parentHeight + elHeight > clientHeight ? 'center bottom' : 'center top'
+    rect.transformOrigin =
+      parentHeight + elHeight > clientHeight ? 'center bottom' : 'center top'
     rect.top = top + 'px'
     rect.left = el.left + 'px'
     rect.minWidth = el.width + 'px'
     rect.minHeight = elHeight + 'px'
   }
-  
+
   const show = () => {
     isShow.value = true
   }
@@ -37,12 +38,12 @@ export default function useToggle(){
   }
   const toggle = () => {
     if (isShow.value) {
-      hide();
+      hide()
     } else {
-      show();
+      show()
     }
   }
-  
+
   const isHide = (e) => {
     const el = currentInstance.vnode.el
     if (!el.contains(e.target)) {
@@ -52,17 +53,17 @@ export default function useToggle(){
 
   onMounted(() => {
     const el = trigger.value
-    el.style.top = "-100%"
-    el.style.display = "block"
+    el.style.top = '-100%'
+    el.style.display = 'block'
     elHeight = el.offsetHeight
-    el.style.top = ""
-    el.style.display = "none"
-    
+    el.style.top = ''
+    el.style.display = 'none'
+
     window.addEventListener('scroll', () => {
-      if(isShow.value && parent) {
+      if (isShow.value && parent) {
         const Rect = parent.getBoundingClientRect()
 
-        if(Rect.top + Rect.height + elHeight > clientHeight){
+        if (Rect.top + Rect.height + elHeight > clientHeight) {
           rect.top = top2 + 'px'
           rect.transformOrigin = 'center bottom'
         } else {
@@ -72,11 +73,11 @@ export default function useToggle(){
       }
     })
 
-    document.addEventListener("click", isHide)
+    document.addEventListener('click', isHide)
   })
 
   onUnmounted(() => {
-    document.removeEventListener("click", isHide)
+    document.removeEventListener('click', isHide)
   })
 
   return {

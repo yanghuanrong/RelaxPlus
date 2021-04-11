@@ -10,10 +10,10 @@ import { getCurrentInstance, provide } from 'vue'
 export default {
   name: 'CheckboxGroup',
   props: {
-    modelValue: Array
+    modelValue: Array,
   },
-  setup(props, {emit}){
+  setup() {
     provide('checkboxGroup', getCurrentInstance())
-  }
+  },
 }
 </script>

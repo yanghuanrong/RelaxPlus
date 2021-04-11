@@ -1,15 +1,10 @@
 <template>
   <span :class="'x-badge'">
-  
-  <template v-if="status !== '' ">
-    <i :class="[
-    'x-badge-'+status,
-    shine && 'x-badge-shine'
-    ]"></i>
-    {{text}}
-  </template>
-  <sup class="x-badge-count" v-else>{{count}}</sup>
-  
+    <template v-if="status !== ''">
+      <i :class="[`x-badge-${status}`, shine && 'x-badge-shine']"></i>
+      {{ text }}
+    </template>
+    <sup class="x-badge-count" v-else>{{ count }}</sup>
   </span>
 </template>
 
@@ -21,7 +16,7 @@ export default {
     status: {
       type: String,
       default: '',
-      validator: value =>
+      validator: (value) =>
         [
           '',
           'success',
@@ -30,10 +25,10 @@ export default {
           'info',
           'error',
           'default',
-        ].includes(value)
+        ].includes(value),
     },
     count: [String, Number],
-    shine: Boolean
-  }
+    shine: Boolean,
+  },
 }
 </script>

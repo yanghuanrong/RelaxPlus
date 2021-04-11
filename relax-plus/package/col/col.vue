@@ -5,39 +5,40 @@
 </template>
 
 <script>
-import {inject, computed} from 'vue'
-import {isNumber, isString} from '../../utils/isType'
+import { inject, computed } from 'vue'
+import { isNumber, isString } from '../../utils/isType'
 export default {
   name: 'Col',
   props: {
     tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     span: {
       type: Number,
-      default: 24
+      default: 24,
     },
     offset: Number,
     order: Number,
     xs: [Number, Object],
     sm: [Number, Object],
     md: [Number, Object],
-    lg: [Number, Object]
+    lg: [Number, Object],
   },
-  setup(props){
-    const Row = inject('Row', {props: {}})
+  setup(props) {
+    const Row = inject('Row', { props: {} })
     let classes = ['x-col']
-    
+
     let isSpan = true
-    ;['xs', 'sm', 'md', 'lg'].forEach(item => {
+    ;['xs', 'sm', 'md', 'lg'].forEach((item) => {
       if (isNumber(props[item])) {
         isSpan = false
         classes.push(`x-col-${item}-${props[item]}`)
       } else if (isString(props[item])) {
         isSpan = false
         props[item].span && classes.push(`x-col-${item}-${props[item].span}`)
-        props[item].offset && classes.push(`x-col-offset-${item}-${props[item].span}`)
+        props[item].offset &&
+          classes.push(`x-col-offset-${item}-${props[item].span}`)
       }
     })
 
@@ -46,10 +47,10 @@ export default {
       props.offset && classes.push(`x-col-offset-sp-${props.offset}`)
     }
 
-    if(Row.type === 'flex') {
+    if (Row.type === 'flex') {
       props.order && classes.push(`x-col-order-${props.order}`)
     }
-  
+
     const style = computed(() => {
       const ret = {}
       if (Row.gutter) {
@@ -62,8 +63,8 @@ export default {
     return {
       tag: props.tag,
       classes,
-      style
+      style,
     }
-  }
+  },
 }
 </script>

@@ -1,19 +1,19 @@
 <template>
-  <transition 
-      @before-enter="beforeEnter"
-      @enter="enter"
-      @after-enter="beforeEnter"
-      @before-leave="beforeLeave"
-      @leave="leave"
-      @after-leave="afterLeave"
-    >
-      <slot></slot>
+  <transition
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="beforeEnter"
+    @before-leave="beforeLeave"
+    @leave="leave"
+    @after-leave="afterLeave"
+  >
+    <slot></slot>
   </transition>
 </template>
 
 <script>
 export default {
-  setup(){
+  setup() {
     const beforeEnter = (el) => {
       el.style.transition = 'height .4s ease'
       el.style.overflow = 'hidden'
@@ -33,8 +33,8 @@ export default {
     }
     const leave = (el) => {
       el.style.transition = 'height .4s ease'
-      if(el.scrollHeight !== 0) {
-          el.style.height = 0
+      if (el.scrollHeight !== 0) {
+        el.style.height = 0
       }
     }
     const afterLeave = (el) => {
@@ -48,8 +48,8 @@ export default {
       afterEnter,
       beforeLeave,
       leave,
-      afterLeave
+      afterLeave,
     }
-  }
+  },
 }
 </script>

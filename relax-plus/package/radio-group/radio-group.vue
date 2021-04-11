@@ -10,16 +10,15 @@ import emitter from '../../utils/emiter'
 export default {
   name: 'RadioGroup',
   props: {
-    modelValue: [String, Boolean, Number]
+    modelValue: [String, Boolean, Number],
   },
-  setup(props, {emit}){
+  setup(props, { emit }) {
     provide('radioGroup', getCurrentInstance())
-    const {on} = emitter()
+    const { on } = emitter()
 
     on('radio', (value) => {
       emit('update:modelValue', value)
     })
-
-  }
+  },
 }
 </script>

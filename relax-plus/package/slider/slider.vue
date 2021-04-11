@@ -1,47 +1,49 @@
 <template>
   <div class="x-slider">
-    <tooltip v-if="range"  :content="start.num" :move="true">
-      <div 
+    <tooltip v-if="range" :content="start.num" :move="true">
+      <div
         class="x-slider-dot"
         :style="{
-          'left': `${start.x}%`
+          left: `${start.x}%`,
         }"
         @mousedown="down($event, 'start')"
-      >
-      </div>
+      ></div>
     </tooltip>
 
     <tooltip :content="end.num" :move="true">
-      <div 
+      <div
         class="x-slider-dot"
         :style="{
-          'left': `${end.x}%`
+          left: `${end.x}%`,
         }"
         @mousedown="down($event, 'end')"
-      >
-      </div>
+      ></div>
     </tooltip>
 
-    <div 
-      class="x-slider-bar"
-      :style="propress"
-    ></div>
+    <div class="x-slider-bar" :style="propress"></div>
 
     <div class="x-slider-step" v-if="steps > 0">
-      <i v-for="(i) in steps"></i>
+      <i v-for="i in steps" :key="i"></i>
     </div>
-
   </div>
 </template>
 
 <script>
-import { reactive, ref, toRefs, getCurrentInstance, onMounted, computed, watchEffect } from 'vue'
+import {
+  reactive,
+  ref,
+  toRefs,
+  getCurrentInstance,
+  onMounted,
+  computed,
+  watchEffect,
+} from 'vue'
 import tooltip from '../tooltip/index'
-import {isArray} from '../../utils/isType'
+import { isArray } from '../../utils/isType'
 export default {
-  name:'Slider',
+  name: 'Slider',
   components: {
-    tooltip
+    tooltip,
   },
   props: {
     modelValue: [Number, Array],
@@ -53,34 +55,33 @@ export default {
       type: Number,
       default: 0,
     },
-    step: Boolean
+    step: Boolean,
   },
   emits: ['update:modelValue'],
-  setup(props, {emit}){
-    const {modelValue, max, min, step} = toRefs(props)
+  setup(props, { emit }) {
+    const { modelValue, max, min, step } = toRefs(props)
     const instance = getCurrentInstance()
     const propress = reactive({})
     const space = ref(0)
     const range = ref(isArray(modelValue.value))
     const steps = ref(0)
     const start = reactive({
-      num: range.value ? modelValue.value[0] : 0
+      num: range.value ? modelValue.value[0] : 0,
     })
     const end = reactive({
-      num: range.value ? modelValue.value[1] : modelValue.value 
+      num: range.value ? modelValue.value[1] : modelValue.value,
     })
 
     const state = reactive({
       modelValue: null,
     })
-    
 
     const model = computed({
-      get(){
+      get() {
         return state.modelValue
       },
-      set({start, end}){
-        if(range.value){
+      set({ start, end }) {
+        if (range.value) {
           const modelValue = model.value
           modelValue[0] = start
           modelValue[1] = end
@@ -89,7 +90,7 @@ export default {
           state.modelValue = end
           emit('update:modelValue', state.modelValue)
         }
-      }
+      },
     })
 
     onMounted(() => {
@@ -102,11 +103,12 @@ export default {
       })
     })
 
-    const usePos = (dot) => ((dot.num - min.value) / (max.value - min.value) * 100)
+    const usePos = (dot) =>
+      ((dot.num - min.value) / (max.value - min.value)) * 100
 
     watchEffect(() => {
       state.modelValue = modelValue.value
-      if(!range.value){
+      if (!range.value) {
         end.num = modelValue.value
         end.x = usePos(end)
         propress.width = end.x + '%'
@@ -119,15 +121,14 @@ export default {
       space.value = propress.maxWidth / (max.value - min.value)
       step.value && (steps.value = max.value - min.value + 1)
     }
-    
 
     const useSlider = () => {
       start.x = range.value ? usePos(start) : 0
       end.x = usePos(end)
-      
+
       let a = start
       let b = end
-      if(end.x >= start.x){
+      if (end.x >= start.x) {
         a = end
         b = start
       }
@@ -135,7 +136,7 @@ export default {
       propress.left = b.x + '%'
       model.value = {
         start: b.num,
-        end: a.num
+        end: a.num,
       }
     }
 
@@ -148,7 +149,7 @@ export default {
         document.removeEventListener('mousemove', move)
       })
 
-      function move (e) {
+      function move(e) {
         e.preventDefault()
         let mx = e.screenX - touchX
         mx < 0 && (mx = 0)
@@ -165,8 +166,8 @@ export default {
       end,
       start,
       steps,
-      propress
+      propress,
     }
-  }
+  },
 }
 </script>

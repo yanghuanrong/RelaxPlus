@@ -1,16 +1,16 @@
-export default function(){
+export default function() {
   const all = new Map()
   const cached = {}
 
   function on(type, handler) {
     const handlers = all.get(type)
     const added = handlers && handlers.push(handler)
-    if(!added){
+    if (!added) {
       all.set(type, [handler])
     }
 
     if (cached[type] instanceof Array) {
-      handler.apply(null, cached[type]);
+      handler.apply(null, cached[type])
     }
   }
 
@@ -31,6 +31,6 @@ export default function(){
   return {
     on,
     emit,
-    off
+    off,
   }
 }

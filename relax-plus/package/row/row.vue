@@ -1,43 +1,46 @@
 <template>
-  <component :is="tag" :class="classes" :style="style" >
+  <component :is="tag" :class="classes" :style="style">
     <slot></slot>
   </component>
 </template>
 
 <script>
-import {computed, getCurrentInstance, provide} from 'vue'
+import { computed, getCurrentInstance, provide } from 'vue'
 export default {
   name: 'Row',
   props: {
-    tag:{
+    tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     gutter: {
       type: Number,
-      default: 0
+      default: 0,
     },
     type: String,
     justify: {
       type: String,
       default: 'start',
-      validator: value => ['start', 'center', 'end', 'space-between', 'space-around'].includes(value)
+      validator: (value) =>
+        ['start', 'center', 'end', 'space-between', 'space-around'].includes(
+          value
+        ),
     },
     align: {
       type: String,
       default: 'top',
-      validator: value => ['top', 'center', 'bottom'].includes(value)
-    }
+      validator: (value) => ['top', 'center', 'bottom'].includes(value),
+    },
   },
-  setup(props){
+  setup(props) {
     const classes = ['x-row']
 
-    if(props.type === 'flex'){
+    if (props.type === 'flex') {
       classes.push('x-row-flex')
       props.justify && classes.push(`x-row-flex-justify-${props.justify}`)
       props.align && classes.push(`x-row-flex-align-${props.align}`)
     }
-    
+
     const style = computed(() => {
       const ret = {}
       if (props.gutter) {
@@ -46,14 +49,14 @@ export default {
       }
       return ret
     })
-    
+
     provide('Row', getCurrentInstance())
 
     return {
       tag: props.tag,
       classes,
-      style
+      style,
     }
-  }
+  },
 }
 </script>

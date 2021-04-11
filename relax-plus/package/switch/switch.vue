@@ -1,14 +1,16 @@
 <template>
-  <button class="x-switch"
-  @click="handerClick"
-  :class="[
-    `x-switch-${type}`,
-    {
-      'x-switch-checked': modelValue,
-      'x-switch-disabled': disabled
-    }
-  ]">
-    <span  class="x-switch-inner">
+  <button
+    class="x-switch"
+    @click="handerClick"
+    :class="[
+      `x-switch-${type}`,
+      {
+        'x-switch-checked': modelValue,
+        'x-switch-disabled': disabled,
+      },
+    ]"
+  >
+    <span class="x-switch-inner">
       <slot v-if="modelValue" name="open"></slot>
       <slot v-else name="close"></slot>
     </span>
@@ -16,30 +18,24 @@
 </template>
 
 <script>
-import {toRefs} from 'vue';
+import { toRefs } from 'vue'
 export default {
   name: 'Switch',
-  props:{
+  props: {
     type: {
       type: String,
       default: 'primary',
-      validator: value =>
-        [
-          'success',
-          'primary',
-          'warning',
-          'info',
-          'danger',
-        ].includes(value)
+      validator: (value) =>
+        ['success', 'primary', 'warning', 'info', 'danger'].includes(value),
     },
     disabled: Boolean,
-    modelValue: Boolean
+    modelValue: Boolean,
   },
-  setup(props, {emit}){
-    const {modelValue, disabled} = toRefs(props) 
+  setup(props, { emit }) {
+    const { modelValue, disabled } = toRefs(props)
 
     const handerClick = () => {
-      if(disabled.value){
+      if (disabled.value) {
         return
       }
       emit('update:modelValue', !modelValue.value)
@@ -47,8 +43,8 @@ export default {
     }
 
     return {
-      handerClick
+      handerClick,
     }
-  }
-};
+  },
+}
 </script>

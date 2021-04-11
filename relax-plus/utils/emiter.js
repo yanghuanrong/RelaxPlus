@@ -1,22 +1,22 @@
-import {getCurrentInstance} from 'vue'
+import { getCurrentInstance } from 'vue'
 import mitt from './mitt'
 
 const emitter = mitt()
 const wrapper = Symbol('wrapper')
 
-const useEmit = function(){
+const useEmit = function() {
   const currentComponentInstance = getCurrentInstance()
 
-  function on(type, fn){
+  function on(type, fn) {
     const event = (e) => {
-      const {type, emitComponentInstance, value} = e
+      const { type, emitComponentInstance, value } = e
 
-      if(type === 'dispatch') {
-        if(isChildComponent(emitComponentInstance, currentComponentInstance)) {
+      if (type === 'dispatch') {
+        if (isChildComponent(emitComponentInstance, currentComponentInstance)) {
           fn && fn(...value)
         }
-      } else if(type === 'broadcast') {
-        if(isChildComponent(currentComponentInstance, emitComponentInstance)) {
+      } else if (type === 'broadcast') {
+        if (isChildComponent(currentComponentInstance, emitComponentInstance)) {
           fn && fn(...value)
         }
       } else {
@@ -28,19 +28,19 @@ const useEmit = function(){
     emitter.on(type, event)
   }
 
-  function dispatch(type, ...args){
+  function dispatch(type, ...args) {
     emitter.emit(type, {
       type: 'dispatch',
       emitComponentInstance: currentComponentInstance,
-      value: args
+      value: args,
     })
   }
 
-  function broadcast(type, ...args){
+  function broadcast(type, ...args) {
     emitter.emit(type, {
       type: 'broadcast',
       emitComponentInstance: currentComponentInstance,
-      value: args
+      value: args,
     })
   }
 

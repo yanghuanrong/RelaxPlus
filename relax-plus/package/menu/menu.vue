@@ -1,5 +1,5 @@
 <template>
-  <ul class='x-menu' :class="`x-menu-${mode}`">
+  <ul class="x-menu" :class="`x-menu-${mode}`">
     <slot></slot>
   </ul>
 </template>
@@ -14,14 +14,10 @@ export default {
     mode: {
       type: String,
       default: 'vertical',
-      validator: value =>
-      [
-        'vertical',
-        'horizontal',
-      ].includes(value)
-    }
+      validator: (value) => ['vertical', 'horizontal'].includes(value),
+    },
   },
-  setup(props){
+  setup() {
     const instance = getCurrentInstance()
     instance.currName = ref(null)
     provide('menu', instance)
@@ -31,7 +27,6 @@ export default {
     on('item-click', (item) => {
       instance.currName.value = item
     })
-
-  }
+  },
 }
 </script>

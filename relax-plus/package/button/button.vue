@@ -1,25 +1,24 @@
 <template>
   <button class="x-btn" :class="className" :disabled="isDisabled">
-    <span v-if="loading" class='x-load'></span>
+    <span v-if="loading" class="x-load"></span>
     <span class="x-btn-content" :style="style">
       <i v-if="icon !== ''" :class="icon" />
       <span v-if="$slots.default">
         <slot></slot>
       </span>
     </span>
-    
   </button>
 </template>
 
 <script>
-import {toRefs, computed} from 'vue'
+import { toRefs, computed } from 'vue'
 export default {
   name: 'Button',
   props: {
     type: {
       type: String,
       default: 'default',
-      validator: value =>
+      validator: (value) =>
         [
           'success',
           'primary',
@@ -27,13 +26,13 @@ export default {
           'info',
           'danger',
           'default',
-          'text'
-        ].includes(value)
+          'text',
+        ].includes(value),
     },
     size: {
       type: String,
       default: 'md',
-      validator: value => ['lg', 'sm', 'md'].includes(value)
+      validator: (value) => ['lg', 'sm', 'md'].includes(value),
     },
     icon: String,
     plain: Boolean,
@@ -41,39 +40,36 @@ export default {
     circle: Boolean,
     block: Boolean,
     disabled: Boolean,
-    loading: Boolean
+    loading: Boolean,
   },
-  setup(props){
-    const isDisabled = computed(() => (props.loading || props.disabled))
-    const {loading, icon} = toRefs(props)
+  setup(props) {
+    const isDisabled = computed(() => props.loading || props.disabled)
+    const { loading, icon } = toRefs(props)
     const className = useClass({
       props,
       loading,
       icon,
     })
-    
-    const style = computed(() => {
-      let ret = {}
-      if(props.loading){
-        ret = {
-          opacity: '0',
-          transform: 'scale(2.2)'
-        }
-      }
-      return ret
-    })
-    
+
+    const style = computed(() =>
+      props.loading
+        ? {
+            opacity: '0',
+            transform: 'scale(2.2)',
+          }
+        : {}
+    )
 
     return {
       className,
       icon,
       style,
-      isDisabled
-    }    
-  }
-};
+      isDisabled,
+    }
+  },
+}
 
-const useClass = ({props, loading, icon}) => {
+const useClass = ({ props, loading }) => {
   return computed(() => {
     return [
       props.type && `x-btn-${props.type}`,
@@ -83,9 +79,9 @@ const useClass = ({props, loading, icon}) => {
         'is-round': props.round,
         'is-circle': props.circle,
         'is-block': props.block,
-        'disabled': props.disabled
+        disabled: props.disabled,
       },
-      loading.value && 'x-btn-loading'
+      loading.value && 'x-btn-loading',
     ]
   })
 }
