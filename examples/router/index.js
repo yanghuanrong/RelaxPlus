@@ -29,6 +29,9 @@ data.forEach((item) => {
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 }
+  },
 })
 
 router.afterEach((to) => {

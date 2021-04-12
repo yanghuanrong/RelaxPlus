@@ -1,41 +1,33 @@
 <template>
-  <x-scroll v-model:to="pageTop" :height="pageHeight" @onScroll="scroll">
-    <div class="content-page">
-      <router-view />
-      <div class="h2-nav" v-if="menu">
-        <div
-          class="dot"
-          :style="{ transform: 'translateY(' + menuActive * 28 + 'px)' }"
-        ></div>
-        <div
-          class="item"
-          v-for="(item, i) in menu"
-          :key="i"
-          :class="{ active: menuActive === i }"
-          @click="toView(i)"
-        >
-          {{ item.name }}
-        </div>
+  <div class="content-page">
+    <router-view />
+    <div class="h2-nav" v-if="menu">
+      <div
+        class="dot"
+        :style="{ transform: 'translateY(' + menuActive * 28 + 'px)' }"
+      ></div>
+      <div
+        class="item"
+        v-for="(item, i) in menu"
+        :key="i"
+        :class="{ active: menuActive === i }"
+        @click="toView(i)"
+      >
+        {{ item.name }}
       </div>
-      <div class="qrcode"><img src="@/assets/qrcode.jpg" alt="" /></div>
     </div>
-  </x-scroll>
+    <!-- <div class="qrcode"><img src="@/assets/qrcode.jpg" alt="" /></div> -->
+  </div>
 </template>
 
 <script>
 import { nextTick, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-
+import { on } from 'RelaxPlus/utils/dom'
 export default {
   setup() {
     const menu = reactive([])
     const menuActive = ref(0)
-    const pageTop = ref(0)
-    const pageHeight = ref(document.documentElement.clientHeight)
-
-    window.addEventListener('resize', () => {
-      pageHeight.value = document.documentElement.clientHeight
-    })
 
     const setMenu = () => {
       menu.length = 0
@@ -53,22 +45,21 @@ export default {
     const router = useRouter()
     router.afterEach(async () => {
       await nextTick()
-      pageTop.value = 0
       setMenu()
     })
 
     const toView = (i) => {
       if (menu.length) {
         const el = document.querySelector('#' + menu[i].id)
-        pageTop.value = el && el.offsetTop - 30
+        document.documentElement.scrollTop = el && el.offsetTop - 30
       }
     }
 
-    const scroll = () => {
+    const scroll = (e) => {
       if (!menu.length) {
         return
       }
-      let nowTop = pageTop.value
+      let nowTop = document.documentElement.scrollTop
       let location = []
 
       for (let i = 0; i < menu.length; i++) {
@@ -88,13 +79,12 @@ export default {
       menuActive.value = k
     }
 
+    on(window, 'scroll', scroll)
+
     return {
       menu,
       menuActive,
-      pageTop,
-      scroll,
       toView,
-      pageHeight,
     }
   },
 }

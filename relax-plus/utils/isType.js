@@ -1,3 +1,4 @@
+export const isNull = (targe) => toString.call(targe) === '[object Null]'
 export const isObject = (targe) => toString.call(targe) === '[object Object]'
 export const isNumber = (targe) => toString.call(targe) === '[object Number]'
 export const isString = (targe) => toString.call(targe) === '[object String]'

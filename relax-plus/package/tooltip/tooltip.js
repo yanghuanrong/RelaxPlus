@@ -8,6 +8,7 @@ import {
   nextTick,
 } from 'vue'
 import { on, off, remove, add } from '../../utils/dom'
+import { isNull } from '../../utils/isType'
 
 export default {
   name: 'Tooltip',
@@ -31,14 +32,17 @@ export default {
           'bottom-end',
         ].includes(value),
     },
-    modelValue: Boolean,
+    modelValue: {
+      type: Boolean,
+      default: null,
+    },
     width: String,
     content: [String, Number],
   },
   setup(props, { slots }) {
     const instance = getCurrentInstance()
     const { placement, content, width, modelValue } = toRefs(props)
-    const isShow = ref(false)
+    const isShow = ref(modelValue.value)
 
     function getFirstElement() {
       const slotsDefault = slots.default()
@@ -92,7 +96,11 @@ export default {
       watchEffect(() => {
         tip.innerHTML = `<span>${content.value}</span>` || ''
         nextTick(update)
-        if (modelValue.value || isShow.value) {
+
+        if (!isNull(props.modelValue)) {
+          isShow.value = modelValue.value
+        }
+        if (isShow.value) {
           show()
         } else {
           hide()
@@ -107,11 +115,13 @@ export default {
         if (modelValue && modelValue.value) return
         isShow.value = false
       })
+      on(window, 'resize', update)
     })
 
     onUnmounted(() => {
       const el = document.getElementById(tid)
       el && document.body.removeChild(tip)
+      off(window, 'resize', update)
     })
 
     return () => {

@@ -1,12 +1,12 @@
 <template>
-  <div class="x-slider">
+  <div class="x-slider" @mouseenter="handleEnter" @mouseleave="handleLeave">
     <tooltip v-if="range" :content="start.num" v-model="isTooltip">
       <div
         class="x-slider-dot"
         :style="{
           left: `${start.x}%`,
         }"
-        @mousedown="down($event, 'start')"
+        @mousedown="handleDown($event, 'start')"
       ></div>
     </tooltip>
 
@@ -16,7 +16,7 @@
         :style="{
           left: `${end.x}%`,
         }"
-        @mousedown="down($event, 'end')"
+        @mousedown="handleDown($event, 'end')"
       ></div>
     </tooltip>
 
@@ -37,7 +37,6 @@ import {
   onMounted,
   computed,
   watchEffect,
-  nextTick,
 } from 'vue'
 import { on, off } from '../../utils/dom'
 import tooltip from '../tooltip/index'
@@ -69,6 +68,9 @@ export default {
     const space = ref(0)
     const range = ref(isArray(modelValue.value))
     const steps = ref(0)
+    const isHover = ref(false)
+    const isDrag = ref(false)
+
     const start = reactive({
       num: range.value ? modelValue.value[0] : 0,
     })
@@ -111,6 +113,8 @@ export default {
       ((dot.num - min.value) / (max.value - min.value)) * 100
 
     watchEffect(() => {
+      isTooltip.value = isDrag.value || isHover.value || showTooltip.value
+
       state.modelValue = modelValue.value
       if (!range.value) {
         end.num = modelValue.value
@@ -144,18 +148,17 @@ export default {
       }
     }
 
-    const down = (e, type) => {
+    const handleDown = (e, type) => {
       const dot = type === 'start' ? start : end
       const touchX = e.screenX - dot.num * space.value + space.value * min.value
-
+      isDrag.value = true
       on(document, 'mousemove', move)
       on(document, 'mouseup', () => {
+        isDrag.value = false
         off(document, 'mousemove', move)
-        isTooltip.value = false
       })
 
       function move(e) {
-        isTooltip.value = true
         e.preventDefault()
         let mx = e.screenX - touchX
         mx < 0 && (mx = 0)
@@ -166,8 +169,18 @@ export default {
       }
     }
 
+    function handleEnter() {
+      isHover.value = true
+    }
+
+    function handleLeave() {
+      isHover.value = false
+    }
+
     return {
-      down,
+      handleDown,
+      handleEnter,
+      handleLeave,
       range,
       end,
       start,
