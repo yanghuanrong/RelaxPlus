@@ -31,10 +31,6 @@ function ModalsCreate(option, type) {
 
 let oneKey = null
 
-function Modals(props) {
-  Modals[oneKey](props)
-}
-
 ;['info', 'error', 'success', 'warning', 'confirm'].forEach((type) => {
   oneKey || (oneKey = type)
   Modal[type] = (props) => ModalsCreate(props, type)

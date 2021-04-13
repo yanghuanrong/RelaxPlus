@@ -171,9 +171,11 @@ export default {
     watch(modelValue, (value) => {
       isShow.value = value
       if (value) {
+        document.body.style.width = 'calc(100% - 17px)'
         document.body.style.overflow = 'hidden'
       } else {
         document.body.style.overflow = ''
+        document.body.style.paddingRight = '0'
       }
     })
 
@@ -223,7 +225,7 @@ export default {
       }
     }
 
-    const afterLeave = (el) => {
+    const afterLeave = () => {
       document.body.style.overflow = ''
       if (!teleprot.value) {
         instance.vnode.el.parentElement?.removeChild(instance.vnode.el)
