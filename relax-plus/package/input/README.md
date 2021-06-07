@@ -69,8 +69,6 @@ export default {
 ```
 :::
 
-clearable
-
 
 ## 文本域
 > 设置 `type` 属性为 `textarea`

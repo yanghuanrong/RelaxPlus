@@ -29,7 +29,7 @@
     <View />
   </div>
   <div class="content-menu">
-    <x-badge :count="`${version}`" />
+    <x-badge :count="`alpha ${version}`" />
     <x-tooltip content="去仓库" placement="bottom">
       <a
         href="https://github.com/yanghuanrong/RelaxPlus"
