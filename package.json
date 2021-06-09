@@ -45,7 +45,7 @@
     "less": "^4.1.1",
     "less-loader": "^5.0.0"
   },
-  "license": "ISC",
+  "license": "SATA",
   "browserslist": [
     "> 1%",
     "last 2 versions",
