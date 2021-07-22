@@ -42,6 +42,13 @@
     "routePath": "/date-picker"
   },
   {
+    "title": "Drawer 抽屉",
+    "tag": "Feedback",
+    "componentName": "drawer",
+    "componentPath": "drawer/README.md",
+    "routePath": "/drawer"
+  },
+  {
     "title": "Icon 图标",
     "tag": "General",
     "componentName": "icon",

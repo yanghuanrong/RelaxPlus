@@ -1,17 +1,18 @@
-:root, [data-color-mode=light]{
+:root,
+[data-color-mode='light'] {
   --default: 227, 234, 239; //#e3eaef
   --success: 10, 207, 151; //#0acf97
-  --primary: 45, 123, 244;//#2d7bf4;
+  --primary: 45, 123, 244; //#2d7bf4;
   --danger: 241, 85, 108; //#f1556c
   --info: 78, 183, 235; // #4eb7eb
   --warning: 249, 188, 11; //#f9bc0b;
   --white: 255, 255, 255;
   --black: 0, 0, 0;
-  
+
   --mix-color: 68, 68, 68;
   --main-background-color: #ffffff;
   --sub-background-color: #fafafa;
-  --hover-background-color: rgb(var(--black), .1);
+  --hover-background-color: rgb(var(--black), 0.1);
   --sub-text-color: #98a6ad;
   --main-text-color: rgb(var(--black));
   --line-color: rgb(var(--default));
@@ -20,94 +21,97 @@
   --scroll: rgb(var(--black), 0.3);
 }
 
-[data-color-mode=dark]{
+[data-color-mode='dark'] {
   --default: 227, 234, 239; //#e3eaef
   --success: 10, 207, 151; //#0acf97
-  --primary: 45, 123, 244;//#2d7bf4;
+  --primary: 45, 123, 244; //#2d7bf4;
   --danger: 241, 85, 108; //#f1556c
   --info: 78, 183, 235; // #4eb7eb
   --warning: 249, 188, 11; //#f9bc0b;
   --white: 255, 255, 255;
   --black: 0, 0, 0;
-  
+
   --mix-color: 255, 255, 255;
   --main-background-color: #1a1d24;
   --sub-background-color: #131415;
-  --hover-background-color: rgb(var(--white), .1);
+  --hover-background-color: rgb(var(--white), 0.1);
   --sub-text-color: #98a6ad;
   --main-text-color: rgb(var(--white));
-  --line-color: rgb(var(--default), .3);
+  --line-color: rgb(var(--default), 0.3);
   --shadow: rgb(var(--black), 0.4);
   --disabled: #2a2b2b;
   --scroll: rgb(var(--white), 0.7);
 }
 
-@import "icon";
-@import "button";
-@import "grid";
-@import "input";
-@import "checkbox";
-@import "select";
-@import "message";
-@import "notice";
-@import "switch";
-@import "transition";
-@import "modal";
-@import "tooltip";
-@import "slider";
-@import "calendar";
-@import "datePicker";
-@import "carousel";
-@import "tabs";
-@import "badge";
-@import "scroll";
-@import "radio";
-@import "menu";
+@import 'icon';
+@import 'button';
+@import 'grid';
+@import 'input';
+@import 'checkbox';
+@import 'select';
+@import 'message';
+@import 'notice';
+@import 'switch';
+@import 'transition';
+@import 'modal';
+@import 'tooltip';
+@import 'slider';
+@import 'calendar';
+@import 'datePicker';
+@import 'carousel';
+@import 'tabs';
+@import 'badge';
+@import 'scroll';
+@import 'radio';
+@import 'menu';
+@import 'drawer';
 
-*, ::after, ::before {
+*,
+::after,
+::before {
   box-sizing: border-box;
 }
 
 html {
-box-sizing: border-box;
--ms-overflow-style: scrollbar;
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar;
 }
 
-html{
-font-family: Lato,sans-serif;
-font-size: 12px;
-line-height: 1.5;
--webkit-text-size-adjust: 100%;
--ms-text-size-adjust: 100%;
-text-size-adjust: 100%;
+html {
+  font-family: Lato, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
-.info{
+.info {
   color: rgb(var(--info));
 }
 
-.error{
+.error {
   color: rgb(var(--danger));
 }
 
-.success{
+.success {
   color: rgb(var(--success));
 }
 
-.warning{
+.warning {
   color: rgb(var(--warning));
 }
 
-
-i.x-arrow{
+i.x-arrow {
   position: relative;
   width: 10px;
   height: 10px;
   top: 50%;
   transform: translateY(-50%);
 
-  &::after,&::before {
-    content: "";
+  &::after,
+  &::before {
+    content: '';
     position: absolute;
     width: 2px;
     height: 5px;
@@ -115,39 +119,39 @@ i.x-arrow{
     left: 4px;
     top: 7px;
     transform-origin: top center;
-    transition: all .2s ease
+    transition: all 0.2s ease;
   }
 
-  &::after{
+  &::after {
     transform: rotate(135deg);
   }
-  &::before{
+  &::before {
     transform: rotate(-135deg);
   }
 
-  &.is-active{
-    &::after{
+  &.is-active {
+    &::after {
       top: 4px;
       transform: rotate(45deg);
     }
-    &::before{
+    &::before {
       top: 4px;
       transform: rotate(-45deg);
     }
   }
 }
 
-.x-mask{
+.x-mask {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,.7);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;
 }
 
-.x-trigger{
+.x-trigger {
   z-index: 2;
   position: absolute;
   background-color: var(--main-background-color);

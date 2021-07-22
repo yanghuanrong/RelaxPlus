@@ -1,0 +1,52 @@
+.el-dialog__body.min {
+  height: calc(100vh - 60px - 62px);
+  overflow: auto;
+}
+.x-drawer {
+  .x-drawer__view {
+    width: 442px;
+    position: fixed;
+    z-index: 11;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+
+    .x-drawer__header {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 1px solid var(--line-color);
+    }
+    .x-drawer__body {
+      flex: 1;
+      padding: 16px 24px;
+      overflow: auto;
+    }
+
+    .x-drawer__footer {
+      padding: 16px 24px;
+      text-align: right;
+      border-top: 1px solid var(--line-color);
+
+      .x-btn {
+        margin: 0;
+        margin-left: 16px;
+      }
+    }
+  }
+  .x-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+  }
+}

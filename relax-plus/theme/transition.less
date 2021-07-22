@@ -1,9 +1,9 @@
 .fade-enter-active,
-.fade-leave-active{
-  transition: all .2s ease-in;
+.fade-leave-active {
+  transition: all 0.2s ease-in;
 }
 .fade-enter-from,
-.fade-leave-to{
+.fade-leave-to {
   opacity: 0;
 }
 
@@ -11,33 +11,41 @@
 .slide-left-enter-active,
 .slide-left-leave-active,
 .slide-right-enter-active,
-.slide-right-leave-active{
-  transition: all .3s ease;
+.slide-right-leave-active {
+  transition: all 0.3s ease;
 }
-.slide-left-leave-to{
+.slide-left-leave-to {
   transform: translateX(100%);
 }
-.slide-left-enter-from{
+.slide-left-enter-from {
   transform: translateX(-100%);
 }
-.slide-right-leave-to{
+.slide-right-leave-to {
   transform: translateX(-100%);
 }
-.slide-right-enter-from{
+.slide-right-enter-from {
   transform: translateX(100%);
 }
 
-
+/*抽屉*/
+.drawer-left-enter-active,
+.drawer-left-leave-active {
+  transition: transform 0.3s ease;
+}
+.drawer-left-enter-from,
+.drawer-left-leave-to {
+  transform: translateX(100%);
+}
 
 /*
   Message组件
 */
 .slideY-fade-enter-active,
-.slideY-fade-leave-active{
-  transition: all .2s ease;
+.slideY-fade-leave-active {
+  transition: all 0.2s ease;
 }
 .slideY-fade-enter-from,
-.slideY-fade-leave-to{
+.slideY-fade-leave-to {
   opacity: 0;
   transform: translate(-50%, -100%);
 }
@@ -46,14 +54,14 @@
   Notice组件
 */
 .notice-enter-active,
-.notice-leave-active{
-  transition: all .2s ease;
+.notice-leave-active {
+  transition: all 0.2s ease;
 }
-.notice-enter-from{
+.notice-enter-from {
   opacity: 0;
   transform: translateX(20%);
 }
-.notice-enter-to{
+.notice-enter-to {
   transform: translateX(0);
 }
 
@@ -61,11 +69,11 @@
   modal 组件
 */
 .scale-enter-active,
-.scale-leave-active{
-  transition: all .3s ease-in-out;
+.scale-leave-active {
+  transition: all 0.3s ease-in-out;
 }
 .scale-enter-from,
-.scale-leave-to{
+.scale-leave-to {
   opacity: 0;
   transform: scale(0.2);
 }
@@ -74,11 +82,11 @@
   下拉列表
 */
 .scaleY-enter-active,
-.scaleY-leave-active{
-  transition: all .2s ease-in;
+.scaleY-leave-active {
+  transition: all 0.2s ease-in;
 }
 .scaleY-enter-from,
-.scaleY-leave-to{
+.scaleY-leave-to {
   opacity: 0;
   transform: scaleY(0.8);
 }
