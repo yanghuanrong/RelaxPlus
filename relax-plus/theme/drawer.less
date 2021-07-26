@@ -10,8 +10,8 @@
     height: 100vh;
     top: 0;
     right: 0;
-    background: #fff;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    background: var(--main-background-color);
+    box-shadow: -2px 0 8px var(--shadow);
     display: flex;
     flex-direction: column;
 
@@ -27,6 +27,7 @@
       flex: 1;
       padding: 16px 24px;
       overflow: auto;
+      color: var(--sub-text-color);
     }
 
     .x-drawer__footer {
