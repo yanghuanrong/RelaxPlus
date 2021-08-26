@@ -1,6 +1,6 @@
 <template>
   <button class="x-btn" :class="className" :disabled="isDisabled">
-    <span v-if="loading" class="x-load"></span>
+    <span v-if="load" class="x-load"></span>
     <span class="x-btn-content" :style="style">
       <i v-if="icon !== ''" :class="icon" />
       <span v-if="$slots.default">
@@ -11,7 +11,16 @@
 </template>
 
 <script>
-import { toRefs, computed } from 'vue'
+import {
+  toRefs,
+  computed,
+  getCurrentInstance,
+  ref,
+  watch,
+  watchEffect,
+  onMounted,
+  nextTick,
+} from 'vue';
 export default {
   name: 'Button',
   props: {
@@ -43,33 +52,53 @@ export default {
     loading: Boolean,
   },
   setup(props) {
-    const isDisabled = computed(() => props.loading || props.disabled)
-    const { loading, icon } = toRefs(props)
+    const instance = getCurrentInstance();
+    const { loading, icon } = toRefs(props);
+    const load = ref(loading.value);
+
+    const isDisabled = computed(() => props.disabled || load.value);
+
+    const oldClick = instance.attrs.onClick;
+
+    watchEffect(() => {
+      load.value = loading.value;
+    });
+
+    async function modified() {
+      load.value = true;
+      const cb = oldClick();
+      cb && (await cb);
+      load.value = false;
+    }
+
+    oldClick && (instance.attrs.onClick = modified);
+
     const className = useClass({
       props,
-      loading,
+      load,
       icon,
-    })
+    });
 
     const style = computed(() =>
-      props.loading
+      load.value
         ? {
             opacity: '0',
             transform: 'scale(2.2)',
           }
         : {}
-    )
+    );
 
     return {
       className,
       icon,
       style,
       isDisabled,
-    }
+      load,
+    };
   },
-}
+};
 
-const useClass = ({ props, loading }) => {
+const useClass = ({ props, load: loading }) => {
   return computed(() => {
     return [
       props.type && `x-btn-${props.type}`,
@@ -82,7 +111,7 @@ const useClass = ({ props, loading }) => {
         disabled: props.disabled,
       },
       loading.value && 'x-btn-loading',
-    ]
-  })
-}
+    ];
+  });
+};
 </script>
