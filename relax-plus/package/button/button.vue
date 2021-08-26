@@ -58,19 +58,19 @@ export default {
 
     const isDisabled = computed(() => props.disabled || load.value);
 
-    const oldClick = instance.attrs.onClick;
-
     watchEffect(() => {
       load.value = loading.value;
     });
 
+    const oldClick = instance.attrs.onClick;
     async function modified() {
-      load.value = true;
       const cb = oldClick();
-      cb && (await cb);
-      load.value = false;
+      if (cb && typeof cb.then === 'function') {
+        load.value = true;
+        cb && (await cb);
+        load.value = false;
+      }
     }
-
     oldClick && (instance.attrs.onClick = modified);
 
     const className = useClass({
