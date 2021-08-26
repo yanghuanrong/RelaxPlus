@@ -125,7 +125,7 @@ tag: General
 
 ## 托管加载状态
 
-> 你只需要返回一个 `promise`，组件会托管 `loading`
+> 你只需要返回一个 `promise`，组件会托管 `loading`，这在发送请求的时候有奇效
 
 :::demo
 
