@@ -134,7 +134,6 @@ tag: General
   <x-button type="warning" @click="handlePromise">loading</x-button>
 </template>
 <script>
-  import { ref } from 'vue';
   export default {
     setup() {
       const handlePromise = () =>
