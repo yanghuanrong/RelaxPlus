@@ -132,6 +132,13 @@
     "routePath": "/slider"
   },
   {
+    "title": "Steps 步骤条",
+    "tag": "General",
+    "componentName": "steps",
+    "componentPath": "steps/README.md",
+    "routePath": "/steps"
+  },
+  {
     "title": "Switch 开关",
     "tag": "Data Entry",
     "componentName": "switch",
