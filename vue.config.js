@@ -1,5 +1,5 @@
-const path = require('path')
-const RoutePlugin = require('./relax-plus/config/routePlugin')
+const path = require('path');
+const RoutePlugin = require('./relax-plus/config/routePlugin');
 
 module.exports = {
   pages: {
@@ -12,8 +12,8 @@ module.exports = {
   publicPath: './',
   chainWebpack: (config) => {
     config.resolve.alias
-      .set('RelaxPlus', path.resolve('relax-plus'))
-      .set('@', path.resolve('examples'))
+      .set('RelaxPlus', path.resolve(__dirname, 'relax-plus'))
+      .set('@', path.resolve(__dirname, 'examples'));
 
     config.module
       .rule('md')
@@ -25,7 +25,7 @@ module.exports = {
       })
       .end()
       .use(path.resolve('relax-plus/config/md-loader/index.js'))
-      .loader(path.resolve('relax-plus/config/md-loader/index.js'))
+      .loader(path.resolve('relax-plus/config/md-loader/index.js'));
   },
   configureWebpack: {
     devServer: {
@@ -35,4 +35,4 @@ module.exports = {
     },
     plugins: [new RoutePlugin()],
   },
-}
+};
