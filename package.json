@@ -34,6 +34,7 @@
     "markdown-it-container": "^3.0.0",
     "transliteration": "^2.2.0",
     "vue": "^3.0.0",
+    "vue-loader-v16": "^16.0.0-beta.5.4",
     "vue-router": "^4.0.0-0",
     "vue-template-es2015-compiler": "^1.9.1"
   },
