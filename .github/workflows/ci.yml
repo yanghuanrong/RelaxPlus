@@ -1,44 +1,30 @@
 on:
   push:
     branches:
-    - master
+      - master
+
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout
-      uses: actions/checkout@master
+      - name: checkout
+        uses: actions/checkout@v4
 
-    - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
-      run: |
-        npm install
-        npm run build
-            
-    - name: buildAndDeploy
-      uses: JamesIves/github-pages-deploy-action@4.1.3
-      with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: dist # The folder the action should deploy.
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: dist
-        BUILD_SCRIPT: npm install && npm run build
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14
 
-    - name: SyncToGitee
-      uses: wearerequired/git-mirror-action@master
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
-      with:
-          source-repo: "git@github.com:yanghuanrong/RelaxPlus.git"
-          destination-repo: "git@gitee.com:bsie/RelaxPlus.git"
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
 
-    - name: BuildGiteePages
-      uses: yanglbme/gitee-pages-action@master
-      with:
-          gitee-username: bsie
-          gitee-password: ${{ secrets.GITEE_PASSWORD }}
-          gitee-repo: bsie/RelaxPlus
+      - name: Deploy GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
           branch: gh-pages
-
+          folder: dist
