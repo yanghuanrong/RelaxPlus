@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="https://gitee.com/bsie/RelaxPlus/raw/master/examples/assets/logo.png" width="160px"/>
+<img src="https://raw.githubusercontent.com/yanghuanrong/RelaxPlus/master/examples/assets/logo.png" width="160px"/>
 
 
 
-🔥 [文档网址](https://bsie.gitee.io/relaxplus/)
+🔥 [文档网址](https://yanghuanrong.github.io/RelaxPlus/)
 
 </div>
 
